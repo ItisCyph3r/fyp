@@ -1,25 +1,35 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './global.util.css';
+import './globals.util.css';
+import { Routes, Route } from 'react-router-dom';
+import { Navbar } from './conponents/navbar/navbar';
+import { Userbar } from './conponents/navbar/userbar';
+import { Context } from './conponents/context';
 
 function App() {
+
+
+  // const [dark, setMode] = React.useState<String>('')
+
+  // const getMode = localStorage.getItem("mode");
+
+  // getMode && "dark" === getMode && body.classList.toggle("dark");
+
+  // getMode && "dark" === getMode && setMode('dark')
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Navbar />} />
+        {/* <Route path="/home" element={<Home />} />
+        <Route path="/compose/tweet" element={<Compose />} />
+        <Route path="/:userName/status/:uuid" element={ <Status/> } />                    */}
+      </Routes>
+    </>
   );
 }
 
