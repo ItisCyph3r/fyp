@@ -8,6 +8,9 @@ import { Navbar } from './conponents/navbar/navbar';
 import { Userbar } from './conponents/navbar/userbar';
 import { Context } from './conponents/context';
 import { Fml } from './pages/fml';
+import { Home } from './pages/homepage/home';
+import { Error404 } from './pages/404/404';
+import { Login } from './pages/login/login';
 
 function App() {
 
@@ -25,10 +28,14 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navbar />} />
-        <Route path="/home" element={<Fml />} /> {/*
-        <Route path="/compose/tweet" element={<Compose />} />
-  <Route path="/:userName/status/:uuid" element={ <Status/> } />  */}
+        <Route path="/home" element={<Navbar />} />
+        <Route path="/" element={<Home />} /> 
+        <Route path="*" element={<Error404 />} /> 
+        <Route path="/login" element={<Login />} /> 
+        
+        {/*
+          <Route path="/compose/tweet" element={<Compose />} />
+          <Route path="/:userName/status/:uuid" element={ <Status/> } />  */}
       </Routes>
     </>
   );
