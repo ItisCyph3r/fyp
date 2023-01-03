@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './conponents/navbar/navbar';
 import { Userbar } from './conponents/navbar/userbar';
 import { Context } from './conponents/context';
+import { Fml } from './pages/fml';
 
 function App() {
 
@@ -25,9 +26,9 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Navbar />} />
-        {/* <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Fml />} /> {/*
         <Route path="/compose/tweet" element={<Compose />} />
-        <Route path="/:userName/status/:uuid" element={ <Status/> } />                    */}
+  <Route path="/:userName/status/:uuid" element={ <Status/> } />  */}
       </Routes>
     </>
   );

@@ -7,7 +7,10 @@ import { Themebtn } from '../themebtn/themebtn';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { navActions } from '../../store/nav-Slice';
-import { BiHomeAlt } from 'react-icons/bi';
+import { BiHomeAlt, BiLogOut, BiCommentDetail } from 'react-icons/bi';
+import { AiOutlineStar, AiOutlineSetting } from 'react-icons/ai';
+import { TbPresentationAnalytics } from 'react-icons/tb';
+import { MdOutlineDarkMode } from 'react-icons/md';
 
 
 export const Navbar: React.FC<{}> = () => {
@@ -43,37 +46,35 @@ export const Navbar: React.FC<{}> = () => {
                         <ul className="nav-links">
                             <li>
                                 <Link className='link-styles' to="/">
-                                    <BiHomeAlt color='red'/>
-                                    {/* <span className="link-name">Home</span> */}
+                                    <BiHomeAlt className='navbarLogo' />
+                                    <span className="link-name">Home</span>
                                 </Link>
                             </li>
                             <li>
                                 <Link className='link-styles' to="/">
-                                    <i className="uil uil-favorite"></i>
+                                    {/* <i className="uil uil-favorite"></i> */}
+                                    <AiOutlineStar className='navbarLogo' />
                                     <span className="link-name">Favorites</span>
                                 </Link>
                             </li>
                             <li>
                                 <Link className='link-styles' to="/">
-                                    <i className="uil uil-chart"></i>
+                                    {/* <i className="uil uil-chart"></i> */}
+                                    <TbPresentationAnalytics className='navbarLogo' />
                                     <span className="link-name">Analytics</span>
                                 </Link>
                             </li>
                             <li>
                                 <Link className='link-styles' to="/">
-                                    <i className="uil uil-thumbs-up"></i>
+                                    {/* <i className="uil uil-thumbs-up"></i> */}
+                                    <BiCommentDetail className='navbarLogo' />
                                     <span className="link-name">Reviews</span>
                                 </Link>
                             </li>
                             <li>
                                 <Link className='link-styles' to="/">
-                                    <i className="uil uil-comments"></i>
-                                    <span className="link-name">Comment</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='link-styles' to="/">
-                                    <i className="uil uil-setting"></i>
+                                    {/* <i className="uil uil-setting"></i> */}
+                                    <AiOutlineSetting className='navbarLogo' />
                                     <span className="link-name">Settings</span>
                                 </Link>
                             </li>
@@ -82,13 +83,15 @@ export const Navbar: React.FC<{}> = () => {
                         <ul className="logout-mode">
                             <li>
                                 <Link className='link-styles' to="/">
-                                    <i className="uil uil-signout"></i>
+                                    {/* <i className="uil uil-signout"></i> */}
+                                    <BiLogOut className='navbarLogo' />
                                     <span className="link-name">Logout</span>
                                 </Link>
                             </li>
                             <li className="mode">
                                 <Link className='link-styles' to="/">
-                                    <i className="uil uil-moon"></i>
+                                    {/* <i className="uil uil-moon"></i> */}
+                                    {collapseMenu && <MdOutlineDarkMode className='navbarLogo' />}
                                     <span className="link-name">Dark Mode</span>
                                 </Link>
 

@@ -2,9 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../global.util.css';
 import '../../globals.util.css';
+import '../../globalss.util.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { navActions } from '../../store/nav-Slice';
 import { BiSearchAlt2, BiMenu } from 'react-icons/bi';
+import profilePic from '../../images/profile.jpg';
+import Sample from '../../images/brooke-cagle-kElEigko7PU-unsplash.jpg';
+import MiniCarousel from '../carousel/minicarousel/minicarousel';
+import MainCarousel from '../carousel/maincarousel/maincarousel';
+
 
 export const Userbar: React.FC<{}> = () => {
 
@@ -16,11 +22,34 @@ export const Userbar: React.FC<{}> = () => {
         // setActive(!active)
         dispatch(navActions.setNavbar({}))
     }
+
+    // interface Image {
+    //     url: string;
+    //     alt: string;
+    // }
+
+    // const images: Image[] = [
+    //     {
+    //         url: 'https://picsum.photos/id/1018/1000/600',
+    //         alt: 'A sunset over a lake'
+    //     },
+    //     {
+    //         url: 'https://picsum.photos/id/1015/1000/600',
+    //         alt: 'A mountain range'
+    //     },
+    //     {
+    //         url: 'https://picsum.photos/id/1019/1000/600',
+    //         alt: 'A beach with palm trees'
+    //     }
+    // ];
+
+
+
+
     return (
         <section className="dashboard">
             <div className="top">
-                {/* <i className="uil uil-bars sidebar-toggle"></i> */}
-                <BiMenu onClick={setNavbar} size='35px'  className='sidebar-toggle'/>
+                <BiMenu onClick={setNavbar} size='35px' className='sidebar-toggle' />
 
                 {/* <div className="search-box">
                     <BiSearchAlt2 className='sidebar-toggle search-logo' />
@@ -32,9 +61,7 @@ export const Userbar: React.FC<{}> = () => {
                         {/* Hello username */}
                         Samuel
                     </div>
-                    <div className="userpicture">
-                        {/* <%- userpicture %> */}
-                    </div>
+                    <img src={profilePic} alt='profilePicture' className="userpicture" />
                 </div>
 
             </div>
@@ -48,37 +75,101 @@ export const Userbar: React.FC<{}> = () => {
                             <span className="text">Trending Movies</span>
                         </div>
 
-                        <div className="activity-data">
-                            {/* <> */}
-                            <section className="ftco-section">
+                        {/* <div className="activity-data">
+                            <section className="">
                                 <div className="container">
                                     <div className="row">
-                                        <div className="col-md-12">
+                                        <div className="w-full">
                                             <div className="featured-carousel owl-carousel">
-                                                {/* <% for(var element= (movie.length-1); element>=0; element--){ %> */}
-                                                {/* <Link to="/watch/featured/Spider-Man Far from Home"> */}
                                                 <div className="item">
                                                     <div className="work">
-                                                        <div
-                                                            className="img d-flex align-items-end justify-content-center"
-                                                            style={{ backgroundImage: `url(/logo.png)` }}
-                                                        >
-                                                            <div className="text w-100">
-                                                                <h3 className="cardName">  movie[element].name  </h3>
-                                                            </div>
+                                                        <div className="img d-flex align-items-end justify-content-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: `url('https://static.babcock.edu.ng/assets/main/img/COEN/COEN_1Hk8j104221.JPG')` }}> </div>
+                                                        <div className="text-white w-100 p-3">
+                                                            <h4 className="cardName"> School of Computing & Engineering Sciences </h4>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {/* </Link> */}
-                                                {/* <% } %> */}
+                                                <div className="item">
+                                                    <div className="work">
+                                                        <div className="img d-flex align-items-end justify-content-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: `url('https://static.babcock.edu.ng/assets/main/img/COEN/COEN_1Hk8j104221.JPG')` }}> </div>
+                                                        <div className="text-white w-100 p-3">
+                                                            <h4 className="cardName"> School of Computing & Engineering Sciences </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="item">
+                                                    <div className="work">
+                                                        <div className="img d-flex align-items-end justify-content-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: `url('https://static.babcock.edu.ng/assets/main/img/COEN/COEN_1Hk8j104221.JPG')` }}> </div>
+                                                        <div className="text-white w-100 p-3">
+                                                            <h4 className="cardName"> School of Computing & Engineering Sciences </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="item">
+                                                    <div className="work">
+                                                        <div className="img d-flex align-items-end justify-content-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: `url('https://static.babcock.edu.ng/assets/main/img/COEN/COEN_1Hk8j104221.JPG')` }}> </div>
+                                                        <div className="text-white w-100 p-3">
+                                                            <h4 className="cardName"> School of Computing & Engineering Sciences </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="item">
+                                                    <div className="work">
+                                                        <div className="img d-flex align-items-end justify-content-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: `url('https://static.babcock.edu.ng/assets/main/img/COEN/COEN_1Hk8j104221.JPG')` }}> </div>
+                                                        <div className="text-white w-100 p-3">
+                                                            <h4 className="cardName"> School of Computing & Engineering Sciences </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            {/* </> */}
-                        </div>
+                        </div> */}
+
+
+                        {/* <MainCarousel /> */}
+                        {/* <ImageCarousel images={images} /> */}
                     </div>
+
+
+
+
+
+
+
+
+
+
+                    <div>
+                        <div className="title">
+                            <span className="text">Computer Science</span>
+                        </div>
+                        <MiniCarousel />
+                    </div>
+
+                    <div>
+                        <div className="title">
+                            <span className="text">Accounting</span>
+                        </div>
+                        <MiniCarousel />
+                    </div>
+
+                    <div>
+                        <div className="title">
+                            <span className="text">Mass Communication</span>
+                        </div>
+                        <MiniCarousel />
+                    </div>
+
+                    <div>
+                        <div className="title">
+                            <span className="text">Medicine</span>
+                        </div>
+                        <MiniCarousel />
+                    </div>
+
                 </div>
             </div>
         </section>

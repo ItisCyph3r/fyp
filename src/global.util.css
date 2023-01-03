@@ -34,7 +34,7 @@ h6 {
     --primary-color: #252158;
     --panel-color: #FFF;
     --text-color: #252158;
-    --black-light-color: #707070;
+    --black-light-color: #252158;
     --border-color: #e6e5e5;
     --toggle-color: #DDD;
     --box1-color: #4DA3FF;
@@ -48,7 +48,9 @@ h6 {
 
 .body.dark {
     --primary-color: #3A3B3C;
+    /* --primary-color: #252158; */
     --panel-color: #242526;
+    /* --panel-color: #252158; */
     --text-color: #CCC;
     --black-light-color: #CCC;
     --border-color: #4D4C4C;
@@ -166,10 +168,11 @@ li {
     background-color: var(--text-color)
 }
 
-.menu-items li .link-styles i {
+.menu-items li .link-styles .navbarLogo {
     font-size: 24px;
     min-width: 45px;
-    height: 100%;
+    margin-left: 30px;
+    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,6 +183,7 @@ li {
     font-size: 18px;
     font-weight: 400;
     color: var(--black-light-color);
+    margin-left: 3px;
     transition: var(--tran-05)
 }
 
@@ -189,12 +193,12 @@ nav.close li .link-styles .link-name {
 }
 
 .nav-links li .link-styles:hover .link-name,
-.nav-links li .link-styles:hover i {
+.nav-links li .link-styles:hover .navbarLogo {
     color: var(--primary-color)
 }
 
 .body.dark .nav-links li .link-styles:hover .link-name,
-.body.dark .nav-links li .link-styles:hover i {
+.body.dark .nav-links li .link-styles:hover .navbarLogo {
     color: var(--text-color)
 }
 
@@ -402,7 +406,7 @@ nav.close~.dashboard .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%
+    /* width: 100% */
 }
 
 .activity .activity-data {
@@ -583,6 +587,11 @@ nav.close~.dashboard .top {
 
 .video-card-image {
     border-radius: 2px;
+    height: 180px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     overflow: hidden;
     position: relative
 }
@@ -642,7 +651,7 @@ nav.close~.dashboard .top {
 .video-title .link-styles {
     color: var(--text-color);
     font-weight: 600;
-    font-size: 1.15rem;
+    font-size: 1rem;
     text-decoration: none
 }
 
@@ -800,3 +809,16 @@ nav.close~.dashboard .top {
 .cardName {
     font-family: Poppins !important;
 }
+
+.fffsplsworkk {
+    display: flex;
+    /*align-items: center;
+    width: 100%; */
+}
+
+.imageBox {
+    width: 100%;
+    margin-left: 20px;
+    /* w-full */
+}
+
