@@ -11,6 +11,7 @@ import { Fml } from './pages/fml';
 import { Home } from './pages/homepage/home';
 import { Error404 } from './pages/404/404';
 import { Login } from './pages/login/login';
+import { Signup } from './pages/login/signup';
 
 function App() {
 
@@ -29,10 +30,10 @@ function App() {
     <>
       <Routes>
         <Route path="/home" element={<Navbar />} />
-        <Route path="/" element={<Home />} /> 
-        <Route path="*" element={<Error404 />} /> 
-        <Route path="/login" element={<Login />} /> 
-        
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<Error404 />} />
         {/*
           <Route path="/compose/tweet" element={<Compose />} />
           <Route path="/:userName/status/:uuid" element={ <Status/> } />  */}

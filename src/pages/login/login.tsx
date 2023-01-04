@@ -1,10 +1,19 @@
 import React from 'react'
 // import '../../global.util.css'
 import '../../globals.util.css'
-import '../../globalss.util.css'
-import Logo from '../../images/PhonePe_Images_zjha50 (2).png'
+import '../../global.util.css'
+import Logo from '../../images/logo.png';
+import { FcGoogle } from 'react-icons/fc';
+import { FaApple, FaLongArrowAltRight, FaEnvelope, FaLock } from 'react-icons/fa';
+// import { HiEnvelope } from 'react-icons/hi';
+
 
 export const Login: React.FC<{}> = () => {
+    const [next, setNext] = React.useState<boolean>(false)
+
+    const changeDisplay = () => {
+        setNext(true)
+    }
     return (
         <div className="userAuth h-[100vh] bg-[#252426]">
             <div className="row" style={{ height: '100vh' }}>
@@ -19,30 +28,48 @@ export const Login: React.FC<{}> = () => {
                             Log in to your account
                         </span>
                         <form className="" action="/login" method="post">
-                            <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                            <div className='mb-6 text-sm'>
+                                <div className='py-2 px-5 border-[1px] border-[grey] rounded-md'>
+                                    <span className='!text-black flex items-center'>
+                                        <FcGoogle /> &nbsp; &nbsp;
+                                        Sign in with <b className='ml-1'>Google</b>
+                                    </span>
+                                </div>
+                                <div className='py-2 px-5 border-[1px] border-[grey] rounded-md mt-4'>
+                                    <span className='!text-black flex items-center'>
+                                        <FaApple /> &nbsp; &nbsp;
+                                        Sign in with <b className='ml-1'>Apple</b>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div className="wrap-input100 validate-input mt-6" data-validate="Valid email is required: ex@abc.xyz">
 
                                 <input className="input100" type="text" name="username" placeholder="Email" />
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
-                                    <i className="fa fa-envelope" aria-hidden="true"></i>
+                                    {/* <i className="fa fa-envelope" aria-hidden="true"></i> */}
+                                    <FaEnvelope />
                                 </span>
                             </div>
 
-                            <div className="wrap-input100 validate-input">
+                            {/* <div className="wrap-input100 validate-input">
                                 <input className="input100" type="password" name="password" placeholder="Password" />
 
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
-                                    <i className="fa fa-lock" aria-hidden="true"></i>
+                                    <FaLock />
                                 </span>
-                            </div>
+                            </div> */}
 
                             <span style={{ color: 'red', fontSize: '0.75rem' }}>
                                 {/* <%- error %> */}
                             </span>
                             <div className="container-login100-form-btn">
-                                <button className="login100-form-btn">
-                                    Login
+                                <button className="login100-form-btn" onClick={changeDisplay}>
+                                    Next
                                 </button>
                             </div>
                         </form>
@@ -55,23 +82,31 @@ export const Login: React.FC<{}> = () => {
                             {/* </a> */}
                         </div>
 
-                        <div className="text-center mt-3">
-                            <a className="txt2" href="/create">
-                                Create your Account
-                                <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        <div className="text-center mt-3 mb-3">
+                            <a className="txt2 flex justify-center items-center" href="/signup">
+                                Create your Account 
+                                <span className='ml-1'>
+                                    <FaLongArrowAltRight />
+                                </span>
                             </a>
                         </div>
-                        <hr />
-                        <div className="text-center social-btn">
-                            <a href="/auth/google" className="btn google btn-block">
-                                <i className="fa fa-google"></i>
+                        
+                        
+                        {/* <div className=" w-full">
+                            <div className='w-full px-0 py-1'>
+                            <a href="/auth/google" className="btn google btn-block w-full">
+                                <span className="fa fa-google">G</span>
                                 Sign in with <b>Google &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
                             </a>
-                            <a href="/auth/facebook" className="btn facebook btn-block">
-                                <i className="fa fa-facebook"></i>
-                                Sign in with <b>Facebook</b>
-                            </a>
-                        </div>
+                            </div>
+                            <div className='mt-3'>
+                                <a href="/auth/facebook" className="btn facebook btn-block">
+                                    <i className="fa fa-facebook"></i>
+                                    Sign in with <b>Facebook</b>
+                                </a>
+                            </div>
+                            
+                        </div> */}
 
                     </div>
                 </div>
