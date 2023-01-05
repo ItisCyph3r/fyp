@@ -3,10 +3,10 @@ import Logo from '../../images/logo.png';
 import '../../global.util.css'
 import '../../globals.util.css'
 import { FcGoogle } from 'react-icons/fc';
-import { FaApple, FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaApple, FaEnvelope } from 'react-icons/fa';
 
 
-export const Signup: React.FC<{}> = () => {
+export const Create: React.FC<{}> = () => {
     return (
         <div className="userAuth h-[100vh] bg-[#252426]">
             <div className="row" style={{ height: '100vh' }}>
@@ -24,41 +24,18 @@ export const Signup: React.FC<{}> = () => {
                         </span>
 
 
-                        <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                            <input className="input100" type="email" name="username" placeholder="Email" required />
-                            <span className="focus-input100"></span>
-                            <span className="symbol-input100">
-                                <FaEnvelope />
-                            </span>
+                        <div className='text-sm mb-6'>
+                            <div className='py-2 px-5 border-[1px] border-[grey] rounded-md'>
+                                <span className='!text-black flex items-center'>
+                                    <FaEnvelope /> &nbsp; &nbsp;
+                                    Sign in with <b className='ml-1'>Google</b>
+                                </span>
+                            </div>
                         </div>
 
-                        {/* <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                            <input className="input100" type="text" name="displayname" placeholder="Username" required />
-                            <span className="focus-input100"></span>
-                            <span className="symbol-input100">
-                                <i className="fa-solid fa-user" aria-hidden="true"></i>
-                            </span>
-                        </div> */}
+                        <hr />
 
-                        <div className="wrap-input100 validate-input mb-6" data-validate="Password is required">
-                            <input className="input100"
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                required
-                            />
-
-                            <span className="focus-input100"></span>
-                            <span className="symbol-input100">
-                                <FaLock />
-                            </span>
-                        </div>
-
-                        <hr className='mt-6' />
-
-                        {/* <div className='text-sm mt-6'>
+                        <div className='text-sm mt-6'>
                             <div className='py-2 px-5 border-[1px] border-[grey] rounded-md'>
                                 <span className='!text-black flex items-center'>
                                     <FcGoogle /> &nbsp; &nbsp;
@@ -71,25 +48,25 @@ export const Signup: React.FC<{}> = () => {
                                     Sign in with <b className='ml-1'>Apple</b>
                                 </span>
                             </div>
-                        </div> */}
+                        </div>
                         <span style={{ color: 'red', fontSize: '0.75rem' }}>
                             {/* <%- error %> */}
                         </span>
                         <span style={{ color: 'red', fontSize: '0.75rem' }}>
                             {/* <%- usernameErr %>  */}
                         </span>
-                        <div className="container-login100-form-btn ">
+                        {/* <div className="container-login100-form-btn">
                             <button className="login100-form-btn">
                                 Sign up now
                             </button>
-                        </div>
+                        </div> */}
 
-                        <div className="specialops d-flex justify-content-around mt-3">
+                        <div className="specialops d-flex justify-content-around mt-5">
                             {/* <!-- <a className="txt2" href="#">
                         Forgot Password?
                     </a> --> */}
-                            <a className="!text-center" href="/login">
-                                Log in instead
+                            <a className="!text-center text-gray-700 text-sm" href="/login">
+                                Have an account already? <b>Log in</b>
                                 <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                             </a>
                         </div>

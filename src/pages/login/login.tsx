@@ -5,6 +5,7 @@ import '../../global.util.css'
 import Logo from '../../images/logo.png';
 import { FcGoogle } from 'react-icons/fc';
 import { FaApple, FaLongArrowAltRight, FaEnvelope, FaLock } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 // import { HiEnvelope } from 'react-icons/hi';
 
 
@@ -27,7 +28,7 @@ export const Login: React.FC<{}> = () => {
                         <span className="login100-form-title">
                             Log in to your account
                         </span>
-                        <form className="" action="/login" method="post">
+                        <div className="" >
                             <div className='mb-6 text-sm'>
                                 <div className='py-2 px-5 border-[1px] border-[grey] rounded-md'>
                                     <span className='!text-black flex items-center'>
@@ -67,12 +68,14 @@ export const Login: React.FC<{}> = () => {
                             <span style={{ color: 'red', fontSize: '0.75rem' }}>
                                 {/* <%- error %> */}
                             </span>
-                            <div className="container-login100-form-btn">
-                                <button className="login100-form-btn" onClick={changeDisplay}>
-                                    Next
-                                </button>
-                            </div>
-                        </form>
+                            <Link to='/signup'>
+                                <div className="container-login100-form-btn">
+                                    <button className="login100-form-btn" onClick={changeDisplay}>
+                                        Next
+                                    </button>
+                                </div>
+                            </Link>
+                        </div>
                         <div className="text-center p-t-12">
                             <span className="txt1">
 

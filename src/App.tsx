@@ -12,6 +12,9 @@ import { Home } from './pages/homepage/home';
 import { Error404 } from './pages/404/404';
 import { Login } from './pages/login/login';
 import { Signup } from './pages/login/signup';
+import { Create } from './pages/login/create';
+// import { Signup } from './pages/login/create';
+// import { Create } from './pages/login/signup';
 
 function App() {
 
@@ -33,6 +36,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/create" element={<Create />} />
         <Route path="*" element={<Error404 />} />
         {/*
           <Route path="/compose/tweet" element={<Compose />} />
