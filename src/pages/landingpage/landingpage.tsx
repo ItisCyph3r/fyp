@@ -1,7 +1,7 @@
 import React from 'react';
-import './home.css';
+import './landingpage.css';
 
-export const Home: React.FC<{}> = () => {
+export const LandingPage: React.FC<{}> = () => {
     return (
         <div className='landingbody'>
             <div className="body-container">
@@ -12,7 +12,7 @@ export const Home: React.FC<{}> = () => {
                         </a>
                     </div>
                     <div className="signin">
-                        <a href="/login">
+                        <a href="/account">
                             <button type="button" className="btn">
                                 Login now
                             </button>

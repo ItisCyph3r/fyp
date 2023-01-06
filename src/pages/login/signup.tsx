@@ -82,15 +82,14 @@ export const Signup: React.FC<{}> = () => {
                             <button className="login100-form-btn">
                                 Sign up now
                             </button>
-                        </div>
+                        </div>                       
 
-                        <div className="specialops d-flex justify-content-around mt-3">
-                            {/* <!-- <a className="txt2" href="#">
-                        Forgot Password?
-                    </a> --> */}
-                            <a className="!text-center" href="/login">
+                        <div className="text-center mt-3 ">
+                            <a className="txt2 flex justify-center items-center" href="/account">
                                 Log in instead
-                                <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                                <span className='ml-1'>
+                                    {/* <FaLongArrowAltRight /> */}
+                                </span>
                             </a>
                         </div>
 

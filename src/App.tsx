@@ -7,12 +7,15 @@ import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './conponents/navbar/navbar';
 import { Userbar } from './conponents/navbar/userbar';
 import { Context } from './conponents/context';
-import { Fml } from './pages/fml';
-import { Home } from './pages/homepage/home';
+// import { Fml } from './pages/fml';
+import { LandingPage } from './pages/landingpage/landingpage';
+// import { LandingPage } from './pages/landingpage/landingpage';
 import { Error404 } from './pages/404/404';
+import { Account } from './pages/login/account';
 import { Login } from './pages/login/login';
 import { Signup } from './pages/login/signup';
 import { Create } from './pages/login/create';
+import { Home } from './pages/home/home';
 // import { Signup } from './pages/login/create';
 // import { Create } from './pages/login/signup';
 
@@ -32,8 +35,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/home" element={<Navbar />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/home/:videoID" element={<Navbar />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/create" element={<Create />} />
