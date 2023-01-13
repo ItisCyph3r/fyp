@@ -5,7 +5,7 @@ import './global.util.css';
 import './globals.util.css';
 import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './conponents/navbar/navbar';
-import { Userbar } from './conponents/navbar/userbar';
+// import { Userbar } from './conponents/navbar/userbar';
 import { Context } from './conponents/context';
 // import { Fml } from './pages/fml';
 import { LandingPage } from './pages/landingpage/landingpage';
@@ -16,27 +16,30 @@ import { Login } from './pages/login/login';
 import { Signup } from './pages/login/signup';
 import { Create } from './pages/login/create';
 import { Home } from './pages/home/home';
+import { Video } from './pages/video/video';
+import { useDispatch } from 'react-redux';
+import axios, { AxiosResponse } from 'axios';
+import { authActions } from './store/auth-Slice';
 // import { Signup } from './pages/login/create';
 // import { Create } from './pages/login/signup';
 
 function App() {
-
-
-  // const [dark, setMode] = React.useState<String>('')
-
-  // const getMode = localStorage.getItem("mode");
-
-  // getMode && "dark" === getMode && body.classList.toggle("dark");
-
-  // getMode && "dark" === getMode && setMode('dark')
-
-
-
+  const dispatch = useDispatch()
+  React.useEffect(() => {
+    // axios.get("https://zapnodetv.onrender.com/getuser", { withCredentials: true })
+      axios.get("http://localhost:4000/getuser", { withCredentials: true} )
+      .then((res: AxiosResponse) => {
+        console.log(res.data)
+        if (res.data) {
+          dispatch(authActions.fetchUser(res.data))
+        }
+      })
+  })
   return (
     <>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/home/:videoID" element={<Navbar />} />
+        <Route path="/home/:videoID" element={<Video />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/account" element={<Account />} />
         <Route path="/login" element={<Login />} />

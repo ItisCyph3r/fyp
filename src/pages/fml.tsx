@@ -197,3 +197,19 @@ export default function MiniCarousel() {
         </>
     );
 }
+
+
+<video
+controls
+width=""
+// height='300px'
+// width="800px" 
+// height="1000px"
+className='md:w-[70%] w-full '
+
+>
+{/* <source src="/video-example.webm" type="video/webm" /> */}
+<source src="https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4" type="video/mp4"
+/>
+Sorry, your browser doesn't support videos.
+</video>

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { Username: '', Password: ''  },
+    initialState: { Username: '', Password: '', UserObject: {}},
     reducers: {
         getUsername (state, action) {
             // console.log(action.payload)
@@ -12,6 +12,9 @@ const authSlice = createSlice({
             // console.log(action.payload)
             state.Password = action.payload
         },
+        fetchUser (state, action) {
+            state.UserObject = action.payload
+        }
         // getSignupUsername (state, action) {
         //     // console.log(action.payload)
         //     state.userAuth = action.payload
