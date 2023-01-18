@@ -15,6 +15,13 @@ import '../../../globalss.util.css';
 import { Pagination, Navigation } from "swiper";
 import { Link } from "react-router-dom";
 
+import profilePic from '../../../images/profile.jpg';
+import { Avatar } from "@mui/material";
+import { profile } from "console";
+
+import { MdVerified } from 'react-icons/md';
+
+
 export default function MiniCarousel() {
     return (
         <>
@@ -29,8 +36,8 @@ export default function MiniCarousel() {
                     // navigation={false}
                     // modules={[Pagination, Navigation]}
                     // className="mySwiper"
-                    navigation={false}
-                    slidesPerView={3}
+                    navigation={true}
+                    slidesPerView={4}
                     spaceBetween={30}
                     pagination={{
                         clickable: true,
@@ -113,15 +120,59 @@ export default function MiniCarousel() {
                                     <img src={'https://elearn.nptel.ac.in/wp-content/uploads/2022/10/unnamed.jpeg'} alt='' />
                                 </div>
                             </Link>
+                            <div className=" pb-7 h-[114px] mt-3 text-white">
+                                <div className="">
+                                    <div className="w-full h-[] ">
+                                        <div className="flex">
+                                            <div className="w-[18%]">
+                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
+                                                </div>
+                                                
+                                                <div className="text-left ml-2 mt-1">
+                                                    <div className="text-[0.95rem]">
+                                                        Object Oriented Programming with Java   
+                                                    </div>
+                                                </div>      
+                                            </div>
+                                            <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-2 ">
+                                                <div>
+                                                    Welcome to the programming in Java course! In this course, you will learn  ...
+                                                </div>
+                                                <div className="flex items-center mt-2">
+                                                    <div>
+                                                        Dr. Okoro Raymond 
+                                                    </div>
+                                                    <div className="ml-1">
+                                                        <MdVerified />
+                                                    </div>
+                                                    <div className="ml-1">
+                                                        . 1 day ago
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </SwiperSlide>    
+
+                    <SwiperSlide>
+                        <div>
+                            <Link to="/" className='link-styles'>
+                                
+                                <div className='h-[180px]'>
+                                    <img src={'https://thecodex.me/static/52b74df4524162e8807bea5fb094d53c/ee604/Python_Thumbnail_b6e99c74df.png'} alt='' width='50%' />
+                                </div>
+                            </Link>
                             <div className="bg-[#252158] pb-7 h-[184px]">
                                 <div className="video-card-body">
                                     <div className="video-title">
                                         <Link to="/" className='link-styles'>
-                                            Object Oriented Programming with Java   
+                                            Programming in Python
                                         </Link>
                                     </div>
                                     <div className="video-page">
-                                    Welcome to the programming in Java course! In this course, you will learn the fundamentals of programming in Java, a powerful programming language used in a variety of applications.
+                                    Welcome to the programming in Python course! In this course, you will learn the fundamentals of programming in Python, how it is used in a variety of applications.
                                         <br />
                                         <Link to="/" className='link-styles' style={{ color: 'red' }}>Enrol Now</Link>
 
@@ -136,7 +187,7 @@ export default function MiniCarousel() {
                                 </div>
                             </div>
                         </div>
-                    </SwiperSlide>    
+                    </SwiperSlide>   
 
                     <SwiperSlide>
                         <div>

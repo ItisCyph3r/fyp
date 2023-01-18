@@ -179,7 +179,7 @@ export const Home: React.FC<{}> = () => {
                             </div>
                             <div className="showwcase">
                                 <div className="title">
-                                    <span className="text">Trending Movies</span>
+                                    <span className="text">What would you like to watch ?</span>
                                 </div>
                             </div>
 
@@ -189,6 +189,7 @@ export const Home: React.FC<{}> = () => {
                                     <span className="text">Computer Science</span>
                                 </div>
                                 <MiniCarousel />
+                                
                             </div>
 
                             <div>

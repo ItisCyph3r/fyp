@@ -41,13 +41,14 @@ h6 {
     --box2-color: #FFE6AC;
     --box3-color: #E7D1FC;
     --title-icon-color: #fff;
-    --tran-05: all 0.5s ease;
+    /* --tran-05: all 0.5s ease; */
+    --tran-05: all 0.2s ease;
     --tran-03: all 0.3s ease;
     --tran-03: all 0.2s ease
 }
 
 .body.dark {
-    --primary-color: #3A3B3C;
+    --primary-color: ##181818;
     /* --primary-color: #252158; */
     --panel-color: #242526;
     /* --panel-color: #252158; */
@@ -255,14 +256,14 @@ nav.close li .link-styles .link-name {
     left: 250px;
     background-color: var(--panel-color);
     min-height: 100vh;
-    width: calc(100% - 250px);
+    /* width: calc(100% - 250px); */
     padding: 10px 14px;
     transition: var(--tran-05)
 }
 
 nav.close~.dashboard {
-    left: 73px;
-    width: calc(100% - 73px);
+    left: 0px;
+    width: calc(100% - 0px);
 }
 
 .dashboard .top {
@@ -280,8 +281,8 @@ nav.close~.dashboard {
 }
 
 nav.close~.dashboard .top {
-    left: 73px;
-    width: calc(100% - 73px);
+    left: 0px;
+    width: calc(100% - 0px);
 }
 
 .dashboard .top .sidebar-toggle {
@@ -552,7 +553,7 @@ nav.close~.dashboard .top {
 
     nav.close~.dashboard {
         left: 73px;
-        width: calc(100% - 73px)
+        width: calc(100% - 0px)
     }
 
     nav~.dashboard .top {
@@ -656,6 +657,7 @@ nav.close~.dashboard .top {
 }
 
 .video-title {
+    text-align: left;
     margin-bottom: 5px
 }
 
