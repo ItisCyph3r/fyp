@@ -4,7 +4,7 @@ import '../../global.util.css'
 import '../../globals.util.css'
 import { FcGoogle } from 'react-icons/fc';
 import { FaApple, FaEnvelope, FaLock } from 'react-icons/fa';
-
+import BUTV from '../../images/unnamed.jpg';
 
 export const Signup: React.FC<{}> = () => {
     return (
@@ -14,7 +14,7 @@ export const Signup: React.FC<{}> = () => {
                     <form className="login100-form validate-form" action="/signup" method="post">
                         <a href="/">
                             <img
-                                src={Logo}
+                                src={BUTV}
                                 style={{ height: '70px', width: '80px' }}
                                 className="login-logo"
                                 alt='' />

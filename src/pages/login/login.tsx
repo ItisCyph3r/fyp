@@ -9,6 +9,7 @@ import { BsFillExclamationTriangleFill } from 'react-icons/bs';
 import { useDispatch, useSelector,  } from 'react-redux';
 import { authActions } from '../../store/auth-Slice';
 import { Link, useNavigate } from 'react-router-dom'
+import BUTV from '../../images/unnamed.jpg';
 
 export const Login: React.FC<{}> = () => {
 
@@ -26,7 +27,7 @@ export const Login: React.FC<{}> = () => {
     const SubmitForm = (e: any) => {
         e.preventDefault()
 
-        console.log(usernamedd, ' + ', passworddd)
+        // console.log(usernamedd, ' + ', passworddd)
         navigate('/home')
         
     }
@@ -43,7 +44,7 @@ export const Login: React.FC<{}> = () => {
                     <div className="login100-form validate-form" >
                         <a href="/">
                             <img
-                                src={Logo}
+                                src={BUTV}
                                 style={{ height: '70px', width: '80px' }}
                                 className="login-logo"
                                 alt='' />

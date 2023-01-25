@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/auth-Slice';
 import axios from 'axios';
+import BUTV from '../../images/unnamed.jpg';
 // import { HiEnvelope } from 'react-icons/hi';
 
 
@@ -23,7 +24,7 @@ export const Account: React.FC<{}> = () => {
 
         axios.get('http://localhost:4000/')
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -48,7 +49,7 @@ export const Account: React.FC<{}> = () => {
 
                     <div className="login100-form validate-form">
                         <a href="/">
-                            <img src={Logo} style={{ height: '70px', width: '80px' }}
+                            <img src={BUTV} style={{ height: '70px', width: '80px' }}
                                 className="login-logo" alt='' />
                         </a>
                         <span className="login100-form-title">

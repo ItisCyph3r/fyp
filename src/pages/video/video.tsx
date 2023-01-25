@@ -32,7 +32,7 @@ import { Themebtn } from '../../conponents/themebtn/themebtn';
 import { BiHomeAlt, BiLogOut, BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineStar, AiOutlineSetting } from 'react-icons/ai';
 import { TbPresentationAnalytics } from 'react-icons/tb';
-import { MdOutlineDarkMode } from 'react-icons/md';
+import { MdOutlineDarkMode, MdVerified } from 'react-icons/md';
 import { Avatar } from '@mui/material';
 
 
@@ -162,17 +162,10 @@ export const Video: React.FC<{}> = () => {
 
                     </div>
 
-                    <div className="dash-content">
+                    <div className={`dash-content ${darkMode ? 'text-white' : 'text-black'}`}>
                         <div className="overview">
-
-                            <div className='flex md:flex-row flex-col'>
-                                <div className='md:w-[70%] w-full'>
-                                    {/* <video>
-                                        <source src='https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4'>
-                                        </source>
-
-                                    </video> */}
-
+                            <div className={` flex flex-col md:flex-row `}>
+                                {/* <div className='md:w-[70%] w-full'>
                                     <video
                                         controls
                                         // width=""
@@ -180,29 +173,206 @@ export const Video: React.FC<{}> = () => {
                                         width="100%"
                                         // height="1000px"
                                         className=''
-
                                     >
-                                        {/* <source src="/video-example.webm" type="video/webm" /> */}
-                                        <source src="https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4" type="video/mp4"
-                                        />
+                                        <source src="https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4" type="video/mp4"/>
                                         Sorry, your browser doesn't support videos.
                                     </video>
-                                    {/* <Player
-                                        playsInline
-                                        poster="/assets/poster.png"
-                                        src="https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4"
-                                    /> */}
-
-                                    <Avatar
-                                        alt="Remy Sharp"
-                                        src={profilePic}
-                                        // src= {userObject ? userObject.displayPicture : profilePic}
-                                        sx={{ width: 48, height: 48 }}
-                                    />
+                                    
+                                    <div className="w-[7%] mt-3">
+                                        <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
+                                    </div>
                                 </div>
-                                <div className='w-[30%] ml-5'>
-                                    <div className='text-xl text-white'>
+                                <div>
+                                    Recommended
+                                </div> */}
+                                <div className='md:w-[70.0%] w-full'>
+                                    <video
+                                        controls
+                                        // width=""
+                                        // height='300px'
+                                        width="100%"
+                                        // height="1000px"
+                                        className=''
+                                    >
+                                        <source src="https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4" type="video/mp4" />
+                                        Sorry, your browser doesn't support videos.
+                                    </video>
+                                    <div className='text-xl mt-5'>
+                                        Object Oriented Programming with Java pt-1
+                                        <div className='mt-4 border-b-[1px] border-gray-500'></div>
+                                    </div>
+
+                                    <div className='flex items-start md:items-center mt-3 '>
+                                        <div className="">
+                                            <img src={profilePic} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.5rem] h-auto" />
+                                        </div>
+
+                                        <div className='mt-0 ml-2'>
+                                            <div className='md:text-xl text-sm'>
+                                                Object Oriented Programming with Java
+                                            </div>
+
+                                            <div className={`flex items-center mt-0 md:text-sm text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+
+                                                <div>
+                                                    Dr. Okoro Raymond
+                                                </div>
+                                                <div className="ml-1">
+                                                    <MdVerified />
+                                                </div>
+                                                <div className="ml-1">
+                                                    . 1 day ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='md:w-[30%] w-full md:px-5 px-0 bg-transparent '>
+                                    <div className='!text-white title !mt-7 text-xl '>
                                         Recommended
+                                    </div>
+                                    <div className='flex '>
+                                        <div className='w-1/2'>
+                                            <img src='https://thecodex.me/static/52b74df4524162e8807bea5fb094d53c/ee604/Python_Thumbnail_b6e99c74df.png' alt='' />
+                                        </div>
+                                        <div className='ml-3'>
+                                            <div className=' text-sm'>
+                                                Object Oriented Programming with Java
+                                            </div>
+                                            <div className={`mt-1 text-[0.65rem] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+
+                                                <div className='flex items-center'>
+                                                    Dr. Okoro Raymond
+                                                    <div className="ml-1">
+                                                    <MdVerified />
+                                                </div>
+                                                </div>
+                                                
+                                                <div className="">
+                                                    Jan 1, 2023
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='flex mt-2'>
+                                        <div className='w-1/2'>
+                                            <img src='https://miro.medium.com/max/720/1*sMryEXZVPKFjGNcfSzE8Mw.webp' alt='' />
+                                        </div>
+                                        <div className='ml-3'>
+                                            <div className=' text-sm'>
+                                                Object Oriented Programming with Java
+                                            </div>
+                                            <div className={`mt-1 text-[0.65rem] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+
+                                                <div className='flex items-center'>
+                                                    Dr. Okoro Raymond
+                                                    <div className="ml-1">
+                                                    <MdVerified />
+                                                </div>
+                                                </div>
+                                                
+                                                <div className="">
+                                                    Jan 1, 2023
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='flex mt-2'>
+                                        <div className='w-1/2'>
+                                            <img src='https://www.educative.io/v2api/editorpage/5393602882568192/image/6038586442907648' alt='' />
+                                        </div>
+                                        <div className='ml-3'>
+                                            <div className=' text-sm'>
+                                                Object Oriented Programming with Java
+                                            </div>
+                                            <div className={`mt-1 text-[0.65rem] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+
+                                                <div className='flex items-center'>
+                                                    Dr. Okoro Raymond
+                                                    <div className="ml-1">
+                                                    <MdVerified />
+                                                </div>
+                                                </div>
+                                                
+                                                <div className="">
+                                                    Jan 1, 2023
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='flex mt-2'>
+                                        <div className='w-1/2'>
+                                            <img src='https://elearn.nptel.ac.in/wp-content/uploads/2022/10/unnamed.jpeg' alt='' />
+                                        </div>
+                                        <div className='ml-3'>
+                                            <div className=' text-sm'>
+                                                Object Oriented Programming with Java
+                                            </div>
+                                            <div className={`mt-1 text-[0.65rem] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+
+                                                <div className='flex items-center'>
+                                                    Dr. Okoro Raymond
+                                                    <div className="ml-1">
+                                                    <MdVerified />
+                                                </div>
+                                                </div>
+                                                
+                                                <div className="">
+                                                    Jan 1, 2023
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='flex mt-2'>
+                                        <div className='w-1/2'>
+                                            <img src='https://thecodex.me/static/52b74df4524162e8807bea5fb094d53c/ee604/Python_Thumbnail_b6e99c74df.png' alt='' />
+                                        </div>
+                                        <div className='ml-3'>
+                                            <div className=' text-sm'>
+                                                Object Oriented Programming with Java
+                                            </div>
+                                            <div className={`mt-1 text-[0.65rem] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+
+                                                <div className='flex items-center'>
+                                                    Dr. Okoro Raymond
+                                                    <div className="ml-1">
+                                                    <MdVerified />
+                                                </div>
+                                                </div>
+                                                
+                                                <div className="">
+                                                    Jan 1, 2023
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='flex mt-2'>
+                                        <div className='w-1/2'>
+                                            <img src='https://thecodex.me/static/52b74df4524162e8807bea5fb094d53c/ee604/Python_Thumbnail_b6e99c74df.png' alt='' />
+                                        </div>
+                                        <div className='ml-3'>
+                                            <div className=' text-sm'>
+                                                Object Oriented Programming with Java
+                                            </div>
+                                            <div className={`mt-1 text-[0.65rem] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+
+                                                <div className='flex items-center'>
+                                                    Dr. Okoro Raymond
+                                                    <div className="ml-1">
+                                                    <MdVerified />
+                                                </div>
+                                                </div>
+                                                
+                                                <div className="">
+                                                    Jan 1, 2023
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

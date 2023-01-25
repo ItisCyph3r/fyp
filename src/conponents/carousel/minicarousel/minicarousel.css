@@ -9,14 +9,18 @@ body {
 } */
 
 .carouselbody {
-    background: #252426;
+    /* background: #252426; */
     /* background: transparent; */
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 14px;
-    color: #000;
+    /* color: #000; */
     margin: 0;
     padding: 0;
     /* height: 280px; */
+}
+.carouselbodyy {
+    height: 400px;
+    /* margin-bottom: 150px; */
 }
 @media only screen and (max-width: 640px){
     /*Tablets [601px -> 1200px]*/
