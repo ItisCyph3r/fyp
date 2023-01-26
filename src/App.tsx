@@ -20,7 +20,6 @@ import { Video } from './pages/video/video';
 import { useDispatch } from 'react-redux';
 import axios, { AxiosResponse } from 'axios';
 import { authActions } from './store/auth-Slice';
-import { Upload } from './pages/upload/upload';
 import S3Uploader from './pages/upload/aws-upload';
 // import { Signup } from './pages/login/create';
 // import { Create } from './pages/login/signup';

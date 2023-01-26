@@ -1,55 +1,27 @@
 import React, { useState } from 'react';
-import AWS from 'aws-sdk'
-import S3 from 'react-aws-s3';
+import S3 from 'aws-sdk/clients/s3';
 import { Link } from 'react-router-dom'
 import '../../global.util.css';
 import '../../globals.util.css';
 import '../../globalss.util.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { navActions } from '../../store/nav-Slice';
-import { BiSearchAlt2, BiMenu } from 'react-icons/bi';
 import profilePic from '../../images/profile.jpg';
-import "../../../node_modules/video-react/dist/video-react.css"; // import css
-
-
-import { Themebtn } from '../../conponents/themebtn/themebtn';
-
-import { BiHomeAlt, BiLogOut, BiCommentDetail } from 'react-icons/bi';
+import { BiHomeAlt, BiLogOut, BiCommentDetail, BiMenu } from 'react-icons/bi';
 import { AiOutlineStar, AiOutlineSetting } from 'react-icons/ai';
 import { TbPresentationAnalytics } from 'react-icons/tb';
-import { MdOutlineDarkMode, MdVerified } from 'react-icons/md';
-import { Avatar } from '@mui/material';
-
-
-
-
-
-// const S3_BUCKET = 'butv';
-// const REGION = 'eu-central-1';
-
-
-// AWS.config.update({
-//     accessKeyId: process.env.accessKeyId,
-//     secretAccessKey: process.env.secretAccessKey
-// })
-
-// const myBucket = new AWS.S3({
-//     params: { Bucket: S3_BUCKET },
-//     region: REGION,
-// })
-
+import { MdOutlineDarkMode } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import { navActions } from '../../store/nav-Slice';
+import upload from '../../images/upload.svg'
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
-// console.log(process.env.secretAccessKey)
-
-export const Upload = () => {
+const S3Uploader = () => {
 
     const dispatch = useDispatch()
 
-    const collapseMenu = useSelector((state) => state.nav.isActive);
+    const collapseMenu = useSelector((state: any) => state.nav.isActive);
 
-    const darkMode = useSelector((state) => state.nav.darkMode);
+    const darkMode = useSelector((state: any) => state.nav.darkMode);
 
     const setDarkMode = () => {
         dispatch(navActions.setDarkMode({}))
@@ -61,58 +33,44 @@ export const Upload = () => {
     }
 
 
-    const [progress, setProgress] = useState(0);
+    const [file, setFile] = useState<any>(null);
+    const [uploadProgress, setUploadProgress] = useState(0);
 
-    const [selectedFile, setSelectedFile] = useState(null);
-
-    // the configuration information is fetched from the .env file
-    const config = {
-        bucketName: 'butv',
-        region: 'eu-central-1',
-        accessKeyId: 'AKIARPEUZAMWYJ3KMTGL',
-        secretAccessKey: '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',
+    const handleFileChange = (event: any) => {
+        setFile(event.target.files[0]);
     }
 
-    const handleFileInput = (e) => {
-        setSelectedFile(e.target.files[0]);
+    const handleUpload = () => {
+        // Configure the S3 client
+        const s3 = new S3({
+            region: '',
+            accessKeyId: '',
+            secretAccessKey: ''
+        });
+
+        // Create the S3 upload params
+
+
+
+        const params: any = {
+            Bucket: '',
+            Key: file.name,
+            Body: file,
+            ContentType: file.type
+        };
+
+        // Upload the file to S3 and update the upload progress
+        s3.putObject(params, function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(data);
+            }
+        }).on('httpUploadProgress', function (progress) {
+            const currentProgress = (progress.loaded / progress.total) * 100;
+            setUploadProgress(currentProgress);
+        });
     }
-
-    const uploadFile = async (file) => {
-        const ReactS3Client = new S3(config);
-        // the name of the file uploaded is used to upload it to S3
-        ReactS3Client
-        .uploadFile(file, file.name)
-        .then(data => console.log(data.location))
-        .catch(err => console.error(err))
-    }
-
-
-
-
-
-    // const [selectedFile, setSelectedFile] = useState(null);
-
-    // const handleFileInput = (e) => {
-    //     setSelectedFile(e.target.files[0]);
-    // }
-
-    // const uploadFile = (file) => {
-
-    //     const params = {
-    //         ACL: 'public-read',
-    //         Body: file,
-    //         Bucket: S3_BUCKET,
-    //         Key: file.name
-    //     };
-
-    //     myBucket.putObject(params)
-    //         .on('httpUploadProgress', (evt) => {
-    //             setProgress(Math.round((evt.loaded / evt.total) * 100))
-    //         })
-    //         .send((err) => {
-    //             if (err) console.log(err)
-    //         })
-    // }
 
     return (
         <>
@@ -215,26 +173,72 @@ export const Upload = () => {
 
                     </div>
 
-                    <div className={`dash-content ${darkMode ? 'text-white' : 'text-black'}`}>
-                        <div className="overview">
-                            <div className='mt-10'>
-                                <div> 
-                                    Native SDK File Upload Progress is {progress}%
+                    <div className={`dash-content ${darkMode ? 'text-white' : 'text-black'} `}>
+                        <div className="overview ">
+                            <div className="showwcase ">
+                                <div className="title">
+                                    <span className="text mt-1">Upload a New Video</span>
                                 </div>
+                                <div className='flex items-center'>
+                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover w-full max-w-[5rem] h-auto" />
 
-                                {/* <input type="file" onChange={handleFileInput} />
+                                    <div className='ml-4'>
+                                        <div className='text-2xl'>
+                                            Momoh Samuel
+                                        </div>
+                                        <div className='text-baseline text-[#AAAAAA]'>
+                                            @momohsamuel
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='md:mt-0 mt-14 flex items-center justify-center'>
+                                    <div className='text-center'>
+                                        <div className='flex justify-center'>
 
-                                <button onClick={() => uploadFile(selectedFile)}> Upload to S3</button> */}
+                                            <img src={upload} alt=' ' className='w-full max-w-[50%] h-auto' />
+                                        </div>
+                                        <div className='px-3 '>
+                                            <div className='mt-4 text-xl'>
+                                                Upload a video to get started
+                                            </div>
+                                            <div className='text-xs mt-3'>
+                                                Start sharing your story and connecting with viewers. Videos you upload will show up here.
+                                            </div>
+                                        </div>
 
-                                <input type="file" onChange={handleFileInput}/>
-                                <br></br>
-                                <button onClick={() => uploadFile(selectedFile)}> Upload to S3</button>
+                                        <div className='mt-3 flex justify-center'>
+                                            <input
+                                                type="file"
+                                                onChange={handleFileChange}
+                                                // accept="image/*" 
+                                                multiple
+                                                id='files'
+                                                className='text-center'
+                                                title=' hello'
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <button onClick={handleUpload} className='px-8 py-2 rounded-3xl bg-white text-black mt-3'>
+                                                Upload
+                                            </button>
+                                        </div>
+
+
+                                        {
+                                            uploadProgress > 0 && <div className='mt-30'> Upload progress: {uploadProgress} % </div>
+                                        }
+                                    </div>
+                                </div>
                             </div>
-                    </div>
-                </div>
 
-                    
-            </section>
-        </div >
-    </>
-)}
+
+                        </div>
+                    </div>
+                </section>
+            </div >
+        </>
+    );
+}
+
+export default S3Uploader;

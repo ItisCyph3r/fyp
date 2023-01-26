@@ -213,3 +213,64 @@ className='md:w-[70%] w-full '
 />
 Sorry, your browser doesn't support videos.
 </video>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const [file, setFile] = useState<any>(null);
+    const [uploadProgress, setUploadProgress] = useState(0);
+
+    const handleFileChange = (event: any) => {
+        setFile(event.target.files[0]);
+    }
+
+    const handleUpload = () => {
+        // Configure the S3 client
+        const s3 = new S3({
+            region: 'eu-central-1',
+            accessKeyId: 'AKIARPEUZAMWYJ3KMTGL',
+            secretAccessKey: '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'
+        });
+
+        // Create the S3 upload params
+
+
+
+        const params: any = {
+            Bucket: 'butv',
+            Key: file.name,
+            Body: file,
+            ContentType: file.type
+        };
+
+        // Upload the file to S3 and update the upload progress
+        s3.putObject(params, function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(data);
+            }
+        }).on('httpUploadProgress', function (progress) {
+            const currentProgress = (progress.loaded / progress.total) * 100;
+            setUploadProgress(currentProgress);
+        });
+    }
