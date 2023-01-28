@@ -27,12 +27,9 @@ export const Login: React.FC<{}> = () => {
     const SubmitForm = (e: any) => {
         e.preventDefault()
 
-        // console.log(usernamedd, ' + ', passworddd)
         navigate('/home')
-        
     }
 
-   
 
     const userObject = useSelector((state: any) => state.auth.Username);
     // console.log(userObject)

@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import './global.util.css';
 import './globals.util.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './conponents/navbar/navbar';
 // import { Userbar } from './conponents/navbar/userbar';
 import { Context } from './conponents/context';
@@ -17,7 +17,7 @@ import { Signup } from './pages/login/signup';
 import { Create } from './pages/login/create';
 import { Home } from './pages/home/home';
 import { Video } from './pages/video/video';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios, { AxiosResponse } from 'axios';
 import { authActions } from './store/auth-Slice';
 import S3Uploader from './pages/upload/aws-upload';
@@ -36,10 +36,21 @@ function App() {
         }
       })
   })
+
+  const userObject = useSelector((state: any) => state.auth.UserObject);
+
+  const [userState, setUserState] = React.useState({});
+
+  React.useEffect(() => {
+    setUserState(userObject)
+  }, [userObject])
+
+
+
   return (
     <>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        {/* <Route path="/home" element={<Home />} />
         <Route path="/upload" element={<S3Uploader />} />
         <Route path="/home/:videoID" element={<Video />} />
         <Route path="/" element={<LandingPage />} />
@@ -47,7 +58,19 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/create" element={<Create />} />
+        <Route path="*" element={<Error404 />} /> */}
+
+        <Route path="/home" element={userState ? <Navigate to="/account" /> : <Home />} />    
+        <Route path="/upload" element={userState ? <Navigate to="/account" /> : <S3Uploader />} />    
+        <Route path="/home/:videoID" element={userState ? <Navigate to="/account" /> : <Video />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/create" element={<Create />} />
         <Route path="*" element={<Error404 />} />
+        
+        
         {/*
           <Route path="/compose/tweet" element={<Compose />} />
           <Route path="/:userName/status/:uuid" element={ <Status/> } />  */}

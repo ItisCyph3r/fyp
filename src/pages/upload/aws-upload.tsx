@@ -26,7 +26,25 @@ const S3Uploader = () => {
 
     const darkMode = useSelector((state: any) => state.nav.darkMode);
 
-    const userObject = useSelector((state: any) => state.auth.userAuth);
+
+
+
+    const userObject = useSelector((state: any) => state.auth.UserObject);
+
+    const [userState, setUserState] = React.useState({
+        displayName: '',
+        displayPicture: '',
+        // userName: ''
+    });
+
+    React.useEffect(() => {
+        setUserState({
+            displayName: userObject.displayName,
+            displayPicture: userObject.displayPicture
+        })
+    }, [userObject.displayName, userObject.displayPicture])
+
+
 
     const setDarkMode = () => {
         dispatch(navActions.setDarkMode({}))
@@ -93,7 +111,7 @@ const S3Uploader = () => {
 
 
         // const data = await fetch('https://zapnodetv.onrender.com/api', {
-        const data = await fetch('http://localhost:4000/api', {
+        const data = await fetch('http://localhost:4000/upload', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,7 +120,7 @@ const S3Uploader = () => {
                 video_title: videoState.file.name,
                 video_description: videoState.file.name,
                 // uuid: UUID(),
-                uuid: userObject._id,
+                // uuid: userObject._id,
                 date: new Date()
             })
         });
@@ -202,10 +220,10 @@ const S3Uploader = () => {
 
                         <div className="user-details">
                             <div className="username d-none d-md-block">
-                                {/* Hello username */}
-                                Samuel
+                                {/* Hello {userState.displayName} */}
+                                {userState.displayName}
                             </div>
-                            <img src={profilePic} alt='profilePicture' className="userpicture" />
+                            <img src={userState.displayPicture} alt='profilePicture' className="userpicture" />
                         </div>
 
                     </div>
@@ -228,15 +246,15 @@ const S3Uploader = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='flex'>
-                                    <div className='w-1/2 mt-7 pr-5'>
+                                <div className='flex md:flex-row flex-col'>
+                                    <div className='md:w-1/2 w-full mt-7 pr-5'>
                                         <div>
                                             <div className=''>
-                                                Title
+                                                Title of the video
                                             </div>
                                             <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 
-                                                <input className="input100" type="text" name="displayname" placeholder="Username" required />
+                                                <input className="input100" type="text" name="displayname" placeholder="Title" required />
                                                 <span className="focus-input100"></span>
                                                 <span className="symbol-input100">
                                                     <FaEnvelope />
@@ -245,12 +263,12 @@ const S3Uploader = () => {
                                         </div>
 
                                         <div>
-                                            <div className=''>
-                                                Description
+                                            <div className='mt-3'>
+                                                Description of the video
                                             </div>
                                             <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 
-                                                <input className="input100" type="text" name="displayname" placeholder="Username" required />
+                                                <input className="input100" type="text" name="displayname" placeholder="Description" required />
                                                 <span className="focus-input100"></span>
                                                 <span className="symbol-input100">
                                                     <FaEnvelope />
@@ -258,11 +276,11 @@ const S3Uploader = () => {
                                             </div>
                                         </div>
 
-                                        <BasicSelect />
+                                        {/* <BasicSelect /> */}
 
                                         {/* <Thumbnail videoUrl='https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4' /> */}
                                     </div>
-                                    <div className='md:mt-0 mt-14 flex items-center justify-center w-1/2 border-l-[.1rem]'>
+                                    <div className='md:mt-0 mt-14 flex items-center justify-center md:w-1/2 w-full md:border-l-[.1rem]'>
                                         <div className='text-center'>
                                             <div className='flex justify-center'>
 
@@ -277,7 +295,7 @@ const S3Uploader = () => {
                                                 </div>
                                             </div>
 
-                                            <div className='mt-3 flex justify-center'>
+                                            <div className='mt-5 pb-10 flex justify-center'>
                                                 <input
                                                     type="file"
                                                     onChange={handleFileChange}
@@ -289,11 +307,11 @@ const S3Uploader = () => {
                                                 />
                                             </div>
 
-                                            <div>
+                                            {/* <div>
                                                 <button onClick={handleUpload} className='px-8 py-2 rounded-3xl bg-white text-black mt-3'>
                                                     Upload
                                                 </button>
-                                            </div>
+                                            </div> */}
 
 
                                             {
