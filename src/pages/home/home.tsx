@@ -94,18 +94,12 @@ export const Home: React.FC<{}> = () => {
                     <div className="menu-items">
                         <ul className="nav-links">
                             <li>
-                                <Link className='link-styles' to="/">
+                                <Link className='link-styles' to="/home">
                                     <BiHomeAlt className='navbarLogo' />
                                     <span className="link-name">Home</span>
                                 </Link>
                             </li>
-                            <li>
-                                <Link className='link-styles' to="/">
-                                    {/* <i className="uil uil-favorite"></i> */}
-                                    <AiOutlineStar className='navbarLogo' />
-                                    <span className="link-name">Favorites</span>
-                                </Link>
-                            </li>
+
                             <li>
                                 <Link className='link-styles' to="/upload">
                                     {/* <i className="uil uil-favorite"></i> */}
@@ -113,22 +107,10 @@ export const Home: React.FC<{}> = () => {
                                     <span className="link-name">Upload</span>
                                 </Link>
                             </li>
+                            {/*  */}
+                            {/*  */}
                             <li>
-                                <Link className='link-styles' to="/">
-                                    {/* <i className="uil uil-chart"></i> */}
-                                    <TbPresentationAnalytics className='navbarLogo' />
-                                    <span className="link-name">Analytics</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='link-styles' to="/">
-                                    {/* <i className="uil uil-thumbs-up"></i> */}
-                                    <BiCommentDetail className='navbarLogo' />
-                                    <span className="link-name">Reviews</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='link-styles' to="/">
+                                <Link className='link-styles' to="/home/hehe">
                                     {/* <i className="uil uil-setting"></i> */}
                                     <AiOutlineSetting className='navbarLogo' />
                                     <span className="link-name">Settings</span>
@@ -170,13 +152,24 @@ export const Home: React.FC<{}> = () => {
                     <input type="text" placeholder="Search here..." />
                 </div> */}
 
+
                         <div className="user-details">
+                            <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}   
+                                onClick={setDarkMode}>
+                                <div>
+                                    Change Theme
+                                </div>
+                                <span className="switch ml-3"></span>
+                            </div>
                             <div className="username d-none d-md-block">
                                 {/* Hello username */}
                                 {userState.displayName}
                             </div>
-                            <img src={`${userState.displayPicture}`} alt='profilePicture' className="userpicture" />
-                            {/* {userState.displayPicture} */}
+                            <div className='flex items-center'>
+
+                                <img src={`${userState.displayPicture}`} alt='profilePicture' className="userpicture" />
+                                {/* {userState.displayPicture} */}
+                            </div>
                         </div>
 
                     </div>
@@ -198,7 +191,7 @@ export const Home: React.FC<{}> = () => {
                                     <span className="text">Computer Science</span>
                                 </div>
                                 <MiniCarousel />
-                                
+
                             </div>
 
                             <div>

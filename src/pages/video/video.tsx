@@ -30,7 +30,7 @@ import { Themebtn } from '../../conponents/themebtn/themebtn';
 // import { useSelector, useDispatch } from 'react-redux';
 // import { navActions } from '../../store/nav-Slice';
 import { BiHomeAlt, BiLogOut, BiCommentDetail } from 'react-icons/bi';
-import { AiOutlineStar, AiOutlineSetting } from 'react-icons/ai';
+import { AiOutlineStar, AiOutlineSetting, AiOutlineCloudUpload } from 'react-icons/ai';
 import { TbPresentationAnalytics } from 'react-icons/tb';
 import { MdOutlineDarkMode, MdVerified } from 'react-icons/md';
 import { Avatar } from '@mui/material';
@@ -40,6 +40,21 @@ import { Avatar } from '@mui/material';
 
 
 export const Video: React.FC<{}> = () => {
+
+    const userObject = useSelector((state: any) => state.auth.UserObject);
+
+    const [userState, setUserState] = React.useState({
+        displayName: '',
+        displayPicture: '',
+        // userName: ''
+    });
+
+    React.useEffect(() => {
+        setUserState({
+            displayName: userObject.displayName,
+            displayPicture: userObject.displayPicture
+        })
+    }, [userObject.displayName, userObject.displayPicture])
 
     const dispatch = useDispatch()
 
@@ -83,34 +98,23 @@ export const Video: React.FC<{}> = () => {
                     <div className="menu-items">
                         <ul className="nav-links">
                             <li>
-                                <Link className='link-styles' to="/">
+                                <Link className='link-styles' to="/home">
                                     <BiHomeAlt className='navbarLogo' />
                                     <span className="link-name">Home</span>
                                 </Link>
                             </li>
+
                             <li>
-                                <Link className='link-styles' to="/">
+                                <Link className='link-styles' to="/upload">
                                     {/* <i className="uil uil-favorite"></i> */}
-                                    <AiOutlineStar className='navbarLogo' />
-                                    <span className="link-name">Favorites</span>
+                                    <AiOutlineCloudUpload className='navbarLogo' />
+                                    <span className="link-name">Upload</span>
                                 </Link>
                             </li>
+                            {/*  */}
+                            {/*  */}
                             <li>
-                                <Link className='link-styles' to="/">
-                                    {/* <i className="uil uil-chart"></i> */}
-                                    <TbPresentationAnalytics className='navbarLogo' />
-                                    <span className="link-name">Analytics</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='link-styles' to="/">
-                                    {/* <i className="uil uil-thumbs-up"></i> */}
-                                    <BiCommentDetail className='navbarLogo' />
-                                    <span className="link-name">Reviews</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='link-styles' to="/">
+                                <Link className='link-styles' to="/home/hehe">
                                     {/* <i className="uil uil-setting"></i> */}
                                     <AiOutlineSetting className='navbarLogo' />
                                     <span className="link-name">Settings</span>
@@ -153,11 +157,22 @@ export const Video: React.FC<{}> = () => {
                 </div> */}
 
                         <div className="user-details">
+                            <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}
+                                onClick={setDarkMode}>
+                                <div>
+                                    Change Theme
+                                </div>
+                                <span className="switch ml-3"></span>
+                            </div>
                             <div className="username d-none d-md-block">
                                 {/* Hello username */}
-                                Samuel
+                                {userState.displayName}
                             </div>
-                            <img src={profilePic} alt='profilePicture' className="userpicture" />
+                            <div className='flex items-center'>
+
+                                <img src={`${userState.displayPicture}`} alt='profilePicture' className="userpicture" />
+                                {/* {userState.displayPicture} */}
+                            </div>
                         </div>
 
                     </div>
@@ -244,10 +259,10 @@ export const Video: React.FC<{}> = () => {
                                                 <div className='flex items-center'>
                                                     Dr. Okoro Raymond
                                                     <div className="ml-1">
-                                                    <MdVerified />
+                                                        <MdVerified />
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                
+
                                                 <div className="">
                                                     Jan 1, 2023
                                                 </div>
@@ -268,10 +283,10 @@ export const Video: React.FC<{}> = () => {
                                                 <div className='flex items-center'>
                                                     Dr. Okoro Raymond
                                                     <div className="ml-1">
-                                                    <MdVerified />
+                                                        <MdVerified />
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                
+
                                                 <div className="">
                                                     Jan 1, 2023
                                                 </div>
@@ -292,10 +307,10 @@ export const Video: React.FC<{}> = () => {
                                                 <div className='flex items-center'>
                                                     Dr. Okoro Raymond
                                                     <div className="ml-1">
-                                                    <MdVerified />
+                                                        <MdVerified />
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                
+
                                                 <div className="">
                                                     Jan 1, 2023
                                                 </div>
@@ -316,10 +331,10 @@ export const Video: React.FC<{}> = () => {
                                                 <div className='flex items-center'>
                                                     Dr. Okoro Raymond
                                                     <div className="ml-1">
-                                                    <MdVerified />
+                                                        <MdVerified />
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                
+
                                                 <div className="">
                                                     Jan 1, 2023
                                                 </div>
@@ -340,10 +355,10 @@ export const Video: React.FC<{}> = () => {
                                                 <div className='flex items-center'>
                                                     Dr. Okoro Raymond
                                                     <div className="ml-1">
-                                                    <MdVerified />
+                                                        <MdVerified />
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                
+
                                                 <div className="">
                                                     Jan 1, 2023
                                                 </div>
@@ -364,10 +379,10 @@ export const Video: React.FC<{}> = () => {
                                                 <div className='flex items-center'>
                                                     Dr. Okoro Raymond
                                                     <div className="ml-1">
-                                                    <MdVerified />
+                                                        <MdVerified />
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                
+
                                                 <div className="">
                                                     Jan 1, 2023
                                                 </div>

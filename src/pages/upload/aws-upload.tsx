@@ -6,7 +6,7 @@ import '../../globals.util.css';
 import '../../globalss.util.css';
 import profilePic from '../../images/profile.jpg';
 import { BiHomeAlt, BiLogOut, BiCommentDetail, BiMenu } from 'react-icons/bi';
-import { AiOutlineStar, AiOutlineSetting } from 'react-icons/ai';
+import { AiOutlineStar, AiOutlineSetting, AiOutlineCloudUpload } from 'react-icons/ai';
 import { TbPresentationAnalytics } from 'react-icons/tb';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,10 +15,44 @@ import upload from '../../images/upload.svg'
 import { Thumbnail } from './thumbnail';
 import { FaEnvelope } from 'react-icons/fa';
 import BasicSelect from '../../conponents/basic-select/basic-select';
+import { useDropzone } from 'react-dropzone';
+
+
+
+
+
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { FormHelperText } from '@mui/material';
+import { title } from 'process';
+import { VideoUpload } from './videoupload';
+
+
+
+
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const S3Uploader = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const dispatch = useDispatch()
 
@@ -34,15 +68,16 @@ const S3Uploader = () => {
     const [userState, setUserState] = React.useState({
         displayName: '',
         displayPicture: '',
-        // userName: ''
+        userId: ''
     });
 
     React.useEffect(() => {
         setUserState({
             displayName: userObject.displayName,
-            displayPicture: userObject.displayPicture
+            displayPicture: userObject.displayPicture,
+            userId: userObject._id,
         })
-    }, [userObject.displayName, userObject.displayPicture])
+    }, [userObject.displayName, userObject.displayPicture, userObject._id,])
 
 
 
@@ -63,9 +98,38 @@ const S3Uploader = () => {
     const [videoState, setVideoState] = useState<any>({
         title: null,
         description: null,
+        course: null,
         file: null
     });
 
+    // const setDetails = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const setDetails = (event: any) => {
+        const { name, value } = event.target;
+        setVideoState({
+            ...videoState,
+            [name]: value
+        });
+    };
+
+    // console.log(videoState)
+
+    async function data() {
+        fetch('http://localhost:4000/upload', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                video_title: videoState.title,
+                video_description: videoState.description,
+                course: videoState.course,
+                fileName: videoState.file.name,
+                userId: userState.userId,
+                date: new Date()
+            })
+        });
+    }
+    // data.json();
 
     const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -78,54 +142,7 @@ const S3Uploader = () => {
         console.log(event.target.files[0].name);
     }
 
-    const handleUpload = async () => {
-        // Configure the S3 client
-        const s3 = new S3({
-            region: '',
-            accessKeyId: '',
-            secretAccessKey: ''
-        });
 
-        // Create the S3 upload params
-
-
-
-        const params: any = {
-            Bucket: '',
-            Key: videoState.file.name,
-            Body: videoState.file,
-            ContentType: videoState.file.type
-        };
-
-        // Upload the file to S3 and update the upload progress
-        s3.putObject(params, function (err, data) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(data);
-            }
-        }).on('httpUploadProgress', function (progress: any) {
-            const currentProgress = (progress.loaded / progress.total) * 100;
-            setUploadProgress(currentProgress);
-        });
-
-
-        // const data = await fetch('https://zapnodetv.onrender.com/api', {
-        const data = await fetch('http://localhost:4000/upload', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                video_title: videoState.file.name,
-                video_description: videoState.file.name,
-                // uuid: UUID(),
-                // uuid: userObject._id,
-                date: new Date()
-            })
-        });
-        data.json();
-    }
 
     return (
         <>
@@ -149,32 +166,21 @@ const S3Uploader = () => {
                     <div className="menu-items">
                         <ul className="nav-links">
                             <li>
-                                <Link className='link-styles' to="/">
+                                <Link className='link-styles' to="/home">
                                     <BiHomeAlt className='navbarLogo' />
                                     <span className="link-name">Home</span>
                                 </Link>
                             </li>
+
                             <li>
-                                <Link className='link-styles' to="/">
+                                <Link className='link-styles' to="/upload">
                                     {/* <i className="uil uil-favorite"></i> */}
-                                    <AiOutlineStar className='navbarLogo' />
-                                    <span className="link-name">Favorites</span>
+                                    <AiOutlineCloudUpload className='navbarLogo' />
+                                    <span className="link-name">Upload</span>
                                 </Link>
                             </li>
-                            <li>
-                                <Link className='link-styles' to="/">
-                                    {/* <i className="uil uil-chart"></i> */}
-                                    <TbPresentationAnalytics className='navbarLogo' />
-                                    <span className="link-name">Analytics</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='link-styles' to="/">
-                                    {/* <i className="uil uil-thumbs-up"></i> */}
-                                    <BiCommentDetail className='navbarLogo' />
-                                    <span className="link-name">Reviews</span>
-                                </Link>
-                            </li>
+                            {/*  */}
+                            {/*  */}
                             <li>
                                 <Link className='link-styles' to="/">
                                     {/* <i className="uil uil-setting"></i> */}
@@ -193,7 +199,7 @@ const S3Uploader = () => {
                                 </Link>
                             </li>
                             <li className="mode">
-                                <Link className='link-styles' to="/">
+                                <Link className='link-styles' to="/home/hehe">
                                     {/* <i className="uil uil-moon"></i> */}
                                     {collapseMenu && <MdOutlineDarkMode className='navbarLogo' />}
                                     <span className="link-name">Dark Mode</span>
@@ -218,12 +224,23 @@ const S3Uploader = () => {
                     <input type="text" placeholder="Search here..." />
                 </div> */}
 
-                        <div className="user-details">
+<div className="user-details">
+                            <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}   
+                                onClick={setDarkMode}>
+                                <div>
+                                    Change Theme
+                                </div>
+                                <span className="switch ml-3"></span>
+                            </div>
                             <div className="username d-none d-md-block">
-                                {/* Hello {userState.displayName} */}
+                                {/* Hello username */}
                                 {userState.displayName}
                             </div>
-                            <img src={userState.displayPicture} alt='profilePicture' className="userpicture" />
+                            <div className='flex items-center'>
+
+                                <img src={`${userState.displayPicture}`} alt='profilePicture' className="userpicture" />
+                                {/* {userState.displayPicture} */}
+                            </div>
                         </div>
 
                     </div>
@@ -235,7 +252,7 @@ const S3Uploader = () => {
                                     <span className="text mt-1">Upload a New Video</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover w-full max-w-[5rem] h-auto" />
+                                    <img src={userState.displayPicture} alt='profilepic' className="rounded-full object-cover w-full max-w-[5rem] h-auto" />
 
                                     <div className='ml-4'>
                                         <div className='text-2xl'>
@@ -254,7 +271,15 @@ const S3Uploader = () => {
                                             </div>
                                             <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 
-                                                <input className="input100" type="text" name="displayname" placeholder="Title" required />
+                                                <input
+                                                    className="input100"
+                                                    type="text"
+                                                    name="title"
+                                                    placeholder="Title"
+                                                    value={videoState.title || ''}
+                                                    onChange={setDetails}
+                                                    required
+                                                />
                                                 <span className="focus-input100"></span>
                                                 <span className="symbol-input100">
                                                     <FaEnvelope />
@@ -268,63 +293,57 @@ const S3Uploader = () => {
                                             </div>
                                             <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 
-                                                <input className="input100" type="text" name="displayname" placeholder="Description" required />
+                                                <input
+                                                    className="input100"
+                                                    type="text"
+                                                    name="description"
+                                                    placeholder="Description"
+                                                    value={videoState.description || ''}
+                                                    onChange={setDetails}
+                                                    required />
                                                 <span className="focus-input100"></span>
                                                 <span className="symbol-input100">
                                                     <FaEnvelope />
                                                 </span>
                                             </div>
                                         </div>
-
-                                        {/* <BasicSelect /> */}
-
-                                        {/* <Thumbnail videoUrl='https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4' /> */}
-                                    </div>
-                                    <div className='md:mt-0 mt-14 flex items-center justify-center md:w-1/2 w-full md:border-l-[.1rem]'>
-                                        <div className='text-center'>
-                                            <div className='flex justify-center'>
-
-                                                <img src={upload} alt=' ' className='w-full max-w-[50%] h-auto' />
-                                            </div>
-                                            <div className='px-3 '>
-                                                <div className='mt-4 text-xl'>
-                                                    Upload a video to get started
-                                                </div>
-                                                <div className='text-xs mt-3'>
-                                                    Start sharing your story and connecting with viewers. Videos you upload will show up here.
-                                                </div>
-                                            </div>
-
-                                            <div className='mt-5 pb-10 flex justify-center'>
-                                                <input
-                                                    type="file"
-                                                    onChange={handleFileChange}
-                                                    // accept="image/*" 
-                                                    multiple
-                                                    id='files'
-                                                    className='text-center'
-                                                    title=' hello'
-                                                />
-                                            </div>
-
-                                            {/* <div>
-                                                <button onClick={handleUpload} className='px-8 py-2 rounded-3xl bg-white text-black mt-3'>
-                                                    Upload
-                                                </button>
+                                        <div className={` mt-3`}>
+                                            {/* <div className='mt-3'>
+                                                Course
                                             </div> */}
+                                            <label>Course:</label>
+                                            <br />
+                                            <select
+                                                name="course"
+                                                id="cars"
+                                                className={`${darkMode ? 'text-white bg-[#171a1c]' : 'text-black'} p-3 rounded-3xl `}
+                                                onChange={setDetails}
+                                                defaultValue='-- select an option --'
+                                                required
+                                            >
+                                                <option disabled> -- select an option -- </option>
+                                                <option value="Computer Science">Computer Science</option>
+                                                <option value="Medicine">Medicine</option>
+                                                <option value="Accounting">Accounting</option>
+                                                <option value="Economics">Economics</option>
+                                            </select>
+                                            <br />
+                                            <br />
+                                            {/* <input type="submit" value="Submit"></input> */}
 
+                                            <div className=''>
+                                                Video Thumbnail
+                                            </div>
+                                            <div className=''>
 
-                                            {
-                                                uploadProgress > 0 && <div className='mt-30'> Upload progress: {uploadProgress} % </div>
-                                            }
-
-
+                                                <Thumbnail />
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <VideoUpload />
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </section>
