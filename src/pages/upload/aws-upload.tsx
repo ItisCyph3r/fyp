@@ -26,7 +26,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { FormHelperText } from '@mui/material';
+import { Backdrop, FormHelperText } from '@mui/material';
 import { title } from 'process';
 import { VideoUpload } from './videoupload';
 
@@ -144,6 +144,18 @@ const S3Uploader = () => {
 
 
 
+
+
+
+
+    
+
+
+
+
+
+
+
     return (
         <>
             <div className={`body ${darkMode && 'dark'}`}>
@@ -224,8 +236,8 @@ const S3Uploader = () => {
                     <input type="text" placeholder="Search here..." />
                 </div> */}
 
-<div className="user-details">
-                            <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}   
+                        <div className="user-details">
+                            <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}
                                 onClick={setDarkMode}>
                                 <div>
                                     Change Theme
@@ -264,85 +276,10 @@ const S3Uploader = () => {
                                     </div>
                                 </div>
                                 <div className='flex md:flex-row flex-col'>
-                                    <div className='md:w-1/2 w-full mt-7 pr-5'>
-                                        <div>
-                                            <div className=''>
-                                                Title of the video
-                                            </div>
-                                            <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-
-                                                <input
-                                                    className="input100"
-                                                    type="text"
-                                                    name="title"
-                                                    placeholder="Title"
-                                                    value={videoState.title || ''}
-                                                    onChange={setDetails}
-                                                    required
-                                                />
-                                                <span className="focus-input100"></span>
-                                                <span className="symbol-input100">
-                                                    <FaEnvelope />
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div className='mt-3'>
-                                                Description of the video
-                                            </div>
-                                            <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-
-                                                <input
-                                                    className="input100"
-                                                    type="text"
-                                                    name="description"
-                                                    placeholder="Description"
-                                                    value={videoState.description || ''}
-                                                    onChange={setDetails}
-                                                    required />
-                                                <span className="focus-input100"></span>
-                                                <span className="symbol-input100">
-                                                    <FaEnvelope />
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className={` mt-3`}>
-                                            {/* <div className='mt-3'>
-                                                Course
-                                            </div> */}
-                                            <label>Course:</label>
-                                            <br />
-                                            <select
-                                                name="course"
-                                                id="cars"
-                                                className={`${darkMode ? 'text-white bg-[#171a1c]' : 'text-black'} p-3 rounded-3xl `}
-                                                onChange={setDetails}
-                                                defaultValue='-- select an option --'
-                                                required
-                                            >
-                                                <option disabled> -- select an option -- </option>
-                                                <option value="Computer Science">Computer Science</option>
-                                                <option value="Medicine">Medicine</option>
-                                                <option value="Accounting">Accounting</option>
-                                                <option value="Economics">Economics</option>
-                                            </select>
-                                            <br />
-                                            <br />
-                                            {/* <input type="submit" value="Submit"></input> */}
-
-                                            <div className=''>
-                                                Video Thumbnail
-                                            </div>
-                                            <div className=''>
-
-                                                <Thumbnail />
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <VideoUpload />
                                 </div>
+
+                                
                             </div>
                         </div>
                     </div>

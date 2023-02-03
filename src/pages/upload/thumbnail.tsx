@@ -2,6 +2,7 @@ import React from 'react'
 import S3 from 'aws-sdk/clients/s3';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
+import { BiCloudUpload } from 'react-icons/bi';
 
 
 export const Thumbnail: React.FC<{}> = () => {
@@ -54,7 +55,7 @@ export const Thumbnail: React.FC<{}> = () => {
             // region: '',
             // accessKeyId: '',
             // secretAccessKey: ''
-            
+
 
         });
 
@@ -79,24 +80,36 @@ export const Thumbnail: React.FC<{}> = () => {
     }
     return (
         <>
-            <div className='md:mt-0 mt-14 md:w-full w-full'>
+            <div className='w-full'>
                 <div className='text-center'>
                     <div className=''>
 
                         {/* <img src={upload} alt=' ' className='w-full max-w-[50%] h-auto' /> */}
                         <div className='mt-2 pb-1 flex justify-center'>
-                            <section className={`container text-center p-3 border-4  border-dashed w-full h-full m-auto  rounded-3xl  cursor-pointer ${darkMode ? 'text-white bg-[#4b4b4b]' : 'text-black bg-[#dcdcdc] border-black'}`}>
-                            {/* <div className={`dash-content  `}> */}
-                                <div {...getRootProps({ className: 'dropzone' })}>
-                                    <input {...getInputProps()} />
-                                    {/* <p>Drag 'n' drop some files here, or click to select files</p> */}
-                                    Click here to add your Video file
+                            <section className={`flex items-center justify-center p-3 border-4  border-dashed w-full min-h-[320px]  rounded-3xl  cursor-pointer ${darkMode ? 'text-white bg-[#4b4b4b]' : 'text-black bg-[#dcdcdc] border-black'}`}>
+                                {/* <div className={`dash-content  `}> */}
+                                <div>
+                                    <div {...getRootProps({ className: 'dropzone' })}>
+                                        <input {...getInputProps()} />
+                                        {/* <p>Drag 'n' drop some files here, or click to select files</p> */}
+                                        <div className='flex justify-center'>
+                                            <BiCloudUpload size={60} />
+                                        </div>
+                                        <div className='flex justify-center items-center'>
+
+
+
+                                            {/* Click here to add your Video filesadsd */}
+                                            Upload Thumbnail
+                                        </div>
+                                    </div>
+                                    <aside>
+                                        <h4>Files</h4>
+                                        <ul>{files}</ul>
+                                    </aside>
                                 </div>
-                                <aside>
-                                    <h4>Files</h4>
-                                    <ul>{files}</ul>
-                                </aside>
                             </section>
+
                         </div>
                     </div>
                     {/* <div className='px-3 '>
@@ -107,12 +120,12 @@ export const Thumbnail: React.FC<{}> = () => {
                             Start sharing your story and connecting with viewers. Videos you upload will show up here.
                         </div>
                     </div> */}
-                    
-                    <div>
+
+                    {/* <div>
                         <button onClick={handleUpload} className='px-8 py-2 rounded-3xl bg-white text-black mt-4'>
                             Upload
                         </button>
-                    </div>
+                    </div> */}
                     <div>
                         {uploadProgress > 0 && <div className='mt-30'> Upload progress: {uploadProgress} % </div>}
                     </div>

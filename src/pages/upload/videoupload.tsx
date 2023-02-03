@@ -2,9 +2,39 @@ import React from 'react'
 import S3 from 'aws-sdk/clients/s3';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
+import { BiCloudUpload } from 'react-icons/bi';
+import { Backdrop, Button, CircularProgress } from '@mui/material';
+import { FaEnvelope } from 'react-icons/fa';
+import { Thumbnail } from './thumbnail';
+import { MdClose } from 'react-icons/md';
 
 
 export const VideoUpload: React.FC<{}> = () => {
+
+    const setDetails = (event: any) => {
+        const { name, value } = event.target;
+        setVideoState({
+            ...videoState,
+            [name]: value
+        });
+    };
+
+
+
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleToggle = () => {
+
+    };
+
+
+
+
+
+
+
     const darkMode = useSelector((state: any) => state.nav.darkMode);
 
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
@@ -49,12 +79,15 @@ export const VideoUpload: React.FC<{}> = () => {
     }
 
     const handleUpload = async () => {
+
+
+        setOpen(!open);
         // Configure the S3 client
         const s3 = new S3({
             // region: '',
             // accessKeyId: '',
             // secretAccessKey: ''
-            
+
         });
 
         const params: any = {
@@ -79,23 +112,28 @@ export const VideoUpload: React.FC<{}> = () => {
     return (
         <>
             {/* <div className='flex justify-center'> */}
-            <div className='md:mt-0 mt-14 flex items-center justify-center md:w-1/2 w-full md:border-l-[.1rem]'>
-                <div className='text-center'>
+            <div className='md:mt-0 mt-3 flex items-center justify-center md:w-full w-full '>
+                <div className='text-center w-full h-full'>
                     <div className=''>
 
                         {/* <img src={upload} alt=' ' className='w-full max-w-[50%] h-auto' /> */}
                         <div className='mt-5 pb-3 flex justify-center'>
-                            <section className={`container text-center p-10 border-4  border-dashed w-full h-full m-auto  rounded-3xl cursor-pointer ${darkMode ? 'text-white bg-[#4b4b4b]' : 'text-black bg-[#dcdcdc] border-black'}`}>
-                            {/* <div className={`dash-content  `}> */}
-                                <div {...getRootProps({ className: 'dropzone' })}>
-                                    <input {...getInputProps()} />
-                                    {/* <p>Drag 'n' drop some files here, or click to select files</p> */}
-                                    Click here to add your Video file
+                            <section className={`flex items-center justify-center text-center md:p-0 p-7 md:h-[200px] border-4  border-dashed w-full rounded-3xl cursor-pointer ${darkMode ? 'text-white bg-[#4b4b4b]' : 'text-black bg-[#dcdcdc] border-black'}`}>
+                                {/* <div className={`dash-content  `}> */}
+                                <div>
+                                    <div {...getRootProps({ className: 'dropzone' })}>
+                                        <input {...getInputProps()} />
+                                        {/* <p>Drag 'n' drop some files here, or click to select files</p> */}
+                                        <div className='flex justify-center'>
+                                            <BiCloudUpload size={60} />
+                                        </div>
+                                        Click here to add your Video file
+                                    </div>
+                                    <aside>
+                                        <h4>Files</h4>
+                                        <ul>{files}</ul>
+                                    </aside>
                                 </div>
-                                <aside>
-                                    <h4>Files</h4>
-                                    <ul>{files}</ul>
-                                </aside>
                             </section>
                         </div>
                     </div>
@@ -112,9 +150,110 @@ export const VideoUpload: React.FC<{}> = () => {
                         <button onClick={handleUpload} className='px-8 py-2 rounded-3xl bg-white text-black mt-4'>
                             Upload
                         </button>
+
+                        {/* <Button onClick={handleToggle}>Show backdrop</Button> */}
+                        <Backdrop
+                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                            open={open}
+                        // onClick={handleClose}
+                        >
+                            <div className='md:w-2/3'>
+                                <div>
+                                    {/* <CircularProgress color="inherit" /> */}
+
+                                    <div className='bg-[#525252] p-5 rounded-t-3xl'>
+                                        <div>
+                                            <div className='flex justify-end'>
+                                                <MdClose size={25} onClick={handleClose} className='cursor-pointer'/>
+                                            </div>
+                                            <div className='text-left flex md:flex-row flex-col'>
+                                                <div className='md:w-[70%] w-full mr-5'>
+                                                    <div>
+                                                        <div className=''>
+                                                            Title of the video
+                                                        </div>
+                                                        <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+
+                                                            <textarea
+                                                                // className="input100"
+                                                                className="w-full min-h-[10px] rounded-lg bg-gray-500 p-3 resize-none !outline-2 !outline-red-700"
+                                                                // type="text"
+                                                                name="title"
+                                                                placeholder="Title"
+                                                                value={videoState.title || ''}
+                                                                onChange={setDetails}
+                                                                required
+                                                            />
+                                                            {/* <span className="focus-input100"></span>
+                                                    <span className="symbol-input100">
+                                                        <FaEnvelope />
+                                                    </span> */}
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <div className='mt-3'>
+                                                            Description of the video
+                                                        </div>
+                                                        <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+
+                                                            <textarea
+                                                                // className="input100"
+                                                                // className='w-full min-h-[120px] rounded-2xl bg-[#525252] p-3 resize-none border-2 border-red-700'
+                                                                className="w-full min-h-[120px] rounded-lg bg-gray-500 p-3 resize-none !outline-2 !outline-red-700"
+
+                                                                // type="text"
+                                                                name="description"
+                                                                placeholder="Description"
+                                                                value={videoState.description || ''}
+                                                                onChange={setDetails}
+                                                                required />
+                                                        </div>
+                                                    </div>
+                                                    <div className={` mt-0`}>
+                                                        <label>Course:</label>
+                                                        <br />
+                                                        <select
+                                                            name="course"
+                                                            id="cars"
+                                                            className={`${darkMode ? 'text-white bg-[#171a1c]' : 'text-black'} p-3 rounded-3xl `}
+                                                            onChange={setDetails}
+                                                            defaultValue='-- select an option --'
+                                                            required
+                                                        >
+                                                            <option disabled> -- select an option -- </option>
+                                                            <option value="Computer Science">Computer Science</option>
+                                                            <option value="Medicine">Medicine</option>
+                                                            <option value="Accounting">Accounting</option>
+                                                            <option value="Economics">Economics</option>
+                                                        </select>
+
+                                                        {/* <input type="submit" value="Submit"></input> */}
+                                                    </div>
+                                                </div>
+                                                <div className='md:w-[30%] w-full'>
+                                                    <Thumbnail />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button className='w-full border-t-2 border-gray-700 bg-[#a3a3a3] py-2 rounded-b-3xl'>
+                                        Upload
+                                    </button>
+                                </div>
+                            </div>
+
+                        </Backdrop>
                     </div>
                     <div>
                         {uploadProgress > 0 && <div className='mt-30'> Upload progress: {uploadProgress} % </div>}
+                    </div>
+
+
+
+
+                    <div>
+
                     </div>
                 </div>
             </div>
