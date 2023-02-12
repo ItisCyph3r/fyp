@@ -62,15 +62,15 @@ function App() {
           }
         />
 
-        {/* <Route
+        <Route
           path="/upload"
           element={
             <ProtectedRoute isSignedIn={userState}>
               <S3Uploader />
             </ProtectedRoute>
           }
-        /> */}
-        <Route path="/upload" element={<S3Uploader />} />
+        />
+        {/* <Route path="/upload" element={<S3Uploader />} /> */}
 
         <Route
           path="/home/:videoID"

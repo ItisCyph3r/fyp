@@ -7,6 +7,9 @@ import { Backdrop, Button, CircularProgress } from '@mui/material';
 import { FaEnvelope } from 'react-icons/fa';
 import { Thumbnail } from './thumbnail';
 import { MdClose } from 'react-icons/md';
+import { PutObjectResponse } from 'aws-sdk/clients/mediastoredata';
+import UUID from '../../conponents/uuid/uuid';
+import generateUUID from '../../conponents/uuid/uuid';
 
 
 export const VideoUpload: React.FC<{}> = () => {
@@ -37,14 +40,17 @@ export const VideoUpload: React.FC<{}> = () => {
 
     const darkMode = useSelector((state: any) => state.nav.darkMode);
 
-    const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+        accept: {
+            'video/mp4': ['.mp4', '.MP4'],
+        }
+    })
 
     const files = acceptedFiles.map((file: any) => (
         <li key={file.path}>
             {file.path} - {file.size} bytes
         </li>
     ));
-
 
 
     const userObject = useSelector((state: any) => state.auth.UserObject);
@@ -64,8 +70,11 @@ export const VideoUpload: React.FC<{}> = () => {
         title: null,
         description: null,
         course: null,
-        file: null
+        file: null,
+        thumbnail: null
     });
+
+    // console.log(videoState)
 
     const [uploadProgress, setUploadProgress] = React.useState(0);
 
@@ -78,6 +87,44 @@ export const VideoUpload: React.FC<{}> = () => {
         console.log(event.target.files[0].name);
     }
 
+
+
+
+
+
+    const handleDataFromChild = (data: any) => {
+        // Do something with the data passed from the child component
+        console.log(data);
+        setVideoState({ ...videoState, thumbnail: data })
+
+    };
+
+
+
+
+    async function data() {
+        fetch('http://localhost:4000/upload', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                video_title: videoState.title,
+                video_description: videoState.description,
+                course: videoState.course,
+                fileName: acceptedFiles.map((data) => (data.name)),
+                thumbnail: videoState.thumbnail,
+                userId: userState.userId,
+                uuid: generateUUID(),
+                date: new Date()
+            })
+        });
+    }
+    // data.json();
+
+
+// console.log(acceptedFiles[0].name)
+
     const handleUpload = async () => {
 
 
@@ -88,14 +135,39 @@ export const VideoUpload: React.FC<{}> = () => {
             // accessKeyId: '',
             // secretAccessKey: ''
 
+
+            
+
+            
         });
 
-        const params: any = {
-            Bucket: ``,
-            Key: videoState.file.name,
-            Body: videoState.file,
-            ContentType: videoState.file.type
-        };
+        let params: any = {}
+
+        acceptedFiles.map((file: any) => (
+            // <li key={file.path}>
+            //     {file.path} - {file.size} bytes
+            // </li>
+            // console.log(file)
+
+            params = {
+                // Bucket: ``,
+                // Key: videoState.file.name,
+                // Body: videoState.file,
+                // ContentType: videoState.file.type
+
+
+
+                Bucket: ``,
+                
+                Key: file.name,
+                Body: file,
+                ContentType: file.type
+
+            }
+        ));
+
+
+        // console.log(`butv/${userState.userId}/video`)
 
         // Upload the file to S3 and update the upload progress
         s3.putObject(params, function (err, data) {
@@ -108,7 +180,13 @@ export const VideoUpload: React.FC<{}> = () => {
             const currentProgress = (progress.loaded / progress.total) * 100;
             setUploadProgress(currentProgress);
         });
+
+        // data()
+        
     }
+
+
+
     return (
         <>
             {/* <div className='flex justify-center'> */}
@@ -147,7 +225,7 @@ export const VideoUpload: React.FC<{}> = () => {
                     </div>
 
                     <div>
-                        <button onClick={handleUpload} className='px-8 py-2 rounded-3xl bg-white text-black mt-4'>
+                        <button onClick={handleUpload} className={`px-8 py-2 rounded-3xl  mt-4 ${acceptedFiles.length === 0 ? 'pointer-events-none' : 'cursor-pointer'} ${darkMode ? 'bg-white text-black' : 'bg-black text-white'}`} disabled={acceptedFiles.length === 0} >
                             Upload
                         </button>
 
@@ -164,7 +242,7 @@ export const VideoUpload: React.FC<{}> = () => {
                                     <div className='bg-[#525252] p-5 rounded-t-3xl'>
                                         <div>
                                             <div className='flex justify-end'>
-                                                <MdClose size={25} onClick={handleClose} className='cursor-pointer'/>
+                                                <MdClose size={25} onClick={handleClose} className='cursor-pointer' />
                                             </div>
                                             <div className='text-left flex md:flex-row flex-col'>
                                                 <div className='md:w-[70%] w-full mr-5'>
@@ -232,12 +310,12 @@ export const VideoUpload: React.FC<{}> = () => {
                                                     </div>
                                                 </div>
                                                 <div className='md:w-[30%] w-full'>
-                                                    <Thumbnail />
+                                                    <Thumbnail onDataChange={handleDataFromChild} />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <button className='w-full border-t-2 border-gray-700 bg-[#a3a3a3] py-2 rounded-b-3xl'>
+                                    <button className='w-full border-t-2 border-gray-700 bg-[#a3a3a3] py-2 rounded-b-3xl' onClick={data} >
                                         Upload
                                     </button>
                                 </div>

@@ -38,22 +38,6 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const S3Uploader = () => {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const dispatch = useDispatch()
 
     const collapseMenu = useSelector((state: any) => state.nav.isActive);
@@ -66,6 +50,7 @@ const S3Uploader = () => {
     const userObject = useSelector((state: any) => state.auth.UserObject);
 
     const [userState, setUserState] = React.useState({
+        userName: '',
         displayName: '',
         displayPicture: '',
         userId: ''
@@ -76,8 +61,9 @@ const S3Uploader = () => {
             displayName: userObject.displayName,
             displayPicture: userObject.displayPicture,
             userId: userObject._id,
+            userName: userObject.userName
         })
-    }, [userObject.displayName, userObject.displayPicture, userObject._id,])
+    }, [userObject.displayName, userObject.displayPicture, userObject._id, userObject.userName])
 
 
 
@@ -95,52 +81,71 @@ const S3Uploader = () => {
 
     // const [file, setFile] = useState<any>(null);
 
-    const [videoState, setVideoState] = useState<any>({
-        title: null,
-        description: null,
-        course: null,
-        file: null
-    });
 
-    // const setDetails = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const setDetails = (event: any) => {
-        const { name, value } = event.target;
-        setVideoState({
-            ...videoState,
-            [name]: value
-        });
-    };
 
-    // console.log(videoState)
 
-    async function data() {
-        fetch('http://localhost:4000/upload', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                video_title: videoState.title,
-                video_description: videoState.description,
-                course: videoState.course,
-                fileName: videoState.file.name,
-                userId: userState.userId,
-                date: new Date()
-            })
-        });
-    }
-    // data.json();
 
-    const [uploadProgress, setUploadProgress] = useState(0);
 
-    const handleFileChange = (event: any) => {
-        // event.target.files[0].name = 'fml'
-        setVideoState({
-            ...videoState,
-            file: event.target.files[0]
-        })
-        console.log(event.target.files[0].name);
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const [videoState, setVideoState] = useState<any>({
+    //     title: null,
+    //     description: null,
+    //     course: null,
+    //     // file: null
+    //     video: null
+    // });
+
+    // // const setDetails = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const setDetails = (event: any) => {
+    //     const { name, value } = event.target;
+    //     setVideoState({
+    //         ...videoState,
+    //         [name]: value
+    //     });
+    // };
+
+    // // console.log(videoState)
+
+    // async function data() {
+    //     fetch('http://localhost:4000/upload', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             video_title: videoState.title,
+    //             video_description: videoState.description,
+    //             course: videoState.course,
+    //             fileName: videoState.video.name,
+    //             userId: userState.userId,
+    //             date: new Date()
+    //         })
+    //     });
+    // }
+    // // data.json();
+
+    // const [uploadProgress, setUploadProgress] = useState(0);
+
+    // const handleFileChange = (event: any) => {
+    //     // event.target.files[0].name = 'fml'
+    //     setVideoState({
+    //         ...videoState,
+    //         video: event.target.files[0]
+    //     })
+    //     console.log(event.target.files[0].name);
+    // }
 
 
 
@@ -268,10 +273,12 @@ const S3Uploader = () => {
 
                                     <div className='ml-4'>
                                         <div className='text-2xl'>
-                                            Momoh Samuel
+                                            {/* Momoh Samuel */}
+                                            {userState.displayName}
                                         </div>
                                         <div className='text-baseline text-[#AAAAAA]'>
-                                            @momohsamuel
+                                            {/* @momohsamuel */}
+                                            {userState.userName}
                                         </div>
                                     </div>
                                 </div>
