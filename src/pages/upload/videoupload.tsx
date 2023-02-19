@@ -131,18 +131,13 @@ export const VideoUpload: React.FC<{}> = () => {
         setOpen(!open);
         // Configure the S3 client
         const s3 = new S3({
-            // region: '',
-            // accessKeyId: '',
-            // secretAccessKey: ''
+            region: '',
+            accessKeyId: '',
+            secretAccessKey: ''
 
 
             
 
-            region: 'eu-central-1',
-            accessKeyId: 'AKIARPEUZAMW5GLJJQNB',
-            secretAccessKey: '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'
-            
-            
         });
 
         let params: any = {}
@@ -161,11 +156,11 @@ export const VideoUpload: React.FC<{}> = () => {
 
 
 
-                // Bucket: ``,
-                Bucket: `butv/${userState.userId}/video`,
+                Bucket: ``,
+            
 
 
-           
+        
                 Key: file.name,
                 Body: file,
                 ContentType: file.type
