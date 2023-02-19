@@ -138,6 +138,10 @@ export const VideoUpload: React.FC<{}> = () => {
 
             
 
+            region: 'eu-central-1',
+            accessKeyId: 'AKIARPEUZAMW5GLJJQNB',
+            secretAccessKey: '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'
+            
             
         });
 
@@ -157,8 +161,11 @@ export const VideoUpload: React.FC<{}> = () => {
 
 
 
-                Bucket: ``,
-                
+                // Bucket: ``,
+                Bucket: `butv/${userState.userId}/video`,
+
+
+           
                 Key: file.name,
                 Body: file,
                 ContentType: file.type
@@ -268,7 +275,7 @@ export const VideoUpload: React.FC<{}> = () => {
                                                     </span> */}
                                                         </div>
                                                     </div>
-
+                                                    
                                                     <div>
                                                         <div className='mt-3'>
                                                             Description of the video
@@ -288,6 +295,7 @@ export const VideoUpload: React.FC<{}> = () => {
                                                                 required />
                                                         </div>
                                                     </div>
+                                                    
                                                     <div className={` mt-0`}>
                                                         <label>Course:</label>
                                                         <br />

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../global.util.css';
 import '../../globals.util.css';
-import '../../globalss.util.css';
+// import '../../globalss.util.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { navActions } from '../../store/nav-Slice';
 import { BiSearchAlt2, BiMenu } from 'react-icons/bi';

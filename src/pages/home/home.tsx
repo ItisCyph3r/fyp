@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../global.util.css';
 import '../../globals.util.css';
-import '../../globalss.util.css';
+// import '../../globalss.util.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { navActions } from '../../store/nav-Slice';
 import { BiSearchAlt2, BiMenu } from 'react-icons/bi';
@@ -14,31 +14,37 @@ import MainCarousel from '../../conponents/carousel/maincarousel/maincarousel';
 import { Navbar } from '../../conponents/navbar/navbar';
 // import { Userbar } from '../../conponents/navbar/userbar';
 
-
-
-
-
-
-
-// import React from 'react'
-// import { Userbar } from './userbar'
-// import '../../global.util.css';
-// import '../../globals.util.css';
 import { Themebtn } from '../../conponents/themebtn/themebtn';
-// import Logo from './logo.png';
-// import { Link } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { navActions } from '../../store/nav-Slice';
 import { BiHomeAlt, BiLogOut, BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineStar, AiOutlineSetting, AiOutlineCloudUpload } from 'react-icons/ai';
 import { TbPresentationAnalytics } from 'react-icons/tb';
 import { MdOutlineDarkMode } from 'react-icons/md';
+import axios, { AxiosResponse } from 'axios';
+import VideoList from '../../conponents/feed/feed';
+// import { Pagefeed } from '../../conponents/feed/feed';
+
+
+
 
 
 
 
 
 export const Home: React.FC<{}> = () => {
+
+
+    const [Feed, setFeed] = React.useState<any[]>([]);
+
+    React.useEffect(() => {
+        axios.get("http://localhost:4000/upload")
+            .then((res: AxiosResponse) => {
+                if (res.data) {
+                    setFeed(res.data);
+                }
+            })
+    }, [])
+
+    
 
     const dispatch = useDispatch()
 
@@ -71,6 +77,11 @@ export const Home: React.FC<{}> = () => {
         dispatch(navActions.setNavbar({}))
     }
 
+
+
+    
+
+    
 
     return (
         <>
@@ -156,9 +167,9 @@ export const Home: React.FC<{}> = () => {
                         <div className="user-details">
                             <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}   
                                 onClick={setDarkMode}>
-                                <div>
+                                {/* <div>
                                     Change Theme
-                                </div>
+                                </div> */}
                                 <span className="switch ml-3"></span>
                             </div>
                             <div className="username d-none d-md-block">
@@ -186,7 +197,22 @@ export const Home: React.FC<{}> = () => {
                             </div>
 
 
-                            <div>
+                            {/* <Pagefeed /> */}
+
+
+                            {
+                                // Feed.map((data) => (
+                                //     <>
+                                //         <div className="title">
+                                //             <span className="text">{data.course}</span>
+                                //         </div>
+                                //         <MiniCarousel data={Feed}/>
+                                //     </>
+                                // ))
+
+                                <VideoList videoData={Feed}/>
+                            }
+                            {/* <div>
                                 <div className="title">
                                     <span className="text">Computer Science</span>
                                 </div>
@@ -213,7 +239,7 @@ export const Home: React.FC<{}> = () => {
                                     <span className="text">Medicine</span>
                                 </div>
                                 <MiniCarousel />
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>

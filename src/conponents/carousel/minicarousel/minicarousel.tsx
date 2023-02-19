@@ -10,7 +10,7 @@ import "swiper/css/bundle";
 import "./minicarousel.css";
 
 import '../../../globals.util.css';
-import '../../../globalss.util.css';
+// import '../../../globalss.util.css';
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import { Link } from "react-router-dom";
@@ -22,10 +22,11 @@ import { useSelector } from 'react-redux';
 import { MdVerified } from 'react-icons/md';
 
 
-export default function MiniCarousel() {
+export default function MiniCarousel({data}: any) {
 
     const darkMode = useSelector((state: any) => state.nav.darkMode);
 
+    // console.log(props.data)
     return (
         <>
             <div className={`carouselbody ${darkMode ? 'bg-[#252426' : 'bg-white'}`}>
@@ -50,7 +51,71 @@ export default function MiniCarousel() {
                     className="mySwiper"
                 >
 
+{
+                        data.map((video: any) => (
+                <SwiperSlide>
+                    
 
+                        
+                    <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
+                    {/* <ul>
+        {data.map((video: any) => (
+          <li key={video.uuid}>
+            <h3>{video.video_title}</h3>
+            <p>{video.video_description}</p>
+          </li>
+        ))}
+      </ul> */}
+      {/* {console.log(video.user._id)} */}
+                            <Link to={`/home/${video.uuid}`} className='link-styles'>
+                                
+                                <div className='h-[180px]'>
+                                <img src={`https://djboxb6mw1ura.cloudfront.net/${video.user._id}/thumbnail/${video.thumbnail}`} alt=''  />
+                                </div>
+                            </Link>
+                            <div className=" pb-7 h-[114px] mt-2 ">
+                                <div className="">
+                                    <div className="w-full h-[] ">
+                                        <div className="flex">
+                                            <div className="w-[15%]">
+                                                    <img src={video.user.displayPicture} alt='profilepic' className="rounded-full object-cover"/>
+                                                </div>
+                                                
+                                                <div className="text-left ml-2 mt-1">
+                                                    <div className="text-[0.95rem]">
+                                                        {video.video_title}
+                                                    </div>
+                                                </div>      
+                                            </div>
+                                            <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
+                                                <div>
+                                                    {/* Welcome to the data structure and algorithm course! In this course, you will ... */}
+                                                    {video.video_description.length > 50 ? video.video_description.substr(0, 60) + "..." : video.video_description}
+                                                    {/* {video.video_description} */}
+                                                </div>
+                                                <div className="flex items-center mt-2">
+                                                    <div>
+                                                        {video.user.userName}
+                                                    </div>
+                                                    <div className="ml-1">
+                                                        <MdVerified />
+                                                    </div>
+                                                    <div className="ml-1">
+                                                        . 1 day ago
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        
+                    </SwiperSlide>
+                    ))
+                }
+    
+
+{/* 
                     <SwiperSlide>
                         <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
                             <Link to="/" className='link-styles'>
@@ -94,11 +159,11 @@ export default function MiniCarousel() {
                             </div>
                         </div>
                         
-                    </SwiperSlide>    
+                    </SwiperSlide>     */}
 
 
 
-                    <SwiperSlide>
+                    {/* <SwiperSlide>
                         <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
                             <Link to="/" className='link-styles'>
                                 
@@ -140,11 +205,11 @@ export default function MiniCarousel() {
                                     </div>
                                 </div>
                             </div>
-                    </SwiperSlide>    
+                    </SwiperSlide>     */}
 
                     
 
-                    <SwiperSlide>
+                    {/* <SwiperSlide>
                         <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
                             <Link to="/" className='link-styles'>
                                 
@@ -231,7 +296,7 @@ export default function MiniCarousel() {
                                 </div>
                             </div>
                     </SwiperSlide>    
-
+ */}
 
                         
                 </Swiper>
@@ -266,12 +331,100 @@ export default function MiniCarousel() {
                     // modules={[Pagination]}
                     // className="mySwiper"
                 >
+
+
+
+
+
+
+
+
+
+
+
+{
+                        data.map((video: any) => (
+    //             <SwiperSlide>
+                    
+
+                        
+    //                 <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
+    //                 {/* <ul>
+    //     {data.map((video: any) => (
+    //       <li key={video.uuid}>
+    //         <h3>{video.video_title}</h3>
+    //         <p>{video.video_description}</p>
+    //       </li>
+    //     ))}
+    //   </ul> */}
+    //   {/* {console.log(video.user._id)} */}
+    //                         <Link to={`/home/${video.uuid}`} className='link-styles'>
+                                
+    //                             <div className='h-[180px]'>
+    //                             <img src={`https://djboxb6mw1ura.cloudfront.net/${video.user._id}/thumbnail/${video.thumbnail}`} alt=''  />
+    //                             </div>
+    //                         </Link>
+    //                         <div className=" pb-7 h-[114px] mt-2 ">
+    //                             <div className="">
+    //                                 <div className="w-full h-[] ">
+    //                                     <div className="flex">
+    //                                         <div className="w-[15%]">
+    //                                                 <img src={video.user.displayPicture} alt='profilepic' className="rounded-full object-cover"/>
+    //                                             </div>
+                                                
+    //                                             <div className="text-left ml-2 mt-1">
+    //                                                 <div className="text-[0.95rem]">
+    //                                                     {video.video_title}
+    //                                                 </div>
+    //                                             </div>      
+    //                                         </div>
+    //                                         <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
+    //                                             <div>
+    //                                                 {/* Welcome to the data structure and algorithm course! In this course, you will ... */}
+    //                                                 {video.video_description.length > 50 ? video.video_description.substr(0, 60) + "..." : video.video_description}
+    //                                                 {/* {video.video_description} */}
+    //                                             </div>
+    //                                             <div className="flex items-center mt-2">
+    //                                                 <div>
+    //                                                     {video.user.userName}
+    //                                                 </div>
+    //                                                 <div className="ml-1">
+    //                                                     <MdVerified />
+    //                                                 </div>
+    //                                                 <div className="ml-1">
+    //                                                     . 1 day ago
+    //                                                 </div>
+    //                                             </div>
+    //                                         </div>
+    //                                     </div>
+    //                                 </div>
+    //                         </div>
+    //                     </div>
+                        
+    //                 </SwiperSlide>
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <SwiperSlide>
-                    <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
+                    <div className={`${darkMode ? 'text-white' : 'text-black'} mb-[6rem]`}>
                             <Link to="/" className='link-styles'>
                                 
                                 <div className='h-[180px]'>
-                                <img src={'https://miro.medium.com/max/720/1*sMryEXZVPKFjGNcfSzE8Mw.webp'} alt=''  />
+                                    <img src={`https://djboxb6mw1ura.cloudfront.net/${video.user._id}/thumbnail/${video.thumbnail}`} alt=''  />
                                 </div>
                             </Link>
                             <div className=" pb-7 h-[114px] mt-2 ">
@@ -279,22 +432,22 @@ export default function MiniCarousel() {
                                     <div className="w-full h-[] ">
                                         <div className="flex">
                                             <div className="w-[15%]">
-                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
+                                                <img src={video.user.displayPicture} alt='profilepic' className="rounded-full object-cover"/>
                                                 </div>
                                                 
                                                 <div className="text-left ml-2 mt-1">
                                                     <div className="text-[0.95rem]">
-                                                    Data Structures & Algorithms
+                                                    {video.video_title}
                                                     </div>
                                                 </div>      
                                             </div>
                                             <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
                                                 <div>
-                                                Welcome to the data structure and algorithm course! In this course, you will ...
+                                                {video.video_description.length > 50 ? video.video_description.substr(0, 60) + "..." : video.video_description}
                                                 </div>
                                                 <div className="flex items-center mt-2">
                                                     <div>
-                                                        Dr. Okoro Raymond 
+                                                        {video.user.userName}   
                                                     </div>
                                                     <div className="ml-1">
                                                         <MdVerified />
@@ -310,8 +463,9 @@ export default function MiniCarousel() {
                         </div>
                     </SwiperSlide>
 
-
-                    <SwiperSlide>
+))
+                }
+                    {/* <SwiperSlide>
                     <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
                             <Link to="/" className='link-styles'>
                                 
@@ -441,7 +595,7 @@ export default function MiniCarousel() {
                                     </div>
                                 </div>
                             </div>
-                    </SwiperSlide>
+                    </SwiperSlide> */}
 
                     
                 </Swiper>

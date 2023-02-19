@@ -6,7 +6,7 @@ import './globals.util.css';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { Navbar } from './conponents/navbar/navbar';
 // import { Userbar } from './conponents/navbar/userbar';
-import { Context } from './conponents/context';
+// import { Context } from './conponents/context';
 // import { Fml } from './pages/fml';
 import { LandingPage } from './pages/landingpage/landingpage';
 // import { LandingPage } from './pages/landingpage/landingpage';
@@ -49,18 +49,18 @@ function App() {
 
     <Routes>
       <>
-        {/* <Route path="/home" element={<Home />} /> */}
+        <Route path="/home" element={<Home />} />
 
 
 
-        <Route
+        {/* <Route
           path="/home"
           element={
             <ProtectedRoute isSignedIn={userState}>
               <Home />
             </ProtectedRoute>
           }
-        />
+        /> */}
 
         <Route
           path="/upload"
