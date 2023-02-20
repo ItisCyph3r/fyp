@@ -29,21 +29,38 @@ const S3Uploader = () => {
 
     const userObject = useSelector((state: any) => state.auth.UserObject);
 
+    // const [userState, setUserState] = React.useState({
+    //     userName: '',
+    //     displayName: '',
+    //     displayPicture: '',
+    //     userId: ''
+    // });
+
+
     const [userState, setUserState] = React.useState({
-        userName: '',
-        displayName: '',
-        displayPicture: '',
+        user_name: '',
+        display_name: '',
+        display_picture: '',
         userId: ''
+        // userName: ''
     });
+
+    // React.useEffect(() => {
+    //     setUserState({
+    //         user_name: userObject.user_name,
+    //         display_picture: userObject.display_picture
+    //     })
+    // }, [userObject.user_name, userObject.display_picture])
+
 
     React.useEffect(() => {
         setUserState({
-            displayName: userObject.displayName,
-            displayPicture: userObject.displayPicture,
+            display_name: userObject.display_name,
+            display_picture: userObject.display_picture,
             userId: userObject._id,
-            userName: userObject.userName
+            user_name: userObject.user_name
         })
-    }, [userObject.displayName, userObject.displayPicture, userObject._id, userObject.userName])
+    }, [userObject.display_name, userObject.display_picture, userObject._id, userObject.user_name])
 
 
 
@@ -146,11 +163,11 @@ const S3Uploader = () => {
                             </div>
                             <div className="username d-none d-md-block">
                                 {/* Hello username */}
-                                {userState.displayName}
+                                {userState.user_name}
                             </div>
                             <div className='flex items-center'>
 
-                                <img src={`${userState.displayPicture}`} alt='profilePicture' className="userpicture" />
+                                <img src={`${userState.display_picture}`} alt='profilePicture' className="userpicture" />
                                 {/* {userState.displayPicture} */}
                             </div>
                         </div>
@@ -164,16 +181,16 @@ const S3Uploader = () => {
                                     <span className="text mt-1">Upload a New Video</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <img src={userState.displayPicture} alt='profilepic' className="rounded-full object-cover w-full max-w-[5rem] h-auto" />
+                                    <img src={userState.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[5rem] h-auto" />
 
                                     <div className='ml-4'>
                                         <div className='text-2xl'>
                                             {/* Momoh Samuel */}
-                                            {userState.displayName}
+                                            {userState.display_name}
                                         </div>
                                         <div className='text-baseline text-[#AAAAAA]'>
                                             {/* @momohsamuel */}
-                                            {userState.userName}
+                                            {userState.user_name}
                                         </div>
                                     </div>
                                 </div>

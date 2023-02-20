@@ -70,23 +70,14 @@ export const Thumbnail: any = (props: ChildProps) => {
             // accessKeyId: '',
             // secretAccessKey: ''
 
-  
-           
+
         });
 
         let params: any = {}
 
         acceptedFiles.map((file: any) => (
             params = {
-                // Bucket: ``,
-                // Key: videoState.file.name,
-                // Body: videoState.file,
-                // ContentType: videoState.file.type
-
-
-
                 Bucket: ``,
-                
                 Key: file.name,
                 Body: file,
                 ContentType: file.type

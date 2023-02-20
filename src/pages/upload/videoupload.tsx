@@ -131,12 +131,12 @@ export const VideoUpload: React.FC<{}> = () => {
         setOpen(!open);
         // Configure the S3 client
         const s3 = new S3({
-            region: '',
-            accessKeyId: '',
-            secretAccessKey: ''
+            // region: '',
+            // accessKeyId: '',
+            // secretAccessKey: ''
 
 
-            
+
 
         });
 
@@ -157,7 +157,7 @@ export const VideoUpload: React.FC<{}> = () => {
 
 
                 Bucket: ``,
-            
+                
 
 
         

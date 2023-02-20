@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import '../../global.util.css';
 import '../../globals.util.css';
 // import '../../globalss.util.css';
@@ -34,6 +34,9 @@ import { AiOutlineStar, AiOutlineSetting, AiOutlineCloudUpload } from 'react-ico
 import { TbPresentationAnalytics } from 'react-icons/tb';
 import { MdOutlineDarkMode, MdVerified } from 'react-icons/md';
 import { Avatar } from '@mui/material';
+import axios, { AxiosResponse } from 'axios';
+import VideoPlayer from './videoPlayer';
+
 
 
 
@@ -41,20 +44,39 @@ import { Avatar } from '@mui/material';
 
 export const Video: React.FC<{}> = () => {
 
+    const id = useParams();
+
+    const video_id = id.videoID
+
+    const [Feed, setFeed] = React.useState<any>([]);
+
+    React.useEffect(() => {
+        axios.get(`http://localhost:4000/home/${video_id}`)
+            .then((res: AxiosResponse) => {
+                if (res.data) {
+                    // console.log(res)
+                    setFeed(res.data);
+                }
+            })
+    }, [video_id])
+    // console.log(Feed)
+
+
+
     const userObject = useSelector((state: any) => state.auth.UserObject);
 
     const [userState, setUserState] = React.useState({
-        displayName: '',
-        displayPicture: '',
+        user_name: '',
+        display_picture: '',
         // userName: ''
     });
 
     React.useEffect(() => {
         setUserState({
-            displayName: userObject.displayName,
-            displayPicture: userObject.displayPicture
+            user_name: userObject.user_name,
+            display_picture: userObject.display_picture
         })
-    }, [userObject.displayName, userObject.displayPicture])
+    }, [userObject.user_name, userObject.display_picture])
 
     const dispatch = useDispatch()
 
@@ -75,7 +97,7 @@ export const Video: React.FC<{}> = () => {
         dispatch(navActions.setNavbar({}))
     }
 
-
+// console.log(`https://djboxb6mw1ura.cloudfront.net/${Feed.user_id}/video/${Feed.file_name}`)
     return (
         <>
             <div className={`body ${darkMode && 'dark'}`}>
@@ -165,13 +187,10 @@ export const Video: React.FC<{}> = () => {
                                 <span className="switch ml-3"></span>
                             </div>
                             <div className="username d-none d-md-block">
-                                {/* Hello username */}
-                                {userState.displayName}
+                                {userState.user_name}
                             </div>
                             <div className='flex items-center'>
-
-                                <img src={`${userState.displayPicture}`} alt='profilePicture' className="userpicture" />
-                                {/* {userState.displayPicture} */}
+                                <img src={`${userState.display_picture}`} alt='profilePicture' className="userpicture" />
                             </div>
                         </div>
 
@@ -200,18 +219,12 @@ export const Video: React.FC<{}> = () => {
                                 <div>
                                     Recommended
                                 </div> */}
+                                
                                 <div className='md:w-[70.0%] w-full'>
-                                    <video
-                                        controls
-                                        // width=""
-                                        // height='300px'
-                                        width="100%"
-                                        // height="1000px"
-                                        className=''
-                                    >
-                                        <source src="https://d2rakmst905e2v.cloudfront.net/Aladdin.mp4" type="video/mp4" />
-                                        Sorry, your browser doesn't support videos.
-                                    </video>
+                                    <VideoPlayer src={`https://djboxb6mw1ura.cloudfront.net/${Feed.user_id}/video/${Feed.file_name}`} />
+
+
+
                                     <div className='text-xl mt-5'>
                                         Object Oriented Programming with Java pt-1
                                         <div className='mt-4 border-b-[1px] border-gray-500'></div>
@@ -219,18 +232,21 @@ export const Video: React.FC<{}> = () => {
 
                                     <div className='flex items-start md:items-center mt-3 '>
                                         <div className="">
-                                            <img src={profilePic} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.5rem] h-auto" />
+                                            <img src={Feed.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.5rem] h-auto" />
                                         </div>
 
                                         <div className='mt-0 ml-2'>
                                             <div className='md:text-xl text-sm'>
-                                                Object Oriented Programming with Java
+                                                {/* Object Oriented Programming with Java */}
+                                                {Feed.video_title}
                                             </div>
 
                                             <div className={`flex items-center mt-0 md:text-sm text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
 
                                                 <div>
-                                                    Dr. Okoro Raymond
+                                                    {/* Dr. Okoro Raymond */}
+                                                    {Feed.user_name}
+                                                    {/* {`https://djboxb6mw1ura.cloudfront.net/${Feed.user_id}/video/${Feed.file_name}`} */}
                                                 </div>
                                                 <div className="ml-1">
                                                     <MdVerified />

@@ -49,18 +49,18 @@ function App() {
 
     <Routes>
       <>
-        <Route path="/home" element={<Home />} />
+        {/* <Route path="/home" element={<Home />} /> */}
 
 
 
-        {/* <Route
+        <Route
           path="/home"
           element={
             <ProtectedRoute isSignedIn={userState}>
               <Home />
             </ProtectedRoute>
           }
-        /> */}
+        />
 
         <Route
           path="/upload"

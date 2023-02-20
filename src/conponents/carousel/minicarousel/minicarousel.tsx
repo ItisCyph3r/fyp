@@ -26,7 +26,7 @@ export default function MiniCarousel({data}: any) {
 
     const darkMode = useSelector((state: any) => state.nav.darkMode);
 
-    // console.log(props.data)
+    // console.log(data)
     return (
         <>
             <div className={`carouselbody ${darkMode ? 'bg-[#252426' : 'bg-white'}`}>
@@ -66,7 +66,7 @@ export default function MiniCarousel({data}: any) {
           </li>
         ))}
       </ul> */}
-      {/* {console.log(video.user._id)} */}
+      {/* {console.log(`https://djboxb6mw1ura.cloudfront.net/${video.user._id}/thumbnail/${video.thumbnail}`)} */}
                             <Link to={`/home/${video.uuid}`} className='link-styles'>
                                 
                                 <div className='h-[180px]'>
@@ -78,7 +78,7 @@ export default function MiniCarousel({data}: any) {
                                     <div className="w-full h-[] ">
                                         <div className="flex">
                                             <div className="w-[15%]">
-                                                    <img src={video.user.displayPicture} alt='profilepic' className="rounded-full object-cover"/>
+                                                    <img src={video.user.display_picture} alt='profilepic' className="rounded-full object-cover"/>
                                                 </div>
                                                 
                                                 <div className="text-left ml-2 mt-1">
@@ -95,7 +95,7 @@ export default function MiniCarousel({data}: any) {
                                                 </div>
                                                 <div className="flex items-center mt-2">
                                                     <div>
-                                                        {video.user.userName}
+                                                        {video.user.user_name}
                                                     </div>
                                                     <div className="ml-1">
                                                         <MdVerified />

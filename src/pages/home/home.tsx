@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../../global.util.css';
 import '../../globals.util.css';
 // import '../../globalss.util.css';
@@ -60,23 +60,36 @@ export const Home: React.FC<{}> = () => {
     const userObject = useSelector((state: any) => state.auth.UserObject);
 
     const [userState, setUserState] = React.useState({
-        displayName: '',
-        displayPicture: '',
+        user_name: '',
+        display_picture: '',
         // userName: ''
     });
 
     React.useEffect(() => {
         setUserState({
-            displayName: userObject.displayName,
-            displayPicture: userObject.displayPicture
+            user_name: userObject.user_name,
+            display_picture: userObject.display_picture
         })
-    }, [userObject.displayName, userObject.displayPicture])
+    }, [userObject.user_name, userObject.display_picture])
 
     const setNavbar = () => {
         // setActive(!active)
         dispatch(navActions.setNavbar({}))
     }
-
+    const navigate = useNavigate()
+    const Logout = () => {
+        axios.get('http://localhost:4000/auth/logout', {withCredentials: true})
+        // axios.get('https://zapnodetv.onrender.com/auth/logout', {withCredentials: true})
+            .then((res: AxiosResponse) => {
+                console.log(res.data)
+                if(res.data === false){
+                    console.log('Logged out :)')
+                    // window.location.href = '/'
+                    navigate('/account');
+                }
+            }
+        )
+    }   
 
 
     
@@ -131,11 +144,11 @@ export const Home: React.FC<{}> = () => {
 
                         <ul className="logout-mode">
                             <li>
-                                <Link className='link-styles' to="/">
+                                <div className='link-styles' onClick={Logout}>
                                     {/* <i className="uil uil-signout"></i> */}
                                     <BiLogOut className='navbarLogo' />
-                                    <span className="link-name">Logout</span>
-                                </Link>
+                                    <span className="link-name" >Logout</span>
+                                </div>
                             </li>
                             <li className="mode">
                                 <Link className='link-styles' to="/">
@@ -174,11 +187,11 @@ export const Home: React.FC<{}> = () => {
                             </div>
                             <div className="username d-none d-md-block">
                                 {/* Hello username */}
-                                {userState.displayName}
+                                Hello {userState.user_name}
                             </div>
                             <div className='flex items-center'>
 
-                                <img src={`${userState.displayPicture}`} alt='profilePicture' className="userpicture" />
+                                <img src={`${userState.display_picture}`} alt='profilePicture' className="userpicture" />
                                 {/* {userState.displayPicture} */}
                             </div>
                         </div>
@@ -190,8 +203,8 @@ export const Home: React.FC<{}> = () => {
                             <div className="notFound">
                                 Results not found!
                             </div>
-                            <div className="showwcase">
-                                <div className="title">
+                            <div className="showwcase !mt-[1.95rem]">
+                                <div className="title ">
                                     <span className="text">What would you like to watch ?</span>
                                 </div>
                             </div>
