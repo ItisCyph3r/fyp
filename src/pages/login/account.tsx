@@ -22,7 +22,7 @@ export const Account: React.FC<{}> = () => {
     const CaptureUsername = () => {
         dispatch(authActions.getUsername(username))
 
-        axios.get(`${env.baseUrl}/`)
+        axios.get(`${env.baseUrl}`)
             .then(response => {
                 // console.log(response.data);
             })
@@ -32,13 +32,13 @@ export const Account: React.FC<{}> = () => {
     }
 
     const googleLogin = () => {
-        window.open('http://localhost:4000/auth/google', '_self', 'width=500, height=600')
+        window.open(`${env.baseUrl}/auth/google`, '_self', 'width=500, height=600')
         // window.open('http://localhost:4000/auth/google', '_self', 'width=500, height=600')
 
     }
     const linkedinLogin = () => {
-        window.open('http://localhost:4000/auth/linkedin', '_self', 'width=500, height=600')
-        // window.open('http://localhost:4000/auth/google', '_self', 'width=500, height=600')
+        window.open(`${env.baseUrl}/auth/linkedin`, '_self', 'width=500, height=600')
+        // window.open('http://localhost:4000/auth/linkedin', '_self', 'width=500, height=600')
 
     }
 
