@@ -1,6 +1,3 @@
-import React from 'react';
-
-
     const generateUUID = () => {
         let d = new Date().getTime();
         if (typeof performance !== 'undefined' && typeof performance.now === 'function') {

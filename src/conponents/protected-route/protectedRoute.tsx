@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { Navigate } from "react-router-dom";
 
 // export const ProtectedRoute = ( props: any ) => {
@@ -19,7 +18,7 @@ export const ProtectedRoute = ({ isSignedIn, children }: { isSignedIn: any, chil
     }
 
     if (isSignedIn === null) {
-         return <Navigate to="/account" replace />
+        return <Navigate to="/account" replace />
     }
     return children
 };

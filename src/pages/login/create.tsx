@@ -1,5 +1,4 @@
 import React from 'react'
-import Logo from '../../images/logo.png';
 import '../../global.util.css'
 import '../../globals.util.css'
 import { FcGoogle } from 'react-icons/fc';

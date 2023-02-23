@@ -2,26 +2,16 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import '../../global.util.css';
 import '../../globals.util.css';
-// import '../../globalss.util.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { navActions } from '../../store/nav-Slice';
-import { BiSearchAlt2, BiMenu } from 'react-icons/bi';
-import profilePic from '../../images/profile.jpg';
 import BUTV from '../../images/unnamed.jpg';
-import Sample from '../../images/brooke-cagle-kElEigko7PU-unsplash.jpg';
-import MiniCarousel from '../../conponents/carousel/minicarousel/minicarousel';
-import MainCarousel from '../../conponents/carousel/maincarousel/maincarousel';
-import { Navbar } from '../../conponents/navbar/navbar';
-// import { Userbar } from '../../conponents/navbar/userbar';
-
-import { Themebtn } from '../../conponents/themebtn/themebtn';
-import { BiHomeAlt, BiLogOut, BiCommentDetail } from 'react-icons/bi';
-import { AiOutlineStar, AiOutlineSetting, AiOutlineCloudUpload } from 'react-icons/ai';
-import { TbPresentationAnalytics } from 'react-icons/tb';
+import { BiHomeAlt, BiLogOut, BiMenu } from 'react-icons/bi';
+import { AiOutlineSetting, AiOutlineCloudUpload } from 'react-icons/ai';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import axios, { AxiosResponse } from 'axios';
 import VideoList from '../../conponents/feed/feed';
-// import { Pagefeed } from '../../conponents/feed/feed';
+import env from '../../env';
+
 
 
 
@@ -36,7 +26,7 @@ export const Home: React.FC<{}> = () => {
     const [Feed, setFeed] = React.useState<any[]>([]);
 
     React.useEffect(() => {
-        axios.get("http://localhost:4000/upload")
+        axios.get(`${env.baseUrl}/upload`)
             .then((res: AxiosResponse) => {
                 if (res.data) {
                     setFeed(res.data);
@@ -78,8 +68,7 @@ export const Home: React.FC<{}> = () => {
     }
     const navigate = useNavigate()
     const Logout = () => {
-        axios.get('http://localhost:4000/auth/logout', {withCredentials: true})
-        // axios.get('https://zapnodetv.onrender.com/auth/logout', {withCredentials: true})
+        axios.get(`${env.baseUrl}/auth/logout`, {withCredentials: true})
             .then((res: AxiosResponse) => {
                 console.log(res.data)
                 if(res.data === false){
@@ -209,51 +198,7 @@ export const Home: React.FC<{}> = () => {
                                 </div>
                             </div>
 
-
-                            {/* <Pagefeed /> */}
-
-
-                            {
-                                // Feed.map((data) => (
-                                //     <>
-                                //         <div className="title">
-                                //             <span className="text">{data.course}</span>
-                                //         </div>
-                                //         <MiniCarousel data={Feed}/>
-                                //     </>
-                                // ))
-
-                                <VideoList videoData={Feed}/>
-                            }
-                            {/* <div>
-                                <div className="title">
-                                    <span className="text">Computer Science</span>
-                                </div>
-                                <MiniCarousel />
-
-                            </div>
-
-                            <div>
-                                <div className="title">
-                                    <span className="text">Accounting</span>
-                                </div>
-                                <MiniCarousel />
-                            </div>
-
-                            <div>
-                                <div className="title">
-                                    <span className="text">Mass Communication</span>
-                                </div>
-                                <MiniCarousel />
-                            </div>
-
-                            <div>
-                                <div className="title">
-                                    <span className="text">Medicine</span>
-                                </div>
-                                <MiniCarousel />
-                            </div> */}
-
+                            { <VideoList videoData={Feed}/> }
                         </div>
                     </div>
                 </section>

@@ -4,14 +4,9 @@ import '../../global.util.css';
 import '../../globals.util.css';
 import { BiHomeAlt, BiLogOut, BiMenu } from 'react-icons/bi';
 import { AiOutlineSetting, AiOutlineCloudUpload } from 'react-icons/ai';
-
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { navActions } from '../../store/nav-Slice';
-
-
-
-
 import { VideoUpload } from './videoupload';
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -24,18 +19,7 @@ const S3Uploader = () => {
 
     const darkMode = useSelector((state: any) => state.nav.darkMode);
 
-
-
-
     const userObject = useSelector((state: any) => state.auth.UserObject);
-
-    // const [userState, setUserState] = React.useState({
-    //     userName: '',
-    //     displayName: '',
-    //     displayPicture: '',
-    //     userId: ''
-    // });
-
 
     const [userState, setUserState] = React.useState({
         user_name: '',
@@ -44,14 +28,6 @@ const S3Uploader = () => {
         userId: ''
         // userName: ''
     });
-
-    // React.useEffect(() => {
-    //     setUserState({
-    //         user_name: userObject.user_name,
-    //         display_picture: userObject.display_picture
-    //     })
-    // }, [userObject.user_name, userObject.display_picture])
-
 
     React.useEffect(() => {
         setUserState({
@@ -148,11 +124,6 @@ const S3Uploader = () => {
                     <div className="top">
                         <BiMenu onClick={setNavbar} size='35px' className='sidebar-toggle' />
 
-                        {/* <div className="search-box">
-                    <BiSearchAlt2 className='sidebar-toggle search-logo' />
-                    <input type="text" placeholder="Search here..." />
-                </div> */}
-
                         <div className="user-details">
                             <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}
                                 onClick={setDarkMode}>
@@ -166,9 +137,7 @@ const S3Uploader = () => {
                                 {userState.user_name}
                             </div>
                             <div className='flex items-center'>
-
                                 <img src={`${userState.display_picture}`} alt='profilePicture' className="userpicture" />
-                                {/* {userState.displayPicture} */}
                             </div>
                         </div>
 
@@ -185,11 +154,9 @@ const S3Uploader = () => {
 
                                     <div className='ml-4'>
                                         <div className='text-2xl'>
-                                            {/* Momoh Samuel */}
                                             {userState.display_name}
                                         </div>
                                         <div className='text-baseline text-[#AAAAAA]'>
-                                            {/* @momohsamuel */}
                                             {userState.user_name}
                                         </div>
                                     </div>
@@ -197,8 +164,6 @@ const S3Uploader = () => {
                                 <div className='flex md:flex-row flex-col'>
                                     <VideoUpload />
                                 </div>
-
-                                
                             </div>
                         </div>
                     </div>

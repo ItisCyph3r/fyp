@@ -2,15 +2,15 @@ import React from 'react'
 // import '../../global.util.css'
 import '../../globals.util.css'
 import '../../global.util.css'
-import Logo from '../../images/logo.png';
 import { FcGoogle } from 'react-icons/fc';
-import { FaApple, FaLongArrowAltRight, FaEnvelope, FaLock, FaLinkedin } from 'react-icons/fa';
+import { FaLongArrowAltRight, FaEnvelope, FaLinkedin } from 'react-icons/fa';
 import { BsFillExclamationTriangleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-Slice';
 import axios from 'axios';
 import BUTV from '../../images/unnamed.jpg';
+import env from '../../env';
 // import { HiEnvelope } from 'react-icons/hi';
 
 
@@ -22,7 +22,7 @@ export const Account: React.FC<{}> = () => {
     const CaptureUsername = () => {
         dispatch(authActions.getUsername(username))
 
-        axios.get('http://localhost:4000/')
+        axios.get(`${env.baseUrl}/`)
             .then(response => {
                 // console.log(response.data);
             })

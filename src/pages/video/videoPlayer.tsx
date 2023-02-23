@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 interface Props {
-  src: string;
+    src: string;
 }
 
 const VideoPlayer: React.FC<Props> = ({ src }) => {
@@ -21,9 +21,9 @@ const VideoPlayer: React.FC<Props> = ({ src }) => {
         ref={videoRef} 
         controls 
         width="100%" 
-        autoPlay 
+        // autoPlay 
         className='' 
-        // muted
+        muted
         />
     );
 };

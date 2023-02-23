@@ -1,9 +1,7 @@
 import React from 'react'
-import Logo from '../../images/logo.png';
 import '../../global.util.css'
 import '../../globals.util.css'
-import { FcGoogle } from 'react-icons/fc';
-import { FaApple, FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
 import BUTV from '../../images/unnamed.jpg';
 
 export const Signup: React.FC<{}> = () => {

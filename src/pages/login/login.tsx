@@ -1,38 +1,28 @@
 import React from 'react'
-import Logo from '../../images/logo.png';
 import '../../global.util.css'
 import '../../globals.util.css'
-import { FcGoogle } from 'react-icons/fc';
-import { FaApple, FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { BsFillExclamationTriangleFill } from 'react-icons/bs';
 
 import { useDispatch, useSelector,  } from 'react-redux';
 import { authActions } from '../../store/auth-Slice';
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import BUTV from '../../images/unnamed.jpg';
 
 export const Login: React.FC<{}> = () => {
 
-    const [password, setPassword] = React.useState<string>('')
-
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
-    const CapturePassword = () => {
-        
-    }
-    const usernamedd = useSelector((state: any) => state.auth.Username);
-    const passworddd = useSelector((state: any) => state.auth.Password);
-
+    
     const SubmitForm = (e: any) => {
         e.preventDefault()
 
         navigate('/home')
     }
 
-
     const userObject = useSelector((state: any) => state.auth.Username);
-    // console.log(userObject)
+    
     return (
         <div className="userAuth h-[100vh] bg-[#252426]">
             <div className="row" style={{ height: '100vh' }}>
@@ -58,14 +48,6 @@ export const Login: React.FC<{}> = () => {
                                     <FaEnvelope />
                                 </span>
                             </div>
-
-                            {/* <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                                <input className="input100" type="text" name="displayname" placeholder="Username" required />
-                                <span className="focus-input100"></span>
-                                <span className="symbol-input100">
-                                    <i className="fa-solid fa-user" aria-hidden="true"></i>
-                                </span>
-                            </div> */}
                             
                             <div className="wrap-input100 validate-input mb-6" data-validate="Password is required">
                                 <input className="input100"

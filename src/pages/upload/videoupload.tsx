@@ -1,15 +1,13 @@
 import React from 'react'
 import S3 from 'aws-sdk/clients/s3';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 import { BiCloudUpload } from 'react-icons/bi';
-import { Backdrop, Button, CircularProgress } from '@mui/material';
-import { FaEnvelope } from 'react-icons/fa';
+import { Backdrop } from '@mui/material';
 import { Thumbnail } from './thumbnail';
 import { MdClose } from 'react-icons/md';
-import { PutObjectResponse } from 'aws-sdk/clients/mediastoredata';
-import UUID from '../../conponents/uuid/uuid';
 import generateUUID from '../../conponents/uuid/uuid';
+import env from '../../env';
 
 
 export const VideoUpload: React.FC<{}> = () => {
@@ -28,22 +26,14 @@ export const VideoUpload: React.FC<{}> = () => {
     const handleClose = () => {
         setOpen(false);
     };
-    const handleToggle = () => {
-
-    };
-
-
-
-
-
-
 
     const darkMode = useSelector((state: any) => state.nav.darkMode);
 
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
         accept: {
             'video/mp4': ['.mp4', '.MP4'],
-        }
+        },
+        multiple: false
     })
 
     const files = acceptedFiles.map((file: any) => (
@@ -103,7 +93,7 @@ export const VideoUpload: React.FC<{}> = () => {
 
 
     async function data() {
-        fetch('http://localhost:4000/upload', {
+        fetch(`${env.baseUrl}/upload`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,22 +110,14 @@ export const VideoUpload: React.FC<{}> = () => {
             })
         });
     }
-    // data.json();
-
-
-// console.log(acceptedFiles[0].name)
 
     const handleUpload = async () => {
-
-
         setOpen(!open);
         // Configure the S3 client
         const s3 = new S3({
-            // region: '',
-            // accessKeyId: '',
-            // secretAccessKey: ''
-
-
+            region: env.region,
+            accessKeyId: env.accessKey,
+            secretAccessKey: env.secretKey
 
 
         });
@@ -143,33 +125,13 @@ export const VideoUpload: React.FC<{}> = () => {
         let params: any = {}
 
         acceptedFiles.map((file: any) => (
-            // <li key={file.path}>
-            //     {file.path} - {file.size} bytes
-            // </li>
-            // console.log(file)
-
             params = {
-                // Bucket: ``,
-                // Key: videoState.file.name,
-                // Body: videoState.file,
-                // ContentType: videoState.file.type
-
-
-
-                Bucket: ``,
-                
-
-
-        
+                Bucket: `${env.bucketName}/${userState.userId}/${env.videoApi}`,
                 Key: file.name,
                 Body: file,
                 ContentType: file.type
-
             }
         ));
-
-
-        // console.log(`butv/${userState.userId}/video`)
 
         // Upload the file to S3 and update the upload progress
         s3.putObject(params, function (err, data) {
@@ -182,16 +144,12 @@ export const VideoUpload: React.FC<{}> = () => {
             const currentProgress = (progress.loaded / progress.total) * 100;
             setUploadProgress(currentProgress);
         });
-
-        // data()
-        
     }
 
 
 
     return (
         <>
-            {/* <div className='flex justify-center'> */}
             <div className='md:mt-0 mt-3 flex items-center justify-center md:w-full w-full '>
                 <div className='text-center w-full h-full'>
                     <div className=''>

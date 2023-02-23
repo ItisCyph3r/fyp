@@ -1,12 +1,10 @@
 import React from "react";
-// import { VideoData } from "./types"; // assuming you've defined the VideoData type
 import '../../global.util.css'
 import '../../globals.util.css'
 import MiniCarousel from "../carousel/minicarousel/minicarousel";
 
 interface Props {
-//   videoData: VideoData[]; // assuming you're passing the videoData array as a prop
-    videoData: any
+  videoData: any
 }
 
 const VideoList: React.FC<Props> = ({ videoData }) => {

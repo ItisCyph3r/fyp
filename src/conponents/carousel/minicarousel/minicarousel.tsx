@@ -1,4 +1,3 @@
-import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,19 +13,16 @@ import '../../../globals.util.css';
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import { Link } from "react-router-dom";
-
-import profilePic from '../../../images/profile.jpg';
-import { Avatar } from "@mui/material";
-import { profile } from "console";
 import { useSelector } from 'react-redux';
 import { MdVerified } from 'react-icons/md';
+import env from "../../../env";
+import { parseCurrentDate } from "../../getDate/getDate";
 
 
 export default function MiniCarousel({data}: any) {
 
     const darkMode = useSelector((state: any) => state.nav.darkMode);
 
-    // console.log(data)
     return (
         <>
             <div className={`carouselbody ${darkMode ? 'bg-[#252426' : 'bg-white'}`}>
@@ -51,254 +47,66 @@ export default function MiniCarousel({data}: any) {
                     className="mySwiper"
                 >
 
-{
-                        data.map((video: any) => (
+            {
+                data.map((video: any) => (
                 <SwiperSlide>
                     
-
                         
                     <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-                    {/* <ul>
-        {data.map((video: any) => (
-          <li key={video.uuid}>
-            <h3>{video.video_title}</h3>
-            <p>{video.video_description}</p>
-          </li>
-        ))}
-      </ul> */}
-      {/* {console.log(`https://djboxb6mw1ura.cloudfront.net/${video.user._id}/thumbnail/${video.thumbnail}`)} */}
+                            
                             <Link to={`/home/${video.uuid}`} className='link-styles'>
                                 
-                                <div className='h-[180px]'>
-                                <img src={`https://djboxb6mw1ura.cloudfront.net/${video.user._id}/thumbnail/${video.thumbnail}`} alt=''  />
+                                <div className=''>
+                                    <img 
+                                        src={`${env.cloudFrontApi}/${video.user._id}/${env.thumbnailApi}/${video.thumbnail}`} 
+                                        alt='' 
+                                        className="rounded-2xl w-full max-w-[20rem] h-auto max-h-[10rem]" 
+                                    />
+                                    
                                 </div>
-                            </Link>
+                            
                             <div className=" pb-7 h-[114px] mt-2 ">
                                 <div className="">
                                     <div className="w-full h-[] ">
                                         <div className="flex">
-                                            <div className="w-[15%]">
-                                                    <img src={video.user.display_picture} alt='profilepic' className="rounded-full object-cover"/>
+                                            <div className="">
+                                                    <img src={video.user.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[3.0rem] h-auto"/>
                                                 </div>
                                                 
                                                 <div className="text-left ml-2 mt-1">
+                                                    <>
                                                     <div className="text-[0.95rem]">
                                                         {video.video_title}
                                                     </div>
+                                                    {/* {console.log(`${env.videoApi}/${video.user._id}/${env.thumbnailApi}/${video.thumbnail}`)} */}
+                                                    </>
                                                 </div>      
                                             </div>
                                             <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
                                                 <div>
-                                                    {/* Welcome to the data structure and algorithm course! In this course, you will ... */}
-                                                    {video.video_description.length > 50 ? video.video_description.substr(0, 60) + "..." : video.video_description}
-                                                    {/* {video.video_description} */}
+                                                    {video.video_description.length > 80 ? video.video_description.substr(0, 80) + "..." : video.video_description}
                                                 </div>
                                                 <div className="flex items-center mt-2">
                                                     <div>
                                                         {video.user.user_name}
                                                     </div>
                                                     <div className="ml-1">
-                                                        <MdVerified />
+                                                        <MdVerified className="text-[goldenrod]"/>
                                                     </div>
                                                     <div className="ml-1">
-                                                        . 1 day ago
+                                                        . {parseCurrentDate(video.createdAt)}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                             </div>
+                            </Link>
                         </div>
                         
                     </SwiperSlide>
                     ))
-                }
-    
-
-{/* 
-                    <SwiperSlide>
-                        <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-                            <Link to="/" className='link-styles'>
-                                
-                                <div className='h-[180px]'>
-                                <img src={'https://miro.medium.com/max/720/1*sMryEXZVPKFjGNcfSzE8Mw.webp'} alt=''  />
-                                </div>
-                            </Link>
-                            <div className=" pb-7 h-[114px] mt-2 ">
-                                <div className="">
-                                    <div className="w-full h-[] ">
-                                        <div className="flex">
-                                            <div className="w-[15%]">
-                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
-                                                </div>
-                                                
-                                                <div className="text-left ml-2 mt-1">
-                                                    <div className="text-[0.95rem]">
-                                                    Data Structures & Algorithms
-                                                    </div>
-                                                </div>      
-                                            </div>
-                                            <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
-                                                <div>
-                                                Welcome to the data structure and algorithm course! In this course, you will ...
-                                                </div>
-                                                <div className="flex items-center mt-2">
-                                                    <div>
-                                                        Dr. Okoro Raymond 
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        <MdVerified />
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        . 1 day ago
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                        
-                    </SwiperSlide>     */}
-
-
-
-                    {/* <SwiperSlide>
-                        <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-                            <Link to="/" className='link-styles'>
-                                
-                                <div className='h-[180px]'>
-                                <img src={'https://www.educative.io/v2api/editorpage/5393602882568192/image/6038586442907648'} alt='' />
-                                </div>
-                            </Link>
-                            <div className=" pb-7 h-[114px] mt-3 ">
-                                <div className="">
-                                    <div className="w-full h-[] ">
-                                        <div className="flex ">
-                                            <div className="w-[15%]">
-                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
-                                                </div>
-                                                
-                                                <div className="text-left ml-2 mt-1">
-                                                    <div className="text-[0.95rem]">
-                                                        Programming in C++  
-                                                    </div>
-                                                </div>      
-                                            </div>
-                                            <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
-                                                <div>
-                                                Welcome to the programming in C++ course! In this course, you will learn ...
-                                                </div>
-                                                <div className="flex items-center mt-2">
-                                                    <div>
-                                                        Dr. Okoro Raymond 
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        <MdVerified />
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        . 1 day ago
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </SwiperSlide>     */}
-
-                    
-
-                    {/* <SwiperSlide>
-                        <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-                            <Link to="/" className='link-styles'>
-                                
-                                <div className='h-[180px]'>
-                                    <img src={'https://elearn.nptel.ac.in/wp-content/uploads/2022/10/unnamed.jpeg'} alt='' />
-                                </div>
-                            </Link>
-                            <div className=" pb-7 h-[114px] mt-3 ">
-                                <div className="">
-                                    <div className="w-full h-[] ">
-                                        <div className="flex">
-                                            <div className="w-[18%]">
-                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
-                                                </div>
-                                                
-                                                <div className="text-left ml-2 mt-1">
-                                                    <div className="text-[0.95rem]">
-                                                        Object Oriented Programming with Java   
-                                                    </div>
-                                                </div>      
-                                            </div>
-                                            <div className="text-left ml-[3.0rem] text-[0.70rem]  mt-0 ">
-                                                <div>
-                                                    Welcome to the programming in Java course! In this course, you will learn  ...
-                                                </div>
-                                                <div className="flex items-center mt-2">
-                                                    <div>
-                                                        Dr. Okoro Raymond 
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        <MdVerified />
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        . 1 day ago
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </SwiperSlide>    
-
-                    <SwiperSlide>
-                        <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-                            <Link to="/" className='link-styles'>
-                                
-                                <div className='h-[180px]'>
-                                    <img src={'https://thecodex.me/static/52b74df4524162e8807bea5fb094d53c/ee604/Python_Thumbnail_b6e99c74df.png'} alt='' width='50%' />
-                                </div>
-                            </Link>
-                            <div className=" pb-7 h-[114px] mt-3">
-                                <div className="">
-                                    <div className="w-full h-[] ">
-                                        <div className="flex">
-                                            <div className="w-[15%]">
-                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
-                                                </div>
-                                                
-                                                <div className="text-left ml-2 mt-1">
-                                                    <div className="text-[0.95rem]">
-                                                    Introduction to Programming in Python
-                                                    </div>
-                                                </div>      
-                                            </div>
-                                            <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-2 ">
-                                                <div>
-                                                Welcome to the programming in Python course! In this course, you will learn ...
-                                                </div>
-                                                <div className="flex items-center mt-2">
-                                                    <div>
-                                                        Dr. Okoro Raymond 
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        <MdVerified />
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        . 1 day ago
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </SwiperSlide>    
- */}
-
-                        
+                }                       
                 </Swiper>
             </div>
 
@@ -344,87 +152,13 @@ export default function MiniCarousel({data}: any) {
 
 {
                         data.map((video: any) => (
-    //             <SwiperSlide>
-                    
-
-                        
-    //                 <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-    //                 {/* <ul>
-    //     {data.map((video: any) => (
-    //       <li key={video.uuid}>
-    //         <h3>{video.video_title}</h3>
-    //         <p>{video.video_description}</p>
-    //       </li>
-    //     ))}
-    //   </ul> */}
-    //   {/* {console.log(video.user._id)} */}
-    //                         <Link to={`/home/${video.uuid}`} className='link-styles'>
-                                
-    //                             <div className='h-[180px]'>
-    //                             <img src={`https://djboxb6mw1ura.cloudfront.net/${video.user._id}/thumbnail/${video.thumbnail}`} alt=''  />
-    //                             </div>
-    //                         </Link>
-    //                         <div className=" pb-7 h-[114px] mt-2 ">
-    //                             <div className="">
-    //                                 <div className="w-full h-[] ">
-    //                                     <div className="flex">
-    //                                         <div className="w-[15%]">
-    //                                                 <img src={video.user.displayPicture} alt='profilepic' className="rounded-full object-cover"/>
-    //                                             </div>
-                                                
-    //                                             <div className="text-left ml-2 mt-1">
-    //                                                 <div className="text-[0.95rem]">
-    //                                                     {video.video_title}
-    //                                                 </div>
-    //                                             </div>      
-    //                                         </div>
-    //                                         <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
-    //                                             <div>
-    //                                                 {/* Welcome to the data structure and algorithm course! In this course, you will ... */}
-    //                                                 {video.video_description.length > 50 ? video.video_description.substr(0, 60) + "..." : video.video_description}
-    //                                                 {/* {video.video_description} */}
-    //                                             </div>
-    //                                             <div className="flex items-center mt-2">
-    //                                                 <div>
-    //                                                     {video.user.userName}
-    //                                                 </div>
-    //                                                 <div className="ml-1">
-    //                                                     <MdVerified />
-    //                                                 </div>
-    //                                                 <div className="ml-1">
-    //                                                     . 1 day ago
-    //                                                 </div>
-    //                                             </div>
-    //                                         </div>
-    //                                     </div>
-    //                                 </div>
-    //                         </div>
-    //                     </div>
-                        
-    //                 </SwiperSlide>
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                     <SwiperSlide>
                     <div className={`${darkMode ? 'text-white' : 'text-black'} mb-[6rem]`}>
                             <Link to="/" className='link-styles'>
                                 
                                 <div className='h-[180px]'>
-                                    <img src={`https://djboxb6mw1ura.cloudfront.net/${video.user._id}/thumbnail/${video.thumbnail}`} alt=''  />
+                                    <img src={`${env.cloudFrontApi}/${video.user._id}/${env.thumbnailApi}/${video.thumbnail}`} alt='' />
                                 </div>
                             </Link>
                             <div className=" pb-7 h-[114px] mt-2 ">
@@ -432,7 +166,7 @@ export default function MiniCarousel({data}: any) {
                                     <div className="w-full h-[] ">
                                         <div className="flex">
                                             <div className="w-[15%]">
-                                                <img src={video.user.displayPicture} alt='profilepic' className="rounded-full object-cover"/>
+                                                <img src={video.user.display_picture} alt='profilepic' className="rounded-full object-cover"/>
                                                 </div>
                                                 
                                                 <div className="text-left ml-2 mt-1">
@@ -443,17 +177,17 @@ export default function MiniCarousel({data}: any) {
                                             </div>
                                             <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
                                                 <div>
-                                                {video.video_description.length > 50 ? video.video_description.substr(0, 60) + "..." : video.video_description}
+                                                    {video.video_description.length > 80 ? video.video_description.substr(0, 80) + "..." : video.video_description}
                                                 </div>
                                                 <div className="flex items-center mt-2">
                                                     <div>
-                                                        {video.user.userName}   
+                                                        {video.user.user_name}   
                                                     </div>
                                                     <div className="ml-1">
-                                                        <MdVerified />
+                                                        <MdVerified className="text-[goldenrod]"/>
                                                     </div>
                                                     <div className="ml-1">
-                                                        . 1 day ago
+                                                        {parseCurrentDate(video.createdAt)}
                                                     </div>
                                                 </div>
                                             </div>
@@ -464,140 +198,7 @@ export default function MiniCarousel({data}: any) {
                     </SwiperSlide>
 
 ))
-                }
-                    {/* <SwiperSlide>
-                    <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-                            <Link to="/" className='link-styles'>
-                                
-                                <div className='h-[180px]'>
-                                <img src={'https://www.educative.io/v2api/editorpage/5393602882568192/image/6038586442907648'} alt='' />
-                                </div>
-                            </Link>
-                            <div className=" pb-7 h-[114px] mt-3 ">
-                                <div className="">
-                                    <div className="w-full h-[] ">
-                                        <div className="flex ">
-                                            <div className="w-[15%]">
-                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
-                                                </div>
-                                                
-                                                <div className="text-left ml-2 mt-1">
-                                                    <div className="text-[0.95rem]">
-                                                        Programming in C++  
-                                                    </div>
-                                                </div>      
-                                            </div>
-                                            <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-0 ">
-                                                <div>
-                                                Welcome to the programming in C++ course! In this course, you will learn ...
-                                                </div>
-                                                <div className="flex items-center mt-2">
-                                                    <div>
-                                                        Dr. Okoro Raymond 
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        <MdVerified />
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        . 1 day ago
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                    <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-                            <Link to="/" className='link-styles'>
-                                
-                                <div className='h-[180px]'>
-                                    <img src={'https://elearn.nptel.ac.in/wp-content/uploads/2022/10/unnamed.jpeg'} alt='' />
-                                </div>
-                            </Link>
-                            <div className=" pb-7 h-[114px] mt-3 ">
-                                <div className="">
-                                    <div className="w-full h-[] ">
-                                        <div className="flex">
-                                            <div className="w-[18%]">
-                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
-                                                </div>
-                                                
-                                                <div className="text-left ml-2 mt-1">
-                                                    <div className="text-[0.95rem]">
-                                                        Object Oriented Programming with Java   
-                                                    </div>
-                                                </div>      
-                                            </div>
-                                            <div className="text-left ml-[3.0rem] text-[0.70rem]  mt-0 ">
-                                                <div>
-                                                    Welcome to the programming in Java course! In this course, you will learn  ...
-                                                </div>
-                                                <div className="flex items-center mt-2">
-                                                    <div>
-                                                        Dr. Okoro Raymond 
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        <MdVerified />
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        . 1 day ago
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
-                            <Link to="/" className='link-styles'>
-                                
-                                <div className='h-[180px]'>
-                                    <img src={'https://thecodex.me/static/52b74df4524162e8807bea5fb094d53c/ee604/Python_Thumbnail_b6e99c74df.png'} alt='' width='50%' />
-                                </div>
-                            </Link>
-                            <div className=" pb-7 h-[114px] mt-3">
-                                <div className="">
-                                    <div className="w-full h-[] ">
-                                        <div className="flex">
-                                            <div className="w-[15%]">
-                                                    <img src={profilePic} alt='profilepic' className="rounded-full object-cover"/>
-                                                </div>
-                                                
-                                                <div className="text-left ml-2 mt-1">
-                                                    <div className="text-[0.95rem]">
-                                                    Introduction to Programming in Python
-                                                    </div>
-                                                </div>      
-                                            </div>
-                                            <div className="text-left ml-[3.4rem] text-[0.70rem]  mt-2 ">
-                                                <div>
-                                                Welcome to the programming in Python course! In this course, you will learn ...
-                                                </div>
-                                                <div className="flex items-center mt-2">
-                                                    <div>
-                                                        Dr. Okoro Raymond 
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        <MdVerified />
-                                                    </div>
-                                                    <div className="ml-1">
-                                                        . 1 day ago
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </SwiperSlide> */}
-
-                    
+                }                    
                 </Swiper>
             </div>
         </>
