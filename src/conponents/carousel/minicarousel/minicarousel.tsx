@@ -274,7 +274,7 @@ export default function MiniCarousel({data}: any) {
         spaceBetween={10}
         navigation={true}
         modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        mousewheel={true}
+        // mousewheel={true}
         // keyboard={true}
         pagination={{
           clickable: true,
