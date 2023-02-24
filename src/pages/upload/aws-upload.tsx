@@ -127,9 +127,9 @@ const S3Uploader = () => {
                         <div className="user-details">
                             <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}
                                 onClick={setDarkMode}>
-                                <div>
+                                {/* <div>
                                     Change Theme
-                                </div>
+                                </div> */}
                                 <span className="switch ml-3"></span>
                             </div>
                             <div className="username d-none d-md-block">
@@ -147,7 +147,7 @@ const S3Uploader = () => {
                         <div className="overview ">
                             <div className="showwcase ">
                                 <div className="title">
-                                    <span className="text mt-1">Upload a New Video</span>
+                                    <span className="text mt-3">Upload a New Video</span>
                                 </div>
                                 <div className='flex items-center'>
                                     <img src={userState.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[5rem] h-auto" />

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const navSlice = createSlice({
     name: 'nav',
-    initialState: { isActive: false, darkMode: true },
+    initialState: { isActive: false, darkMode: false },
     reducers: {
         setNavbar(state, action) {
             state.isActive = !state.isActive;

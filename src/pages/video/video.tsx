@@ -150,9 +150,9 @@ export const Video: React.FC<{}> = () => {
                         <div className="user-details">
                             <div className={`mode-toggle mr-5 flex items-center ${darkMode ? 'text-white' : 'text-black'}`}
                                 onClick={setDarkMode}>
-                                <div>
+                                {/* <div>
                                     Change Theme
-                                </div>
+                                </div> */}
                                 <span className="switch ml-3"></span>
                             </div>
                             <div className="username d-none d-md-block">
