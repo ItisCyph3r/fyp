@@ -29,7 +29,10 @@ const VideoList: React.FC<Props> = ({ videoData }) => {
                 <span className="text">{course}</span>
                 {/* <span className="text">{data.course}</span> */}
             </div>
+            {/* <MiniCarousel data={data}/> */}
+            {/* <div className='!bg-red-700'> */}
             <MiniCarousel data={data}/>
+            {/* </div> */}
         </div>
       
     </div>

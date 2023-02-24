@@ -170,7 +170,7 @@ export const Video: React.FC<{}> = () => {
                         {/* <LinearDeterminate /> */}
                             <div className={` flex flex-col lg:flex-row `}>    
                                                         
-                                <div className= 'md:w-[65.0%] w-full'>
+                                <div className= 'lg:w-[65.0%] w-full'>
                                     <VideoPlayer src={`https://djboxb6mw1ura.cloudfront.net/${Video.user_id}/video/${Video.file_name}`} />
 
                                     <div className='text-xl mt-3'>
@@ -215,7 +215,7 @@ export const Video: React.FC<{}> = () => {
                                         {Video.video_description}
                                     </div>
                                 </div>
-                                <div className='md:w-[35%] w-full md:px-5 px-0 bg-transparent '>
+                                <div className='lg:w-[35%] w-full lg:px-5 px-0 bg-transparent '>
                                     <div className='title !mt-7 text-xl !mb-[1rem]'>
                                         Recommended
                                     </div>
@@ -238,7 +238,7 @@ export const Video: React.FC<{}> = () => {
                                                         <img 
                                                         src={`https://djboxb6mw1ura.cloudfront.net/${recommend.user._id}/thumbnail/${recommend.thumbnail}`} 
                                                         alt='' 
-                                                        className='rounded-2xl w-full max-w-[8rem] h-auto max-h-[10rem]'
+                                                        className='rounded-2xl min-w-[8rem] max-w-[8rem] h-auto max-h-[10rem]'
                                                     />
                                                     </div>
                                                     <div className='ml-3'>

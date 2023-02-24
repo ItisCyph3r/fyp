@@ -45,8 +45,11 @@ h6 {
     --tran-05: all 0.2s ease;
     --tran-03: all 0.3s ease;
     --tran-03: all 0.2s ease
+    /* overflow: hidden !important */
 }
-
+.body{
+    /* overflow: hidden !important */
+}
 .body.dark {
     --primary-color: ##181818;
     /* --primary-color: #252158; */
@@ -283,7 +286,8 @@ nav.close li .link-styles .link-name {
     min-height: 100vh;
     /* width: calc(100% - 250px); */
     padding: 10px 14px;
-    transition: var(--tran-05)
+    transition: var(--tran-05);
+    
 }
 
 nav.close~.dashboard {
@@ -386,7 +390,7 @@ nav.close~.dashboard .top {
     flex-direction: column;
     margin: 0 15px
 }
-
+/* 
 @media (max-width:992px) {
     nav {
         width: 73px
@@ -437,9 +441,9 @@ nav.close~.dashboard .top {
     }
 
     .activity .activity-data {
-        overflow-X: scroll
+        overflow: hidden
     }
-}
+} */
 
 @media (max-width:768px) {
     .dash-content .boxes .box {
@@ -465,7 +469,7 @@ nav.close~.dashboard .top {
         width: 50%
     }
 }
-
+/* 
 @media (max-width:480px) {
     .dash-content .boxes .box {
         width: 100%
@@ -518,7 +522,31 @@ nav.close~.dashboard .top {
         left: 0;
         width: 100%
     }
-}
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .user-details {
     display: flex;

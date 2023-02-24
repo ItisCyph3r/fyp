@@ -189,9 +189,6 @@ export const Home: React.FC<{}> = () => {
 
                     <div className="dash-content">
                         <div className="overview">
-                            <div className="notFound">
-                                Results not found!
-                            </div>
                             <div className="showwcase !mt-[1.95rem]">
                                 <div className="title ">
                                     <span className="text">What would you like to watch ?</span>
