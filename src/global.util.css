@@ -48,7 +48,7 @@ h6 {
     /* overflow: hidden !important */
 }
 .body{
-    /* overflow: hidden !important */
+    overflow: hidden !important
 }
 .body.dark {
     --primary-color: ##181818;

@@ -249,26 +249,6 @@ export default function MiniCarousel({data}: any) {
   return (
     <div className='carouselbody !mb-10'>
 
-      {/* <Swiper
-        cssMode={true}
-        navigation={true}
-        pagination={true}
-        mousewheel={true}
-        keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        className="mySwiper"
-      >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
-      </Swiper> */}
-
 <Swiper
         slidesPerView={1}
         spaceBetween={10}
@@ -276,11 +256,13 @@ export default function MiniCarousel({data}: any) {
         modules={[Navigation, Pagination, Mousewheel, Keyboard]}
         // mousewheel={true}
         // keyboard={true}
-        pagination={{
-          clickable: true,
-        }}
+
+        // pagination={{
+        //   clickable: true,
+        // }}
         breakpoints={{
-          640: {
+          
+          480: {
             slidesPerView: 2,
             spaceBetween: 10,
           },
@@ -296,16 +278,7 @@ export default function MiniCarousel({data}: any) {
         // modules={[Pagination]}
         className="mySwiper"
       >
-        {/* <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide> */}
-                        
+      
         {
             data.map((video: any) => ( 
         <SwiperSlide>
@@ -313,9 +286,9 @@ export default function MiniCarousel({data}: any) {
                         
                     <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
                             
-                            <Link to={`/home/${video.uuid}`} className='link-styles'>
+                            <Link to={`/home/${video.uuid}`} className='link-styles' >
                                 
-                                <div className=''>
+                                <div className='flex justify-center'>
                                     <img 
                                         src={`${env.cloudFrontApi}/${video.user._id}/${env.thumbnailApi}/${video.thumbnail}`} 
                                         alt='' 
