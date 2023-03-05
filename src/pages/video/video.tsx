@@ -13,18 +13,13 @@ import axios, { AxiosResponse } from 'axios';
 import VideoPlayer from './videoPlayer';
 import { parseCurrentDate } from '../../conponents/getDate/getDate';
 import env from '../../env';
+import Comment from '../../conponents/comment-section/comment';
+
 
 export const Video: React.FC<{}> = () => {
     
     const topRef = React.useRef<HTMLDivElement>(null);
 
-
-    const [like, setLike] =React.useState<boolean>(false)
-
-    const likeTheVideo = () => {
-        setLike(!like)
-    }
-console.log(like)
     const id = useParams();
 
     const video_id = id.videoID
@@ -64,14 +59,16 @@ console.log(like)
     const [userState, setUserState] = React.useState({
         user_name: '',
         display_picture: '',
+        _id: userObject._id
     });
 
     React.useEffect(() => {
         setUserState({
             user_name: userObject.user_name,
-            display_picture: userObject.display_picture
+            display_picture: userObject.display_picture,
+            _id: userObject._id
         })
-    }, [userObject.user_name, userObject.display_picture])
+    }, [userObject.user_name, userObject.display_picture, userObject._id])
 
     const dispatch = useDispatch()
 
@@ -187,7 +184,8 @@ console.log(like)
                                                         
                                 <div className= 'lg:w-[65.0%] w-full'>
                                     <VideoPlayer 
-                                    src={`https://djboxb6mw1ura.cloudfdront.net/${Video.user_id}/video/${Video.file_name}`} 
+                                    // src={`https://djboxb6mw1ura.cloudfront.net/${Video.user_id}/video/${Video.file_name}`} 
+                                    src=''
                                     />
 
                                     <div className='text-xl mt-3'>
@@ -231,127 +229,7 @@ console.log(like)
                                     <div className='mt-2'>
                                         {Video.video_description}
                                     </div>
-                                    <div className='text-xl font-[400] mt-3'> 
-                                        <div>
-                                            Comments
-                                            <div className='mt-3 border-t-[1px] border-gray-500'></div>
-                                        </div>
-                                        <div className='flex h-auto mt-3 text-sm'>
-                                            <div className=" ">
-                                                <img src={userState.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.0rem] h-auto" />
-                                                
-                                            </div>
-                                            <div className='ml-3 flex-grow w-full'>
-                                                <textarea className={`w-full min-h-[10px] p-2 mb-3 rounded-md resize-none text-sm bg-transparent`} placeholder='Add a Comment'/>
-                                                <div className='flex justify-between'>
-                                                    <div>
-                                                        {/* dsada */}
-                                                    </div>
-                                                    <div>
-                                                        <button className='px-3 py-1 hover:bg-[#3F3F3F] rounded-2xl hover:text-white'>
-                                                            Cancel
-                                                        </button>
-                                                        <button className='ml-3 bg-[#65B8FF] text-black px-3 py-1 rounded-2xl'>
-                                                            Comment
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <div className='flex h-auto mt-3 text-sm'>
-                                            <div className=" ">
-                                                <img src={userState.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.0rem] h-auto" />
-                                                
-                                            </div>
-                                            <div className='ml-3 flex-grow w-full'>
-                                                {/* <textarea className='w-full min-h-[10px] py-2 mb-3 rounded-md resize-none text-sm' placeholder='Add a Comment'/> */}
-                                                <div className='flex'>
-                                                    <div>
-                                                        John Doe
-                                                    </div>
-                                                    <div className='ml-1'>
-                                                        . 2 days ago
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div className='mt-1'>
-                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis odit voluptate nisi temporibus consectetur soluta, corporis excepturi exercitationem, rem similique qui. Nesciunt laborum temporibus iste fugit, alias aliquid nemo ipsum!
-                                                </div>
-                                                <div className='flex '>
-                                                    <div>
-                                                        {/* dsada */}
-                                                    </div>
-                                                    <div className='mt-1'>
-                                                        <div className='flex items-center'>
-                                                            <AiFillLike className={`${like ? 'text-blue-600' : ''}`} onClick={likeTheVideo} />
-                                                            <div className='ml-1'>
-                                                                999
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div className='mt-1 ml-2'>
-                                                        <div className='flex items-center'>
-                                                            <AiFillDislike className={`${like ? '' : 'text-blue-600'}`}/>
-                                                            <div className='ml-1'>
-                                                                999
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <div className='flex h-auto mt-3 text-sm'>
-                                            <div className=" ">
-                                                <img src={userState.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.0rem] h-auto" />
-                                                
-                                            </div>
-                                            <div className='ml-3 flex-grow w-full'>
-                                                {/* <textarea className='w-full min-h-[10px] py-2 mb-3 rounded-md resize-none text-sm' placeholder='Add a Comment'/> */}
-                                                <div className='flex'>
-                                                    <div>
-                                                        Eren Yaeger
-                                                    </div>
-                                                    <div className='ml-1'>
-                                                        . 2 days ago
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div className='mt-1'>
-                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis odit voluptate nisi temporibus consectetur soluta, corporis excepturi exercitationem, rem similique qui. Nesciunt laborum temporibus iste fugit, alias aliquid nemo ipsum!
-                                                </div>
-                                                <div className='flex '>
-                                                    <div>
-                                                        {/* dsada */}
-                                                    </div>
-                                                    <div className='mt-1'>
-                                                        <div className='flex items-center'>
-                                                            <AiFillLike className={`${like ? 'text-blue-600' : ''}`} onClick={likeTheVideo} />
-                                                            <div className='ml-1'>
-                                                                699
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div className='mt-1 ml-2'>
-                                                        <div className='flex items-center'>
-                                                            <AiFillDislike className={`${like ? '' : 'text-blue-600'}`}/>
-                                                            <div className='ml-1'>
-                                                                699
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        
-                                    </div>
+                                    <Comment user={userState} />
                                 </div>
                                 <div className='lg:w-[35%] w-full lg:px-5 px-0 bg-transparent '>
                                     <div className='title !mt-7 text-xl !mb-[1rem]'>
@@ -369,16 +247,16 @@ console.log(like)
                                         </div>
                                         : 
                                         Recommended.map((recommend: any, index: number) => (
-                                            <Link to={`/home/${recommend.uuid}`} >
+                                            <Link to={`/home/${recommend.uuid}`} key={index}>
                                                 {/* <div className={`}> */}
-                                                <div onClick={()=>{topRef.current?.scrollIntoView({ behavior: 'smooth' });}} className={`flex ${index !== 0 ? 'mt-2' : '' } ${darkMode ? 'text-white' : 'text-black'} rounded-2xl`} key={recommend._id}>
+                                                <div  onClick={()=>{topRef.current?.scrollIntoView({ behavior: 'smooth' });}} className={`flex ${index !== 0 ? 'mt-2' : '' } ${darkMode ? 'text-white' : 'text-black'} rounded-2xl`} key={recommend._id}>
                                                     <div className=''>
                                                         {/* <img 
                                                         src={`https://djboxb6mw1ura.cloudfront.net/${recommend.user._id}/thumbnail/${recommend.thumbnail}`} 
                                                         alt='' 
                                                         className='rounded-2xl w-full max-w-[8rem]  flex justify-center items-center object-cover'
                                                     /> */}
-                                                     <img 
+                                                    <img 
                                                         src={`https://djboxb6mw1ura.cloudfront.net/${recommend.user._id}/thumbnail/${recommend.thumbnail}`} 
                                                         alt='' 
                                                         className='rounded-2xl w-[150px] h-[80px] flex justify-center items-center object-cover'

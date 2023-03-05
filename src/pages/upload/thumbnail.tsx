@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 import { BiCloudUpload } from 'react-icons/bi';
 import env from '../../env';
+import { roundTo3SFand2DP } from '../../conponents/roundPercentage/roundPercentage';
+import { TruncateText } from '../../conponents/truncateText/truncateText';
 
 interface ChildProps {
     onDataChange: (data: any) => void;
@@ -38,13 +40,6 @@ export const Thumbnail: any = (props: ChildProps) => {
             {file.path} - {file.size} bytes
         </li>
     ));
-
-    const roundTo3SFand2DP = (num: any) => {
-        let roundedNum = Math.round(num * 100) / 100;
-        return roundedNum.toFixed(2);
-    }
-
-
 
     const [uploadProgress, setUploadProgress] = React.useState(0);
 
@@ -91,7 +86,7 @@ export const Thumbnail: any = (props: ChildProps) => {
                     <div className=''>
                         <div className='mt-2 pb-1 flex justify-center'>
                             <div>
-                                <section className={`flex items-center justify-center p-3 border-4  border-dashed w-full min-h-[320px]  rounded-3xl   ${darkMode ? 'text-white bg-[#4b4b4b]' : 'text-black bg-[#dcdcdc] border-black'}`}>
+                                <section className={`flex items-center justify-center xs:p-3 p-0 border-4  border-dashed   rounded-3xl   ${darkMode ? 'text-white bg-[#4b4b4b]' : 'text-black bg-[#dcdcdc] border-black'}`}>
                                     <div>
                                         <div {...getRootProps({ className: 'dropzone' })}>
                                             <input {...getInputProps()} />
@@ -104,11 +99,15 @@ export const Thumbnail: any = (props: ChildProps) => {
                                             </div>
                                         </div>
                                         <aside>
+                                            <>
                                             <h4>Files</h4>
-                                            <ul>{files}</ul>
+                                            <ul>{ files}</ul>
+                                            
+                                            {/* {console.log((files[0]))} */}
                                             <div>
                                                 {uploadProgress > 0 && <div className='mt-30'> Upload progress: {roundTo3SFand2DP(uploadProgress)} % </div>}
                                             </div>
+                                            </>
                                         </aside>
                                     </div>
 

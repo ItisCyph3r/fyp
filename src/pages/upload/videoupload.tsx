@@ -8,6 +8,7 @@ import { Thumbnail } from './thumbnail';
 import { MdClose } from 'react-icons/md';
 import generateUUID from '../../conponents/uuid/uuid';
 import env from '../../env';
+import { roundTo3SFand2DP } from '../../conponents/roundPercentage/roundPercentage';
 
 
 export const VideoUpload: React.FC<{}> = () => {
@@ -285,7 +286,7 @@ export const VideoUpload: React.FC<{}> = () => {
                         </Backdrop>
                     </div>
                     <div>
-                        {uploadProgress > 0 && <div className='mt-30'> Upload progress: {uploadProgress} % </div>}
+                        {uploadProgress > 0 && <div className='mt-30'> Upload progress: {roundTo3SFand2DP(uploadProgress)} % </div>}
                     </div>
 
 
