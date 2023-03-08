@@ -57,16 +57,16 @@ export const Account: React.FC<{}> = () => {
                         </span>
                         <div className="" >
                             <div className='mb-6 text-sm'>
-                                <div className='py-2 px-5 border-[1px] border-[grey] rounded-md cursor-pointer' >
-                                    <button onClick={googleLogin}>
+                                <div className='py-2 px-5 border-[1px] border-[grey] rounded-md cursor-pointer' onClick={googleLogin}>
+                                    <button>
                                         <span className='!text-black flex items-center'>
                                             <FcGoogle /> &nbsp; &nbsp;
                                             Sign in with <b className='ml-1'>Google</b>
                                         </span>
                                     </button>
                                 </div>
-                                <div className='py-2 px-5 border-[1px] border-[grey] rounded-md mt-4' >
-                                    <button onClick={linkedinLogin}>
+                                <div className='py-2 px-5 border-[1px] border-[grey] rounded-md mt-4' onClick={linkedinLogin}>
+                                    <button>
                                         <span className='!text-black flex items-center'>
                                             <FaLinkedin color='#0072b1'  /> &nbsp; &nbsp;
                                             Sign in with <b className='ml-1'>LinkedIn</b>

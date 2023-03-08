@@ -12,7 +12,7 @@ export const parseCurrentDate = (tdate: any) => {
     if (diff <= 90) {return "1 minute ago";}
 
     // if (diff <= 3540) {return Math.round(diff / 60) + " minutes ago";}
-    if (diff <= 3540) {return Math.round(diff / 60) + "minutes ago";}
+    if (diff <= 3540) {return Math.round(diff / 60) + " minutes ago";}
 
     if (diff <= 5400) {return "1 hour ago";}
     // if (diff <= 5400) {return "1h";}

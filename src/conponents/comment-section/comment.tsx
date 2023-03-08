@@ -2,6 +2,8 @@ import axios from 'axios'
 import React from 'react'
 import { AiFillDislike, AiFillLike } from 'react-icons/ai'
 import env from '../../env'
+import RenderComment from './renderComment'
+
 
 type Props = {
     user: {
@@ -9,6 +11,8 @@ type Props = {
         display_picture: string,
         _id: string
     }
+    video_id: string,
+    comments: Array<string>
     
 }
 
@@ -21,6 +25,7 @@ export default function Comment(props: Props) {
     }
 
     const [commentText, setCommentText] = React.useState('');
+    const [postComment,  setPostComment] = React.useState<boolean>(false)
     const [comments, setComments] = React.useState<any[]>([]);
   
     // React.useEffect(() => {
@@ -30,27 +35,44 @@ export default function Comment(props: Props) {
     //     });
     //   }, []);
 // console.log(`${env.baseUrl}/api/comment`)
-    
+
+
+
+    // console.log({
+    //     content: commentText,
+    //     author: props.user._id,
+    //     parentId: null, // Set parentId to null for top-level comments
+    //     videoId: props.video_id
+    //   })
     
     const handleCommentSubmit = (e: any) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      fetch(`${env.baseUrl}/api/comment`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            text: commentText,
-            author: props.user._id,
-            parentId: null // Set parentId to null for top-level comments
-        })
-    }).then((result: any) => {
-        console.log('req sucessful', result)
-    }).catch((error: Error) => {
-        console.log(error)
-    });
+        async function fetchData() {
+            fetch(`${env.baseUrl}/api/comment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: commentText,
+                    author: props.user._id,
+                    parentId: null, // Set parentId to null for top-level comments
+                    videoId: props.video_id
+                })
+                
+                
+            }).then((result: any) => {
+                
+                // console.log('req sucessful', result)
+            }).catch((error: Error) => {
+                console.log(error)
+            });
+            setCommentText('')
+            setPostComment(false)
+        }
 
+        if(props.video_id) return fetchData()
     };
 // console.log(like)
 
@@ -72,114 +94,28 @@ export default function Comment(props: Props) {
                                                     placeholder='Add a Comment'
                                                     value={commentText}
                                                     onChange={(e) => setCommentText(e.target.value)}
+                                                    onClick={(e) => {setPostComment(true)}}
                                                 />
-                                                <div className='flex justify-between'>
-                                                    <div>
-                                                        {/* dsada */}
+                                                {
+                                                    postComment &&
+                                                    <div className='flex justify-between'>
+                                                        <div>
+                                                            {/* dsada */}
+                                                        </div>
+                                                        <div>
+                                                            <button className='px-3 py-1 hover:bg-[#3F3F3F] rounded-2xl hover:text-white' onClick={() => {setPostComment(false); setCommentText('')}}>
+                                                                Cancel
+                                                            </button>
+                                                            <button className='ml-3 bg-[#65B8FF] text-black px-3 py-1 rounded-2xl' onClick={handleCommentSubmit }>
+                                                                Comment
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <button className='px-3 py-1 hover:bg-[#3F3F3F] rounded-2xl hover:text-white'>
-                                                            Cancel
-                                                        </button>
-                                                        <button className='ml-3 bg-[#65B8FF] text-black px-3 py-1 rounded-2xl' onClick={handleCommentSubmit }>
-                                                            Comment
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                }
                                             </div>
                                             
                                         </div>
-                                        <div className='flex h-auto mt-3 text-sm'>
-                                            <div className=" ">
-                                                <img src={props.user.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.0rem] h-auto" />
-                                                
-                                            </div>
-                                            <div className='ml-3 flex-grow w-full'>
-                                                {/* <textarea className='w-full min-h-[10px] py-2 mb-3 rounded-md resize-none text-sm' placeholder='Add a Comment'/> */}
-                                                <div className='flex'>
-                                                    <div>
-                                                        John Doe
-                                                    </div>
-                                                    <div className='ml-1'>
-                                                        . 2 days ago
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div className='mt-1'>
-                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis odit voluptate nisi temporibus consectetur soluta, corporis excepturi exercitationem, rem similique qui. Nesciunt laborum temporibus iste fugit, alias aliquid nemo ipsum!
-                                                </div>
-                                                <div className='flex '>
-                                                    <div>
-                                                        {/* dsada */}
-                                                    </div>
-                                                    <div className='mt-1'>
-                                                        <div className='flex items-center'>
-                                                            <AiFillLike className={`${like ? 'text-blue-600' : ''}`} onClick={likeTheVideo} />
-                                                            <div className='ml-1'>
-                                                                999
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div className='mt-1 ml-2'>
-                                                        <div className='flex items-center'>
-                                                            <AiFillDislike className={`${like ? '' : 'text-blue-600'}`}/>
-                                                            <div className='ml-1'>
-                                                                999
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <div className='flex h-auto mt-3 text-sm'>
-                                            <div className=" ">
-                                                <img src={props.user.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.0rem] h-auto" />
-                                                
-                                            </div>
-                                            <div className='ml-3 flex-grow w-full'>
-                                                {/* <textarea className='w-full min-h-[10px] py-2 mb-3 rounded-md resize-none text-sm' placeholder='Add a Comment'/> */}
-                                                <div className='flex'>
-                                                    <div>
-                                                        Eren Yaeger
-                                                    </div>
-                                                    <div className='ml-1'>
-                                                        . 2 days ago
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div className='mt-1'>
-                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis odit voluptate nisi temporibus consectetur soluta, corporis excepturi exercitationem, rem similique qui. Nesciunt laborum temporibus iste fugit, alias aliquid nemo ipsum!
-                                                </div>
-                                                <div className='flex '>
-                                                    <div>
-                                                        {/* dsada */}
-                                                    </div>
-                                                    <div className='mt-1'>
-                                                        <div className='flex items-center'>
-                                                            <AiFillLike className={`${like ? 'text-blue-600' : ''}`} onClick={likeTheVideo} />
-                                                            <div className='ml-1'>
-                                                                699
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div className='mt-1 ml-2'>
-                                                        <div className='flex items-center'>
-                                                            <AiFillDislike className={`${like ? '' : 'text-blue-600'}`}/>
-                                                            <div className='ml-1'>
-                                                                699
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        
+                                        <RenderComment user={props.user} />                                  
                                         
                                     </div>
         </div>

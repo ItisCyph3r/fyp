@@ -22,20 +22,20 @@ export const Video: React.FC<{}> = () => {
 
     const id = useParams();
 
-    const video_id = id.videoID
+    const video_uuid = id.videoID
 
     const [Video, setVideo] = React.useState<any>([]);
-
+    // {console.log(Video.video_id)}
     React.useEffect(() => {
-        axios.get(`${env.baseUrl}/home/${video_id}`)
+        axios.get(`${env.baseUrl}/home/${video_uuid}`)
             .then((res: AxiosResponse) => {
                 if (res.data) {
-                    // console.log(res)
+                    // console.log(res.data)
                     setVideo(res.data);
                 }
             })
-    }, [video_id])
-    // console.log(Feed)
+    }, [video_uuid])
+    // console.log(Video)
 
     const [Recommended, setRecommended] = React.useState<any>([]);
 
@@ -229,7 +229,8 @@ export const Video: React.FC<{}> = () => {
                                     <div className='mt-2'>
                                         {Video.video_description}
                                     </div>
-                                    <Comment user={userState} />
+                                    
+                                    <Comment user={userState} video_id={Video.video_id} comments={Video.comments}/>
                                 </div>
                                 <div className='lg:w-[35%] w-full lg:px-5 px-0 bg-transparent '>
                                     <div className='title !mt-7 text-xl !mb-[1rem]'>
