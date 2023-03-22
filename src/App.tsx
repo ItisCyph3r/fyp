@@ -46,15 +46,15 @@ function App() {
     <Routes>
       <>
         <Route path="/home" element={<Home />} />
-
-        <Route
+        <Route path="/upload" element={<S3Uploader />} />
+        {/* <Route
           path="/upload"
           element={
             <ProtectedRoute isSignedIn={userState}>
               <S3Uploader />
             </ProtectedRoute>
           }
-        />
+        /> */}
 
         <Route path="/home/:videoID" element={<Video />} />
 

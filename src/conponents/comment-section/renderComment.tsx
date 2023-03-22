@@ -33,7 +33,7 @@ export default function RenderComment() {
         axios.get(`${env.baseUrl}/api/comment?v=${video_uuid}`).then((response) => {
             setComments(response.data);
         });
-    }, [comments]);
+    }, [video_uuid]);
     
     
     console.log(comments)

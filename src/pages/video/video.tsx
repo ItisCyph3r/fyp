@@ -242,7 +242,7 @@ export const Video: React.FC<{}> = () => {
                                                 // onClick={handleClick}
                                             /> */}
                                             {
-                                                userState._id === Video.user_id &&
+                                                // userState._id === Video.user_id &&
                                                 <button className='bg-red-700 px-3 py-1 rounded-2xl' onClick={deleteVideo}>
                                                     
                                                     delete
