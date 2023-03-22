@@ -7,13 +7,10 @@ import RenderComment from './renderComment'
 
 type Props = {
     user: {
-        user_name: string,
         display_picture: string,
         _id: string
     }
-    video_id: string,
-    comments: Array<string>
-    
+    video_id: string,    
 }
 
 export default function Comment(props: Props) {
@@ -115,7 +112,7 @@ export default function Comment(props: Props) {
                                             </div>
                                             
                                         </div>
-                                        <RenderComment user={props.user} />                                  
+                                        <RenderComment />                                  
                                         
                                     </div>
         </div>

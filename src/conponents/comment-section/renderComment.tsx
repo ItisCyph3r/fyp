@@ -6,15 +6,15 @@ import env from '../../env';
 import BasicMenu from '../basic-select/basic-select';
 import { parseCurrentDate } from '../getDate/getDate';
 
-type Props = {
-    user: { 
-        user_name: string; 
-        display_picture: string; 
-        _id: string; 
-    }
-}
+// type Props = {
+//     user: { 
+//         user_name: string; 
+//         display_picture: string; 
+//         _id: string; 
+//     }
+// }
 
-export default function RenderComment(props: Props) {
+export default function RenderComment() {
 
     const id = useParams();
 
@@ -30,15 +30,14 @@ export default function RenderComment(props: Props) {
 
     React.useEffect(() => {
         // Fetch comments from backend API
-        axios.get(`${env.baseUrl}/api/comment/${video_uuid}`).then((response) => {
+        axios.get(`${env.baseUrl}/api/comment?v=${video_uuid}`).then((response) => {
             setComments(response.data);
         });
-    }, [video_uuid]);
+    }, [comments]);
     
     
+    console.log(comments)
 
-    // console.log(video_uuid)
-    //   console.log(comments)
     return (
         <>
             {

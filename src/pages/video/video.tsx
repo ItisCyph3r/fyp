@@ -6,7 +6,7 @@ import '../../globals.util.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { navActions } from '../../store/nav-Slice';
 import { BiHomeAlt, BiLogOut, BiMenu } from 'react-icons/bi';
-import { AiOutlineSetting, AiOutlineCloudUpload, AiOutlineComment, AiFillLike, AiFillDislike } from 'react-icons/ai';
+import { AiOutlineSetting, AiOutlineCloudUpload, AiOutlineComment, AiFillLike, AiFillDislike, AiOutlineMore } from 'react-icons/ai';
 import { MdOutlineDarkMode, MdVerified } from 'react-icons/md';
 import { Skeleton } from '@mui/material';
 import axios, { AxiosResponse } from 'axios';
@@ -85,6 +85,18 @@ export const Video: React.FC<{}> = () => {
         dispatch(navActions.setNavbar({}))
     }
 
+    const deleteVideo = () => {
+        axios.get(`${env.baseUrl}/watch?v=${video_uuid}`, { withCredentials: true })
+            .then(response => {
+                console.log(response.data)
+                // console.log('Resource deleted successfully');
+            })
+            .catch(error => {
+                console.error('Error deleting resource', error);
+            });
+    }
+    // console.log(Video.user_id)
+    // console.log(userState._id)
     return (
         <>
             <div className={`body ${darkMode && 'dark'}`}>
@@ -184,8 +196,8 @@ export const Video: React.FC<{}> = () => {
                                                         
                                 <div className= 'lg:w-[65.0%] w-full'>
                                     <VideoPlayer 
-                                    // src={`https://djboxb6mw1ura.cloudfront.net/${Video.user_id}/video/${Video.file_name}`} 
-                                    src=''
+                                    src={`https://djboxb6mw1ura.cloudfront.net/${Video.user_id}/video/${Video.file_name}`} 
+                                    
                                     />
 
                                     <div className='text-xl mt-3'>
@@ -199,30 +211,44 @@ export const Video: React.FC<{}> = () => {
                                             <img src={Video.display_picture} alt='profilepic' className="rounded-full object-cover w-full max-w-[4.0rem] h-auto" />
                                         </div>
 
-                                        <div className='mt-0 ml-2'>
-                                            <div className='md:text-xl text-sm flex items-center'>
-                                                {/* Object Oriented Programming with Java */}
-                                                {/* {Video.video_title} */}
-                                                @{Video.display_name} 
-                                                <div className="ml-1">
-                                                    <MdVerified className='text-[goldenrod]'/>
+                                        <div className='mt-0 ml-2 flex justify-between items-center w-full'>
+                                            <div>
+                                                <div className='md:text-xl text-sm flex items-center'>
+                                                    {/* Object Oriented Programming with Java */}
+                                                    {/* {Video.video_title} */}
+                                                    @{Video.display_name} 
+                                                    <div className="ml-1">
+                                                        <MdVerified className='text-[goldenrod]'/>
+                                                    </div>
+                                                </div>
+
+                                                <div className={`flex items-center mt-0 md:text-sm text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+
+                                                    <div>
+                                                        {/* Dr. Okoro Raymond */}
+                                                        {Video.course}
+                                                    </div>
+                                                    
+                                                    <div className="ml-1">
+                                                        {/* . 1 day ago */}
+                                                        .<span className='ml-1'>uploaded </span> {parseCurrentDate(Video.createdAt)}
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className={`flex items-center mt-0 md:text-sm text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-
-                                                <div>
-                                                    {/* Dr. Okoro Raymond */}
-                                                    {Video.course}
-                                                </div>
+                                            <div>
+                                            {/* <AiOutlineMore
                                                 
-                                                <div className="ml-1">
-                                                    {/* . 1 day ago */}
-                                                    .<span className='ml-1'>uploaded </span> {parseCurrentDate(Video.createdAt)}
-                                                </div>
+                                                // onClick={handleClick}
+                                            /> */}
+                                            {
+                                                userState._id === Video.user_id &&
+                                                <button className='bg-red-700 px-3 py-1 rounded-2xl' onClick={deleteVideo}>
+                                                    
+                                                    delete
+                                                </button>
+                                            }
                                             </div>
-
-                                            
                                         </div>
                                         
                                     </div>
@@ -230,7 +256,7 @@ export const Video: React.FC<{}> = () => {
                                         {Video.video_description}
                                     </div>
                                     
-                                    <Comment user={userState} video_id={Video.video_id} comments={Video.comments}/>
+                                    <Comment user={userState} video_id={Video.video_id} />
                                 </div>
                                 <div className='lg:w-[35%] w-full lg:px-5 px-0 bg-transparent '>
                                     <div className='title !mt-7 text-xl !mb-[1rem]'>
