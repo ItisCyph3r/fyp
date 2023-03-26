@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate } from "react-router-dom";
+import { Unauthorized } from '../unauthorized/unauthorized';
 
 // export const ProtectedRoute = ( props: any ) => {
 //     // console.log(props.isSignedIn)
@@ -14,7 +15,9 @@ import { Navigate } from "react-router-dom";
 export const ProtectedRoute = ({ isSignedIn, children }: { isSignedIn: any, children: React.ReactElement }) => { 
 
     if (isSignedIn === undefined) {
-        return <div>Loading...</div>
+        // return <div>Loading...</div>
+        return <Unauthorized />
+
     }
 
     if (isSignedIn === null) {

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { AiFillDislike, AiFillLike } from 'react-icons/ai'
+import { useParams } from 'react-router-dom'
 import env from '../../env'
 import RenderComment from './renderComment'
 
@@ -15,6 +16,11 @@ type Props = {
 
 export default function Comment(props: Props) {
 
+    const id = useParams();
+
+    const video_uuid = id.videoID
+
+
     const [like, setLike] =React.useState<boolean>(false)
 
     const likeTheVideo = () => {
@@ -24,29 +30,13 @@ export default function Comment(props: Props) {
     const [commentText, setCommentText] = React.useState('');
     const [postComment,  setPostComment] = React.useState<boolean>(false)
     const [comments, setComments] = React.useState<any[]>([]);
-  
-    // React.useEffect(() => {
-    //     // Fetch comments from backend API
-    //     axios.get('/api/comments').then((response) => {
-    //       setComments(response.data);
-    //     });
-    //   }, []);
-// console.log(`${env.baseUrl}/api/comment`)
 
-
-
-    // console.log({
-    //     content: commentText,
-    //     author: props.user._id,
-    //     parentId: null, // Set parentId to null for top-level comments
-    //     videoId: props.video_id
-    //   })
     
     const handleCommentSubmit = (e: any) => {
         e.preventDefault();
 
         async function fetchData() {
-            fetch(`${env.baseUrl}/api/comment`, {
+            fetch(`${env.baseUrl}/api/comment?v=${video_uuid}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

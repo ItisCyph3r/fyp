@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AiFillDislike, AiFillLike, AiOutlineMore } from 'react-icons/ai'
@@ -28,14 +28,24 @@ export default function RenderComment() {
 
     const [comments, setComments] = React.useState<any[]>([]);
 
+    // React.useEffect(() => {
+    //     // Fetch comments from backend API
+    //     axios.get(`${env.baseUrl}/api/comment?v=${video_uuid}`).then((response) => {
+    //         console.log(response.data  )
+    //         setComments(response.data);
+    //     });
+    // }, [video_uuid]);
+    
+    
     React.useEffect(() => {
-        // Fetch comments from backend API
-        axios.get(`${env.baseUrl}/api/comment?v=${video_uuid}`).then((response) => {
-            setComments(response.data);
-        });
-    }, [video_uuid]);
-    
-    
+        axios.get(`${env.baseUrl}/api/comment?v=${video_uuid}`)
+            .then((res: AxiosResponse) => {
+                console.log(res.data  )
+                setComments(res.data);
+            })
+    }, [video_uuid])
+
+
     console.log(comments)
 
     return (

@@ -39,33 +39,42 @@ function App() {
         }
       })
   })
-  console.log(userState)
+  // console.log(userState)
 
   return (
 
     <Routes>
       <>
-        <Route path="/home" element={<Home />} />
-        <Route path="/upload" element={<S3Uploader />} />
-        {/* <Route
+        {/* <Route path="/home" element={<Home />} /> */}
+
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute isSignedIn={userState}>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        {/* <Route path="/upload" element={<S3Uploader />} /> */}
+        <Route
           path="/upload"
           element={
             <ProtectedRoute isSignedIn={userState}>
               <S3Uploader />
             </ProtectedRoute>
           }
-        /> */}
+        />
 
-        <Route path="/home/:videoID" element={<Video />} />
+        {/* <Route path="/home/:videoID" element={<Video />} /> */}
 
-        {/* <Route
+        <Route
           path="/home/:videoID"
           element={
             <ProtectedRoute isSignedIn={userState}>
               <Video />
             </ProtectedRoute>
           }
-        /> */}
+        />
 
         
         <Route path="/" element={<LandingPage />} />
@@ -82,15 +91,3 @@ function App() {
 
 export default App;
 
-
-
-
-
-
-
-
-
-
-
-
-// Create a typescript conponent  that sends otp to emails? 
