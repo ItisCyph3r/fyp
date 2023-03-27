@@ -43,7 +43,7 @@ export default function RenderComment() {
                 console.log(res.data  )
                 setComments(res.data);
             })
-    }, [video_uuid])
+    }, [comments])
 
 
     console.log(comments)
