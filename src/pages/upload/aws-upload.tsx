@@ -106,7 +106,7 @@ const S3Uploader = () => {
                                 </Link>
                             </li>
                             <li className="mode">
-                                <Link className='link-styles' to="/home/hehe">
+                                <Link className='link-styles' to="/">
                                     {/* <i className="uil uil-moon"></i> */}
                                     {collapseMenu && <MdOutlineDarkMode className='navbarLogo' />}
                                     <span className="link-name">Dark Mode</span>
