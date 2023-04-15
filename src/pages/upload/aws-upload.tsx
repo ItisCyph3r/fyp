@@ -8,7 +8,7 @@ import { MdOutlineDarkMode } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { navActions } from '../../store/nav-Slice';
 import { VideoUpload } from './videoupload';
-
+import BUTV from '../../images/unnamed.jpg';
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const S3Uploader = () => {
@@ -25,8 +25,8 @@ const S3Uploader = () => {
         user_name: '',
         display_name: '',
         display_picture: '',
-        userId: ''
-        // userName: ''
+        userId: '',
+        isVerified: ''
     });
 
     React.useEffect(() => {
@@ -34,9 +34,10 @@ const S3Uploader = () => {
             display_name: userObject.display_name,
             display_picture: userObject.display_picture,
             userId: userObject._id,
-            user_name: userObject.user_name
+            user_name: userObject.user_name,
+            isVerified: userObject.isverified
         })
-    }, [userObject.display_name, userObject.display_picture, userObject._id, userObject.user_name])
+    }, [userObject.display_name, userObject.display_picture, userObject._id, userObject.user_name, userObject.isverified])
 
 
 
@@ -57,13 +58,13 @@ const S3Uploader = () => {
                     <div className="logo-name">
                         <div className="logo-image">
                             <Link className='link-styles' to="/">
-                                <img src="/images/PhonePe_Images_zjha50 (2).png" alt="" />
+                                <img src={BUTV} alt="" />
                             </Link>
                         </div>
 
                         <span className="logo_name">
                             <Link className='link-styles' to="/">
-                                Zapnode
+                                BUTV
                             </Link>
                         </span>
                     </div>
@@ -71,28 +72,29 @@ const S3Uploader = () => {
                     <div className="menu-items">
                         <ul className="nav-links">
                             <li>
-                                <Link className='link-styles' to="/home">
+                                <Link className='link-styles' to="/watch">
                                     <BiHomeAlt className='navbarLogo' />
                                     <span className="link-name">Home</span>
                                 </Link>
                             </li>
 
-                            <li>
+                            {
+                                userState.isVerified &&
+                                <li>
                                 <Link className='link-styles' to="/upload">
                                     {/* <i className="uil uil-favorite"></i> */}
                                     <AiOutlineCloudUpload className='navbarLogo' />
                                     <span className="link-name">Upload</span>
                                 </Link>
                             </li>
-                            {/*  */}
-                            {/*  */}
-                            <li>
+                            }
+                            {/* <li>
                                 <Link className='link-styles' to="/">
-                                    {/* <i className="uil uil-setting"></i> */}
+                                    
                                     <AiOutlineSetting className='navbarLogo' />
                                     <span className="link-name">Settings</span>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
 
                         <ul className="logout-mode">

@@ -31,14 +31,22 @@
 }
 
 .showcase {
-    height: 100vh;
-    margin: 120px 0 0 0
+    height: 92.5vh;
+    /* margin: 120px 0 0 0 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* line-height: 1.5; */
+
 }
 
 .showcase-header button {
     background-color: #252158;
     color: #fff;
-    transition: .8s
+    transition: .8s;
+    padding: 15px 50px;
+    font-size: 1.5rem;
+    border-radius: 25px;
 }
 
 .showcase-header button:focus,

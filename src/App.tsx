@@ -48,7 +48,7 @@ function App() {
         {/* <Route path="/home" element={<Home />} /> */}
 
         <Route
-          path="/home"
+          path="/watch"
           element={
             <ProtectedRoute isSignedIn={userState}>
               <Home />
@@ -56,7 +56,8 @@ function App() {
           }
         />
         {/* <Route path="/upload" element={<S3Uploader />} /> */}
-        <Route
+        {
+          <Route
           path="/upload"
           element={
             <ProtectedRoute isSignedIn={userState}>
@@ -64,11 +65,13 @@ function App() {
             </ProtectedRoute>
           }
         />
+        }
+        
 
         {/* <Route path="/home/:videoID" element={<Video />} /> */}
 
         <Route
-          path="/home/:videoID"
+          path="/watch/:videoID"
           element={
             <ProtectedRoute isSignedIn={userState}>
               <Video />
@@ -79,9 +82,9 @@ function App() {
         
         <Route path="/" element={<LandingPage />} />
         <Route path="/account" element={<Account />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/create" element={<Create />} />
+        {/* <Route path="/login" element={<Login />} /> */}
+        {/* <Route path="/signup" element={<Signup />} /> */}
+        {/* <Route path="/create" element={<Create />} /> */}
         <Route path="*" element={<Error404 />} />
       </>
     </Routes>

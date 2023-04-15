@@ -14,7 +14,7 @@ import VideoPlayer from './videoPlayer';
 import { parseCurrentDate } from '../../conponents/getDate/getDate';
 import env from '../../env';
 import Comment from '../../conponents/comment-section/comment';
-
+import BUTV from '../../images/unnamed.jpg';
 
 export const Video: React.FC<{}> = () => {
     
@@ -27,7 +27,7 @@ export const Video: React.FC<{}> = () => {
     const [Video, setVideo] = React.useState<any>([]);
     // {console.log(Video.video_id)}
     React.useEffect(() => {
-        axios.get(`${env.baseUrl}/home/${video_uuid}`)
+        axios.get(`${env.baseUrl}/api/watch/${video_uuid}`)
             .then((res: AxiosResponse) => {
                 if (res.data) {
                     // console.log(res.data)
@@ -59,16 +59,18 @@ export const Video: React.FC<{}> = () => {
     const [userState, setUserState] = React.useState({
         user_name: '',
         display_picture: '',
-        _id: userObject._id
+        _id: userObject._id,
+        isVerified: ''
     });
 
     React.useEffect(() => {
         setUserState({
             user_name: userObject.user_name,
             display_picture: userObject.display_picture,
-            _id: userObject._id
+            _id: userObject._id,
+            isVerified: userObject.isverified
         })
-    }, [userObject.user_name, userObject.display_picture, userObject._id])
+    }, [userObject.user_name, userObject.display_picture, userObject._id, userObject.isverified])
 
     const dispatch = useDispatch()
 
@@ -86,9 +88,9 @@ export const Video: React.FC<{}> = () => {
     }
 
     const deleteVideo = () => {
-        axios.get(`${env.baseUrl}/watch?v=${video_uuid}`, { withCredentials: true })
+        axios.get(`${env.baseUrl}/delete?v=${video_uuid}`, { withCredentials: true })
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 // console.log('Resource deleted successfully');
             })
             .catch(error => {
@@ -105,13 +107,13 @@ export const Video: React.FC<{}> = () => {
                     <div className="logo-name">
                         <div className="logo-image">
                             <Link className='link-styles' to="/">
-                                <img src="/images/PhonePe_Images_zjha50 (2).png" alt="" />
+                                <img src={BUTV} alt="" />
                             </Link>
                         </div>
 
                         <span className="logo_name">
                             <Link className='link-styles' to="/">
-                                Zapnode
+                                BUTV
                             </Link>
                         </span>
                     </div>
@@ -119,27 +121,29 @@ export const Video: React.FC<{}> = () => {
                     <div className="menu-items">
                         <ul className="nav-links">
                             <li>
-                                <Link className='link-styles' to="/home">
+                                <Link className='link-styles' to="/watch">
                                     <BiHomeAlt className='navbarLogo' />
                                     <span className="link-name">Home</span>
                                 </Link>
                             </li>
 
-                            <li>
+                            {
+                                userState.isVerified &&
+                                <li>
                                 <Link className='link-styles' to="/upload">
                                     {/* <i className="uil uil-favorite"></i> */}
                                     <AiOutlineCloudUpload className='navbarLogo' />
                                     <span className="link-name">Upload</span>
                                 </Link>
                             </li>
-
-                            <li>
-                                <Link className='link-styles' to="/home/hehe">
-                                    {/* <i className="uil uil-setting"></i> */}
+                            }
+                            {/* <li>
+                                <Link className='link-styles' to="/watch">
+                                    
                                     <AiOutlineSetting className='navbarLogo' />
                                     <span className="link-name">Settings</span>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
 
                         <ul className="logout-mode">
@@ -243,9 +247,9 @@ export const Video: React.FC<{}> = () => {
                                             /> */}
                                             {
                                                 // userState._id === Video.user_id &&
-                                                <button className='bg-red-700 px-3 py-1 rounded-2xl' onClick={deleteVideo}>
-                                                    delete
-                                                </button>
+                                                // <button className='bg-red-700 px-3 py-1 rounded-2xl' onClick={deleteVideo}>
+                                                //     delete
+                                                // </button>
                                             }
                                             </div>
                                         </div>
@@ -273,9 +277,15 @@ export const Video: React.FC<{}> = () => {
                                         </div>
                                         : 
                                         Recommended.map((recommend: any, index: number) => (
-                                            <Link to={`/home/${recommend.uuid}`} key={index}>
+                                            <Link to={`/watch/${recommend.uuid}`} key={index}>
                                                 {/* <div className={`}> */}
-                                                <div  onClick={()=>{topRef.current?.scrollIntoView({ behavior: 'smooth' });}} className={`flex ${index !== 0 ? 'mt-2' : '' } ${darkMode ? 'text-white' : 'text-black'} rounded-2xl`} key={recommend._id}>
+                                                <div 
+                                                    onClick={()=>{
+                                                        topRef.current?.scrollIntoView({ behavior: 'smooth' }); 
+                                                        // window.location.href = `/watch/${recommend.uuid}`;
+                                                    }} 
+                                                    className={`flex ${index !== 0 ? 'mt-2' : '' } ${darkMode ? 'text-white' : 'text-black'} rounded-2xl`} key={recommend._id}>
+                                                    
                                                     <div className=''>
                                                         {/* <img 
                                                         src={`https://djboxb6mw1ura.cloudfront.net/${recommend.user._id}/thumbnail/${recommend.thumbnail}`} 

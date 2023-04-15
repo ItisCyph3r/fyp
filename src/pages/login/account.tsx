@@ -5,7 +5,7 @@ import '../../global.util.css'
 import { FcGoogle } from 'react-icons/fc';
 import { FaLongArrowAltRight, FaEnvelope, FaLinkedin } from 'react-icons/fa';
 import { BsFillExclamationTriangleFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-Slice';
 import axios from 'axios';
@@ -15,21 +15,50 @@ import env from '../../env';
 
 
 export const Account: React.FC<{}> = () => {
+    const navigate = useNavigate()
     const [username, setUsername] = React.useState<string>('')
+
+    const [errorMsg, setErrorMsg] = React.useState('');
 
     const dispatch = useDispatch()
 
-    const CaptureUsername = () => {
+    const CaptureUsername = async () => {
         dispatch(authActions.getUsername(username))
 
-        axios.get(`${env.baseUrl}`)
-            .then(response => {
-                // console.log(response.data);
+        fetch(`${env.baseUrl}/api/checkEmail`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username }),
+        })
+            .then((response) => {
+                if (response.ok) {
+                // Email exists, navigate to next page
+                // Replace 'nextPage' with the actual URL of your next page
+                navigate('/login')
+            } else {
+                // Email does not exist, display error message
+                setErrorMsg('Email does not exist');
+            }
             })
-            .catch(error => {
-                console.log(error);
+            .catch((error) => {
+              // Handle error
+                console.error(error);
             });
     }
+
+    // const checkUsername = () => {
+    //     fetch(`${env.baseUrl}/api/checkUsername`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             username: username
+    //         })
+    //     });
+    // }
 
     const googleLogin = () => {
         window.open(`${env.baseUrl}/auth/google`, '_self', 'width=500, height=600')
@@ -77,31 +106,28 @@ export const Account: React.FC<{}> = () => {
 
                             <hr />
 
-                            <div className="wrap-input100 validate-input mt-6" data-validate="Valid email is required: ex@abc.xyz">
+                            {/* <div className="wrap-input100 validate-input mt-6" data-validate="Valid email is required: ex@abc.xyz">
 
-                                <input className="input100" type="text" name="username" placeholder="Email" value={username} onChange={(e) => { setUsername(e.target.value) }} />
+                                <input className="input100" type="email" name="username" placeholder="Email" value={username} onChange={(e) => { setUsername(e.target.value) }} />
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
-                                    {/* <i className="fa fa-envelope" aria-hidden="true"></i> */}
                                     <FaEnvelope />
                                 </span>
                             </div>
-                            <span style={{ color: 'red', fontSize: '0.75rem' }} className='flex items-center'>
-                                <BsFillExclamationTriangleFill />
-                                <span className='ml-1'> This Email does not exist, Try again </span>
-                            </span>
+                            {
+                                errorMsg &&
+                                <span style={{ color: 'red', fontSize: '0.75rem' }} className='flex items-center'>
+                                    <BsFillExclamationTriangleFill />
+                                    <span className='ml-1'> {errorMsg} </span>
+                                </span> 
+                                
+                            } */}
+                            
 
-                            {/* <div className="wrap-input100 validate-input">
-                                    <input className="input100" type="password" name="password" placeholder="Password" />
-
-                                    <span className="focus-input100"></span>
-                                    <span className="symbol-input100">
-                                        <FaLock />
-                                    </span>
-                                </div> */}
-
+                            
+{/* 
                             <span style={{ color: 'red', fontSize: '0.75rem' }}>
-                                {/* <%- error %> */}
+                                <%- error %>
                             </span>
                             <Link to='/login'>
                                 <div className="container-login100-form-btn mt-12">
@@ -109,7 +135,7 @@ export const Account: React.FC<{}> = () => {
                                         Next
                                     </button>
                                 </div>
-                            </Link>
+                            </Link> */}
 
                         </div>
                         <div className="text-center p-t-12">
@@ -121,14 +147,14 @@ export const Account: React.FC<{}> = () => {
                             {/* </a> */}
                         </div>
 
-                        <div className="text-center mt-3 ">
+                        {/* <div className="text-center mt-3 ">
                             <a className="txt2 flex justify-center items-center" href="/signup">
                                 Create your Account
                                 <span className='ml-1'>
                                     <FaLongArrowAltRight />
                                 </span>
                             </a>
-                        </div>
+                        </div> */}
 
 
                         {/* <div className=" w-full">

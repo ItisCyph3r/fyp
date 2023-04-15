@@ -60,8 +60,8 @@ export default function MiniCarousel({data}: any) {
                         
                     <div className={`${darkMode ? 'text-white' : 'text-black'}`} key={video._id}>
                             
-                            <Link to={`/home/${video.uuid}`} className='link-styles' >
-                                
+                            <Link to={`/watch/${video.uuid}`} className='link-styles' >
+                            
                                 <div className='flex justify-center'>
                                     <img 
                                         src={`${env.cloudFrontApi}/${video.user._id}/${env.thumbnailApi}/${video.thumbnail}`} 

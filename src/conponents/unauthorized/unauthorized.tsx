@@ -18,6 +18,7 @@ export const Unauthorized: React.FC<{}> = () => {
                     <Link to='/account'>
                         <button className='bg-[#252158] w-full mt-3 p-3 rounded-3xl text-white'>
                             Sign in
+                            
                         </button>
                     </Link>
                     {/* <h1>hi</h1> */}

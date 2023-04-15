@@ -40,13 +40,13 @@ export default function RenderComment() {
     React.useEffect(() => {
         axios.get(`${env.baseUrl}/api/comment?v=${video_uuid}`)
             .then((res: AxiosResponse) => {
-                console.log(res.data  )
+                // console.log(res.data  )
                 setComments(res.data);
             })
     }, [comments])
 
 
-    console.log(comments)
+    // console.log(comments)
 
     return (
         <>
@@ -81,7 +81,7 @@ export default function RenderComment() {
                                 <div>
                                     {/* dsada */}
                                 </div>
-                                <div className='mt-1'>
+                                {/* <div className='mt-1'>
                                     <div className='flex items-center'>
                                         <AiFillLike className={`${like ? 'text-blue-600' : ''}`} onClick={likeTheVideo} />
                                         <div className='ml-1'>
@@ -98,7 +98,7 @@ export default function RenderComment() {
                                         </div>
                                     </div>
                                     
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

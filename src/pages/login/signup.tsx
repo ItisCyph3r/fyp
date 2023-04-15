@@ -1,15 +1,61 @@
 import React from 'react'
 import '../../global.util.css'
 import '../../globals.util.css'
-import { FaEnvelope, FaLock } from 'react-icons/fa';
+
+
+import { FaEnvelope, FaLock, FaUser } from 'react-icons/fa';
 import BUTV from '../../images/unnamed.jpg';
+import env from '../../env';
 
 export const Signup: React.FC<{}> = () => {
+
+    const [details, setDetails] = React.useState<any>({
+        email: null,
+        username: null,
+        password: null
+    })    
+
+// console.log(details)
+    
+    const setUserCredentials = (event: any) => {
+        const { name, value } = event.target;
+        setDetails({
+            ...details,
+            [name]: value
+        });
+    };
+
+    const SignupUser = () => {
+        fetch(`${env.baseUrl}/api/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                username: details.username,
+                email: details.email,
+                password: details.password
+            }),
+        })
+            .then((response) => {
+                return response.json(); // Parse response body as JSON
+            })
+            .then((data) => {
+                console.log(data); // Log the parsed response data
+            })
+                .catch((error) => {
+                // Handle error
+                console.error(error);
+            });
+    }
+    
+
+
     return (
         <div className="userAuth h-[100vh] bg-[#252426]">
             <div className="row" style={{ height: '100vh' }}>
                 <div className="login-form">
-                    <form className="login100-form validate-form" action="/signup" method="post">
+                    <div className="login100-form validate-form" >
                         <a href="/">
                             <img
                                 src={BUTV}
@@ -22,11 +68,39 @@ export const Signup: React.FC<{}> = () => {
                         </span>
 
 
-                        <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                            <input className="input100" type="email" name="username" placeholder="Email" required />
+                        <div className="wrap-input100 validate-input" 
+                            // data-validate="Valid email is required: ex@abc.xyz"
+                            >
+                            <input 
+                                className="input100" 
+                                type="email" 
+                                name="email" 
+                                placeholder="Email" 
+                                value={details.email || ''} 
+                                onChange={setUserCredentials}
+                                required 
+                            />
                             <span className="focus-input100"></span>
                             <span className="symbol-input100">
                                 <FaEnvelope />
+                            </span>
+                        </div>
+
+                        <div className="wrap-input100 validate-input" 
+                            // data-validate="Valid email is required: ex@abc.xyz"
+                            >
+                            <input 
+                                className="input100" 
+                                type="text" 
+                                name="username" 
+                                placeholder="Username" 
+                                value={details.username || ''} 
+                                onChange={setUserCredentials}
+                                required 
+                            />
+                            <span className="focus-input100"></span>
+                            <span className="symbol-input100">
+                                <FaUser />
                             </span>
                         </div>
 
@@ -46,6 +120,8 @@ export const Signup: React.FC<{}> = () => {
                                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                 required
+                                value={details.password || ''} 
+                                onChange={setUserCredentials}
                             />
 
                             <span className="focus-input100"></span>
@@ -77,7 +153,7 @@ export const Signup: React.FC<{}> = () => {
                             {/* <%- usernameErr %>  */}
                         </span>
                         <div className="container-login100-form-btn ">
-                            <button className="login100-form-btn">
+                            <button className="login100-form-btn" onClick={SignupUser}>
                                 Sign up now
                             </button>
                         </div>                       
@@ -91,7 +167,7 @@ export const Signup: React.FC<{}> = () => {
                             </a>
                         </div>
 
-                    </form>
+                    </div>
                 </div>
                 {/* <!-- <div className="col-lg col-md p-5 d-none d-lg-block login-img">
             

@@ -49,18 +49,20 @@ export const Home: React.FC<{}> = () => {
 
     const userObject = useSelector((state: any) => state.auth.UserObject);
 
+    // console.log(userObject)
     const [userState, setUserState] = React.useState({
         user_name: '',
         display_picture: '',
-        // userName: ''
+        isVerified: ''
     });
 
     React.useEffect(() => {
         setUserState({
             user_name: userObject.user_name,
-            display_picture: userObject.display_picture
+            display_picture: userObject.display_picture,
+            isVerified: userObject.isverified
         })
-    }, [userObject.user_name, userObject.display_picture])
+    }, [userObject.user_name, userObject.display_picture, userObject.isverified])
 
     const setNavbar = () => {
         // setActive(!active)
@@ -70,7 +72,7 @@ export const Home: React.FC<{}> = () => {
     const Logout = () => {
         axios.get(`${env.baseUrl}/auth/logout`, {withCredentials: true})
             .then((res: AxiosResponse) => {
-                console.log(res.data)
+                // console.log(res.data)
                 if(res.data === false){
                     console.log('Logged out :)')
                     // window.location.href = '/'
@@ -79,11 +81,6 @@ export const Home: React.FC<{}> = () => {
             }
         )
     }   
-
-
-    
-
-    
 
     return (
         <>
@@ -107,37 +104,41 @@ export const Home: React.FC<{}> = () => {
                     <div className="menu-items">
                         <ul className="nav-links">
                             <li>
-                                <Link className='link-styles' to="/home">
+                                <Link className='link-styles' to="/watch">
                                     <BiHomeAlt className='navbarLogo' />
                                     <span className="link-name">Home</span>
                                 </Link>
                             </li>
 
-                            <li>
+                            {
+                                userState.isVerified &&
+                                <li>
                                 <Link className='link-styles' to="/upload">
                                     {/* <i className="uil uil-favorite"></i> */}
                                     <AiOutlineCloudUpload className='navbarLogo' />
                                     <span className="link-name">Upload</span>
                                 </Link>
                             </li>
+                            }
+                            
                             {/*  */}
                             {/*  */}
-                            <li>
+                            {/* <li>
                                 <Link className='link-styles' to="/home/hehe">
-                                    {/* <i className="uil uil-setting"></i> */}
+                                    
                                     <AiOutlineSetting className='navbarLogo' />
                                     <span className="link-name">Settings</span>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
 
                         <ul className="logout-mode">
                             <li>
-                                <div className='link-styles' onClick={Logout}>
+                                <button className='link-styles' onClick={Logout}>
                                     {/* <i className="uil uil-signout"></i> */}
                                     <BiLogOut className='navbarLogo' />
                                     <span className="link-name" >Logout</span>
-                                </div>
+                                </button>
                             </li>
                             <li className="mode">
                                 <Link className='link-styles' to="/">

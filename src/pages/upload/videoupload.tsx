@@ -75,7 +75,7 @@ export const VideoUpload: React.FC<{}> = () => {
             ...videoState,
             file: event.target.files[0]
         })
-        console.log(event.target.files[0].name);
+        // console.log(event.target.files[0].name);
     }
 
 
@@ -85,7 +85,7 @@ export const VideoUpload: React.FC<{}> = () => {
 
     const handleDataFromChild = (data: any) => {
         // Do something with the data passed from the child component
-        console.log(data);
+        // console.log(data);
         setVideoState({ ...videoState, thumbnail: data })
 
     };

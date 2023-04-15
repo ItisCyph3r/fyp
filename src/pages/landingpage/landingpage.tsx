@@ -8,27 +8,29 @@ export const LandingPage: React.FC<{}> = () => {
                 <div className="container flex justify-around py-3 landnav">
                     <div className="brand text-xl text-white">
                         <a href="/">
-                            Zapnode<sub>TV</sub>
+                            BabcockTV
                         </a>
                     </div>
                     <div className="signin">
-                        <a href="/account">
+                        <a href="/watch">
                             <button type="button" className="btn">
-                                Login now
+                                Home
                             </button>
                         </a>
                     </div>
                 </div>
                 <div className="showcase text-center text-white">
                     <div className="showcase-header">
-                        <p className="text-5xl text-white">
-                            Free movies, TV shows, and more.
+                        <p className="text-[3rem] text-white leading-normal">
+                            Ready to Unlock a World of Knowledge and Entertainment
                         </p>
                         <br />
-                        Zapnode streaming is available 24/7.<br />
-                        Ready to watch? Create an account first
+                        
+                        {/* Zapnode streaming is available 24/7.<br />
+                        Ready to watch? Create an account first */}
+                        {/* Ready to get started? */}
                         <div className="mt-4">
-                            <a href="/create">
+                            <a href="/account">
                                 <button type="button" className="btn btn-lg">
                                     Let's get started 🥳
                                 </button>
